@@ -1,0 +1,50 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres_etnair
+    environment:
+      POSTGRES_USER: etnair_user
+      POSTGRES_PASSWORD: etnair_pass
+      POSTGRES_DB: etnair_db
+    volumes:
+      - etnair_db_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - etnair_network
+
+  api:
+    build:
+      context: ./api
+    container_name: api_etnair
+    environment:
+      DB_HOST: postgres
+      DB_USER: etnair_user
+      DB_PASSWORD: etnair_pass
+      DB_NAME: etnair_db
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    networks:
+      - etnair_network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin_etnair
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@etnair.com
+      PGADMIN_DEFAULT_PASSWORD: admin_password
+    ports:
+      - "8080:80"
+    networks:
+      - etnair_network
+
+networks:
+  etnair_network:
+    driver: bridge
+
+volumes:
+  etnair_db_data:
+    driver: local
