@@ -1,3 +1,12 @@
 
 # NODE MODULES
 api/node_modules/
+
+# GIT files
+.gitmessage
+
+# database volumes
+api/deb/data
+
+# ENV
+.env

@@ -275,14 +275,14 @@ BEGIN
 
     -- Create 'Etnair_Public_User' role if it doesn't exist
     IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'etnair_public_user') THEN
-        CREATE ROLE "etnair_public_user" LOGIN PASSWORD 'pwd';
+        EXECUTE format('CREATE ROLE "etnair_public_user" LOGIN PASSWORD %L;', current_setting('etnair.public_user_password'));
         GRANT SELECT ON ALL TABLES IN SCHEMA public TO "etnair_public_user";
         REVOKE SELECT ON TABLE "messages", "user_notifications", "roles", "reservation_types" FROM "etnair_public_user";
     END IF;
 
     -- Create 'Etnair_User' role if it doesn't exist
     IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'etnair_user') THEN
-        CREATE ROLE "etnair_user" LOGIN PASSWORD 'pwd' INHERIT;
+        EXECUTE format('CREATE ROLE "etnair_user" LOGIN PASSWORD %L INHERIT;', current_setting('etnair.user_password'));
         GRANT SELECT ON ALL TABLES IN SCHEMA public TO "etnair_user";
         GRANT UPDATE ON TABLE "users", "reservations", "addresses", "reviews", "accommodations", "promotions", "wishlists", "accommodation_equipments", "user_notifications" TO "etnair_user";
         GRANT INSERT ON TABLE "messages", "user_notifications" TO "etnair_user";
@@ -291,7 +291,7 @@ BEGIN
 
     -- Create 'Etnair_Admin_Data_Manager' role if it doesn't exist
     IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'etnair_admin_data_manager') THEN
-        CREATE ROLE "etnair_admin_data_manager" LOGIN PASSWORD 'pwd';
+        EXECUTE format('CREATE ROLE "etnair_admin_data_manager" LOGIN PASSWORD %L;', current_setting('etnair.admin_manager_password'));
         GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO "etnair_admin_data_manager";
         REVOKE TRUNCATE, REFERENCES, TRIGGER ON ALL TABLES IN SCHEMA public FROM "etnair_admin_data_manager";
         REVOKE CREATE ON SCHEMA public FROM "etnair_admin_data_manager";
@@ -299,7 +299,7 @@ BEGIN
 
     -- Create 'Etnair_Super_Admin' role if it doesn't exist
     IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'etnair_super_admin') THEN
-        CREATE ROLE "etnair_super_admin" LOGIN PASSWORD 'pwd' INHERIT SUPERUSER;
+        EXECUTE format('CREATE ROLE "etnair_super_admin" LOGIN PASSWORD %L INHERIT SUPERUSER;', current_setting('etnair.super_admin_password'));
     END IF;
 
 END $$;
