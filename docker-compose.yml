@@ -1,4 +1,4 @@
-version: "3.9"
+
 
 services:
   postgres:
@@ -7,10 +7,15 @@ services:
     env_file:
       - .env
     volumes:
-      - ./api/db/init.sh:/docker-entrypoint-initdb.d/init.sh
+      - ./api/src/configs/db/init.sh:/docker-entrypoint-initdb.d/init.sh
       - etnair_db_data:/var/lib/postgresql/data
     networks:
       - etnair_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   api:
     build:
@@ -21,7 +26,8 @@ services:
     ports:
       - "${API_PORT}:3000"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     networks:
       - etnair_network
 
