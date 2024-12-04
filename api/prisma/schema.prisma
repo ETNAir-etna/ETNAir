@@ -13,3 +13,169 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum Gender {
+  MAN
+  WOMAN
+  OTHER
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum PropertyType {
+  APARTMENT
+  HOUSE
+  VILLA
+  BUNGALOW
+  CONDO
+  LOFT
+  ROOM
+}
+
+enum reservationType {
+  GUEST_REQUEST
+  HOST_REQUEST
+}
+
+enum reservationStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+  PAYMENT_PROCESSING
+  PAYMENT_RECEIVED
+  PAYMENT_FAI
+  CANCELED
+  COMPLETED
+}
+
+enum reviewTypes {
+  USER
+  PROPERTY
+}
+
+model User {
+  id                    Int                   @id @default(autoincrement())  //@id @default(uuid()) 
+  email                 String                @unique
+  password              String
+  firstName             String                @db.VarChar(35)
+  lasrName              String                @db.VarChar(35)
+  gender                Gender?
+  phoneNumber           BigInt?               @unique
+  role                  Role                  @default(USER)
+  status                String[]
+  createdAt             DateTime              @default(now())
+  updatedAt             DateTime              @updatedAt
+  guestRating           Float?
+  hostRating            Float?
+  summary               String?               @db.Text
+  profileImg            String?
+  requestForDelete      Boolean               @default(false)
+  rating                Float?
+  isSuperHost           Boolean               @default(false)
+
+  // RELATIONS
+  guetReservations      Reservation[]         @relation("HostId")
+  hostReservations      Reservation[]         @relation("GuestId")
+  reviews               Review[]
+  properties            Property[]
+
+  @@index([email])
+  @@index([phoneNumber])
+  @@index([status])
+  @@index([role])
+  @@index([createdAt])
+  @@index([guestRating])
+  @@index([hostRating])
+  @@index([requestForDelete])
+}
+
+model Property {
+  id                    Int                @id @default(autoincrement())  //@id @default(uuid()) 
+  title                 String
+  description           String?
+  propertyType          PropertyType
+  occupancyMax          Int?
+  totalBedrooms         Int?
+  totalBathrooms        Int?
+  area                  Float?
+  pricePerNight         Decimal
+  mainImgUrl            String
+  publishedAt           DateTime             @default(now())
+  updatedAt             DateTime             @updatedAt
+  roomNumber            Int?
+  floorNumber           Int?
+  unitNumber            Int?
+  streetNumber          Int
+  streetName            String
+  city                  String
+  zip                   Int?
+  country               String
+  latitude              Float?
+  longitude             Float?
+  ownerId               Int
+  
+
+  // RELATIONS
+  reservations          Reservation[]
+  reviews               Review[]
+  owner                 User                      @relation(fields: [ownerId], references: [id])
+
+  @@index([pricePerNight])
+}
+
+
+model Reservation {
+  id                    Int                       @id @default(autoincrement()) //@id @default(uuid())
+  guestId               Int
+  hostId                Int
+  propertyId            Int
+  description           String
+  startDate             DateTime
+  endDate               DateTime
+  NumberOfguests        Int
+  totalPrice            Float
+  status                reservationStatus         @default(PENDING)
+  reservationType       reservationType           
+  createdAt             DateTime                  @default(now())
+  updatedAt             DateTime                  @updatedAt
+  reviews               Review[]
+
+  // Relations
+  guest                 User                      @relation("GuestId", fields: [guestId], references: [id])
+  host                  User                      @relation("HostId", fields: [hostId], references: [id])
+  property              Property                  @relation(fields: [propertyId], references: [id])
+  
+  @@index([guestId])
+  @@index([hostId])
+  @@index([propertyId])
+  @@index([status])
+  @@index([createdAt])
+  @@index([startDate, endDate])
+}
+
+
+model Review {
+  id                    Int                       @id @default(autoincrement()) //@id @default(uuid())
+  createdBy             Int 
+  reviewType            reviewTypes
+  reservationId         Int?
+  propertyId            Int?
+  content               String
+  rating                Int
+  publishedAt           DateTime                  @default(now())
+  updatedAt             DateTime                  @updatedAt
+
+  // Relations
+  creator               User                      @relation(fields: [createdBy], references: [id])
+  reservation           Reservation?              @relation(fields: [reservationId], references: [id])
+  property              Property?                 @relation(fields: [propertyId], references: [id])
+
+
+  @@index([reviewType])
+  @@index([id])
+  @@index([rating])
+}
+
