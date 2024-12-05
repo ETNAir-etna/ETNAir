@@ -6,7 +6,8 @@ api/node_modules/
 .gitmessage
 
 # database volumes
-api/deb/data
+api/db/data
 
-# ENV
-.env
+# ENV Variables
+.env*
+api/.env.*

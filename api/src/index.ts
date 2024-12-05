@@ -27,7 +27,9 @@ app.use("*", (req: Request, res: Response) => {
 });
 
 
-const port = process.env.PORT || 3001;
+const port = process.env.API_PORT || 3001;
+
+console.log(process.env.API_PORT)
 app.listen(port, () => {
     console.log(`App listening on port  http://localhost:${port}`)
 }) 

@@ -2,9 +2,14 @@
 # Node modules
 node_modules/
 
-
-# Prisma migrations folder
-migrations/
-
 # Var environments
-.env.dev
+.env.local
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Build
+dist/
+
+nodemon.json
