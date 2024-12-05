@@ -75,6 +75,7 @@ model User {
   requestForDelete      Boolean               @default(false)
   rating                Float?
   isSuperHost           Boolean               @default(false)
+  wishlists             Wishlist[]
 
   // RELATIONS
   guetReservations      Reservation[]         @relation("HostId")
@@ -91,6 +92,8 @@ model User {
   @@index([hostRating])
   @@index([requestForDelete])
 }
+
+
 
 model Property {
   id                    Int                @id @default(autoincrement())  //@id @default(uuid()) 
@@ -115,17 +118,53 @@ model Property {
   country               String
   latitude              Float?
   longitude             Float?
+  equipments            String[]
   ownerId               Int
+  pictures              PropertyImages[]
   
 
   // RELATIONS
+  wishlist              WishlistProperty[]
   reservations          Reservation[]
   reviews               Review[]
-  owner                 User                      @relation(fields: [ownerId], references: [id])
+  owner                 User                      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 
   @@index([pricePerNight])
 }
 
+model PropertyImages {
+  id                    Int          @id @default(autoincrement())
+  propertyId            Int
+  url                   String
+  property              Property                  @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@unique([url, propertyId])
+}
+
+model Wishlist {
+  id                    Int                @id @default(autoincrement())  //@id @default(uuid()) 
+  name                 String             
+  userId                Int 
+  propertyId            Int
+  createdAt             DateTime             @default(now())
+  updatedAt             DateTime             @updatedAt
+
+  // RELATIONS
+  user                  User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  property              WishlistProperty[]
+
+  @@unique([name, userId])
+  @@index([userId])
+}
+
+model WishlistProperty {
+  wishlistId  Int
+  propertyId  Int
+  wishlist    Wishlist   @relation(fields: [wishlistId], references: [id], onDelete: Cascade)
+  property    Property   @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+  @@id([wishlistId, propertyId])
+}
 
 model Reservation {
   id                    Int                       @id @default(autoincrement()) //@id @default(uuid())
@@ -144,9 +183,9 @@ model Reservation {
   reviews               Review[]
 
   // Relations
-  guest                 User                      @relation("GuestId", fields: [guestId], references: [id])
-  host                  User                      @relation("HostId", fields: [hostId], references: [id])
-  property              Property                  @relation(fields: [propertyId], references: [id])
+  guest                 User                      @relation("GuestId", fields: [guestId], references: [id], onDelete: Restrict)
+  host                  User                      @relation("HostId", fields: [hostId], references: [id], onDelete: Restrict)
+  property              Property                  @relation(fields: [propertyId], references: [id], onDelete: Restrict, onUpdate: Cascade)
   
   @@index([guestId])
   @@index([hostId])
@@ -159,7 +198,9 @@ model Reservation {
 
 model Review {
   id                    Int                       @id @default(autoincrement()) //@id @default(uuid())
-  createdBy             Int 
+  createdBy             Int?
+  fullName              String
+  prrofileImg           String
   reviewType            reviewTypes
   reservationId         Int?
   propertyId            Int?
@@ -169,9 +210,9 @@ model Review {
   updatedAt             DateTime                  @updatedAt
 
   // Relations
-  creator               User                      @relation(fields: [createdBy], references: [id])
-  reservation           Reservation?              @relation(fields: [reservationId], references: [id])
-  property              Property?                 @relation(fields: [propertyId], references: [id])
+  creator               User?                      @relation(fields: [createdBy], references: [id], onDelete: SetNull)
+  reservation           Reservation?              @relation(fields: [reservationId], references: [id], onDelete: SetNull)
+  property              Property?                 @relation(fields: [propertyId], references: [id], onDelete: Cascade)
 
 
   @@index([reviewType])
