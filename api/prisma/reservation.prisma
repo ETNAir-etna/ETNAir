@@ -15,10 +15,10 @@ enum reservationStatus {
 }
 
 model Reservation {
-  id                    Int                       @id @default(autoincrement()) //@id @default(uuid())
-    guestId               Int
-    hostId                Int
-    propertyId            Int
+    id                    String                       @id @default(uuid())
+    guestId               String
+    hostId                String
+    propertyId            String
     description           String
     startDate             DateTime
     endDate               DateTime

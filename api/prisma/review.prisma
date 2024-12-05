@@ -6,13 +6,13 @@ enum reviewTypes {
 
 
 model Review {
-  id                    Int                       @id @default(autoincrement()) //@id @default(uuid())
-    createdBy             Int?
+    id                    String                       @id @default(uuid())
+    createdBy             String?
     fullName              String
     prrofileImg           String
     reviewType            reviewTypes
-    reservationId         Int?
-    propertyId            Int?
+    reservationId         String?
+    propertyId            String?
     content               String
     rating                Int
     publishedAt           DateTime                  @default(now())

@@ -1,7 +1,7 @@
 model Wishlist {
-  id                    Int                @id @default(autoincrement())  //@id @default(uuid()) 
-  name                 String             
-  userId                Int 
+  id                    String                @id @default(uuid())
+  name                  String             
+  userId                String 
   propertyId            Int
   createdAt             DateTime             @default(now())
   updatedAt             DateTime             @updatedAt
@@ -15,8 +15,8 @@ model Wishlist {
 }
 
 model WishlistProperty {
-  wishlistId  Int
-  propertyId  Int
+  wishlistId  String
+  propertyId  String
   wishlist    Wishlist   @relation(fields: [wishlistId], references: [id], onDelete: Cascade)
   property    Property   @relation(fields: [propertyId], references: [id], onDelete: Cascade)
 

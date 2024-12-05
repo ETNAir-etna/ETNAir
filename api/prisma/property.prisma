@@ -12,7 +12,7 @@ enum PropertyType {
 
 
 model Property {
-  id                    Int                @id @default(autoincrement())  //@id @default(uuid()) 
+    id                    String                @id @default(uuid())
     title                 String
     description           String?
     propertyType          PropertyType
@@ -35,7 +35,7 @@ model Property {
     latitude              Float?
     longitude             Float?
     equipments            String[]
-    ownerId               Int
+    ownerId               String
     pictures              PropertyImages[]
 
 
@@ -50,7 +50,7 @@ model Property {
 
 model PropertyImages {
     id                    Int          @id @default(autoincrement())
-    propertyId            Int
+    propertyId            String
     url                   String
     property              Property                  @relation(fields: [propertyId], references: [id], onDelete: Cascade)
 
