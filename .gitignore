@@ -11,3 +11,5 @@ api/db/data
 # ENV Variables
 .env*
 api/.env.*
+
+api/dist
