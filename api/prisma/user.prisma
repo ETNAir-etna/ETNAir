@@ -1,0 +1,48 @@
+
+enum Gender {
+    MAN
+    WOMAN
+    OTHER
+}
+
+enum Role {
+    ADMIN
+    USER
+}
+
+model User {
+    id                    Int                   @id @default(autoincrement())  //@id @default(uuid()) 
+    email                 String                @unique
+    password              String
+    firstName             String                @db.VarChar(35)
+    lasrName              String                @db.VarChar(35)
+    gender                Gender?
+    phoneNumber           BigInt?               @unique
+    role                  Role                  @default(USER)
+    status                String[]
+    createdAt             DateTime              @default(now())
+    updatedAt             DateTime              @updatedAt
+    guestRating           Float?
+    hostRating            Float?
+    summary               String?               @db.Text
+    profileImg            String?
+    requestForDelete      Boolean               @default(false)
+    rating                Float?
+    isSuperHost           Boolean               @default(false)
+    wishlists             Wishlist[]
+
+    // RELATIONS
+    guetReservations      Reservation[]         @relation("HostId")
+    hostReservations      Reservation[]         @relation("GuestId")
+    reviews               Review[]
+    properties            Property[]
+
+    @@index([email])
+    @@index([phoneNumber])
+    @@index([status])
+    @@index([role])
+    @@index([createdAt])
+    @@index([guestRating])
+    @@index([hostRating])
+    @@index([requestForDelete])
+}

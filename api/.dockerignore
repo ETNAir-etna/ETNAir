@@ -1,3 +1,10 @@
+
+# Node modules
 node_modules/
 
-db/init.sql
+
+# Prisma migrations folder
+migrations/
+
+# Var environments
+.env.dev

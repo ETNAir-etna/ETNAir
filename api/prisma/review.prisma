@@ -1,0 +1,31 @@
+
+enum reviewTypes {
+    USER
+    PROPERTY
+}
+
+
+model Review {
+  id                    Int                       @id @default(autoincrement()) //@id @default(uuid())
+    createdBy             Int?
+    fullName              String
+    prrofileImg           String
+    reviewType            reviewTypes
+    reservationId         Int?
+    propertyId            Int?
+    content               String
+    rating                Int
+    publishedAt           DateTime                  @default(now())
+    updatedAt             DateTime                  @updatedAt
+
+    // Relations
+    creator               User?                      @relation(fields: [createdBy], references: [id], onDelete: SetNull)
+    reservation           Reservation?              @relation(fields: [reservationId], references: [id], onDelete: SetNull)
+    property              Property?                 @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+
+    @@index([reviewType])
+    @@index([id])
+    @@index([rating])
+}
+

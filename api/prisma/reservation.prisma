@@ -1,0 +1,44 @@
+enum reservationType {
+    GUEST_REQUEST
+    HOST_REQUEST
+}
+
+enum reservationStatus {
+    PENDING
+    ACCEPTED
+    REJECTED
+    PAYMENT_PROCESSING
+    PAYMENT_RECEIVED
+    PAYMENT_FAI
+    CANCELED
+    COMPLETED
+}
+
+model Reservation {
+  id                    Int                       @id @default(autoincrement()) //@id @default(uuid())
+    guestId               Int
+    hostId                Int
+    propertyId            Int
+    description           String
+    startDate             DateTime
+    endDate               DateTime
+    NumberOfguests        Int
+    totalPrice            Float
+    status                reservationStatus         @default(PENDING)
+    reservationType       reservationType           
+    createdAt             DateTime                  @default(now())
+    updatedAt             DateTime                  @updatedAt
+    reviews               Review[]
+
+    // Relations
+    guest                 User                      @relation("GuestId", fields: [guestId], references: [id], onDelete: Restrict)
+    host                  User                      @relation("HostId", fields: [hostId], references: [id], onDelete: Restrict)
+    property              Property                  @relation(fields: [propertyId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+    @@index([guestId])
+    @@index([hostId])
+    @@index([propertyId])
+    @@index([status])
+    @@index([createdAt])
+    @@index([startDate, endDate])
+}

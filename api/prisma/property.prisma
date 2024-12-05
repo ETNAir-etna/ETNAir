@@ -1,0 +1,58 @@
+
+
+enum PropertyType {
+    APARTMENT
+    HOUSE
+    VILLA
+    BUNGALOW
+    CONDO
+    LOFT
+    ROOM
+}
+
+
+model Property {
+  id                    Int                @id @default(autoincrement())  //@id @default(uuid()) 
+    title                 String
+    description           String?
+    propertyType          PropertyType
+    occupancyMax          Int?
+    totalBedrooms         Int?
+    totalBathrooms        Int?
+    area                  Float?
+    pricePerNight         Decimal
+    mainImgUrl            String
+    publishedAt           DateTime             @default(now())
+    updatedAt             DateTime             @updatedAt
+    roomNumber            Int?
+    floorNumber           Int?
+    unitNumber            Int?
+    streetNumber          Int
+    streetName            String
+    city                  String
+    zip                   Int?
+    country               String
+    latitude              Float?
+    longitude             Float?
+    equipments            String[]
+    ownerId               Int
+    pictures              PropertyImages[]
+
+
+    // RELATIONS
+    wishlist              WishlistProperty[]
+    reservations          Reservation[]
+    reviews               Review[]
+    owner                 User                      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+    @@index([pricePerNight])
+}
+
+model PropertyImages {
+    id                    Int          @id @default(autoincrement())
+    propertyId            Int
+    url                   String
+    property              Property                  @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+
+    @@unique([url, propertyId])
+}
