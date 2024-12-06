@@ -19,9 +19,10 @@ model Reservation {
     guestId               String
     hostId                String
     propertyId            String
-    description           String
     startDate             DateTime
     endDate               DateTime
+    checkIn               String
+    checkOut              String
     NumberOfguests        Int
     totalPrice            Float
     status                reservationStatus         @default(PENDING)

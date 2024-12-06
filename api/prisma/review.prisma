@@ -9,7 +9,7 @@ model Review {
     id                    String                       @id @default(uuid())
     createdBy             String?
     fullName              String
-    prrofileImg           String
+    profileImg            String
     reviewType            reviewTypes
     reservationId         String?
     propertyId            String?
@@ -17,9 +17,11 @@ model Review {
     rating                Int
     publishedAt           DateTime                  @default(now())
     updatedAt             DateTime                  @updatedAt
+    directedTo            String?  
 
     // Relations
-    creator               User?                      @relation(fields: [createdBy], references: [id], onDelete: SetNull)
+    receiver              User?                     @relation("ReviewReceiverId", fields: [directedTo], references:[id], onDelete: Cascade)
+    creator               User?                     @relation("ReviewCreatorId",fields: [createdBy], references: [id], onDelete: SetNull)
     reservation           Reservation?              @relation(fields: [reservationId], references: [id], onDelete: SetNull)
     property              Property?                 @relation(fields: [propertyId], references: [id], onDelete: Cascade)
 
