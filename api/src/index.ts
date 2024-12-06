@@ -1,10 +1,11 @@
 import express, { Request, Response, Application } from 'express';
 import path from 'path';
+import router from "./routes/index";
 import * as dotenv from 'dotenv';
 /* ROUTES */
 import homeRoutes from './routes/home.routes';
 import userRoutes from './routes/user.routes';
-import accommodationsRoutes from './routes/accomodations.routes';
+import accommodationsRoutes from './routes/property.routes';
 
 dotenv.config()
 
@@ -13,9 +14,7 @@ const app: Application = express();
 // app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.json());
 
-app.use('/', homeRoutes);
-app.use('/user', userRoutes);
-app.use('/accommodation', accommodationsRoutes);
+app.use(router)
 
 app.use((req, res) => {
     res.status(404);
