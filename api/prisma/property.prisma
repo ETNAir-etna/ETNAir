@@ -30,7 +30,7 @@ model Property {
     streetNumber          Int
     streetName            String
     city                  String
-    zip                   Int?
+    zip                   String?
     country               String
     latitude              Float?
     longitude             Float?
@@ -46,6 +46,13 @@ model Property {
     owner                 User                      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 
     @@index([pricePerNight])
+    @@index([ownerId])
+    @@index([city])
+    @@index([country])
+    @@index([equipments])
+    @@index([totalBedrooms])
+    @@index([propertyType])
+    @@index([occupancyMax])
 }
 
 model PropertyImages {
