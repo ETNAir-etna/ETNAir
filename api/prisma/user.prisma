@@ -14,10 +14,10 @@ model User {
     id                    String                @id @default(uuid()) 
     email                 String                @unique
     password              String
-    firstName             String                @db.VarChar(35)
-    lasrName              String                @db.VarChar(35)
+    firstName             String?               @db.VarChar(35)
+    lasrName              String?               @db.VarChar(35)
     gender                Gender?
-    phoneNumber           BigInt?               @unique
+    phoneNumber           String?               @unique
     role                  Role                  @default(USER)
     status                String[]
     createdAt             DateTime              @default(now())
@@ -29,12 +29,13 @@ model User {
     requestForDelete      Boolean               @default(false)
     rating                Float?
     isSuperHost           Boolean               @default(false)
-    wishlists             Wishlist[]
 
     // RELATIONS
-    guetReservations      Reservation[]         @relation("HostId")
+    wishlists             Wishlist[]
+    guestReservations     Reservation[]         @relation("HostId")
     hostReservations      Reservation[]         @relation("GuestId")
-    reviews               Review[]
+    sentReviews           Review[]              @relation("ReviewCreatorId")
+    receivedReviews       Review[]              @relation("ReviewReceiverId")
     properties            Property[]
 
     @@index([email])
@@ -45,4 +46,5 @@ model User {
     @@index([guestRating])
     @@index([hostRating])
     @@index([requestForDelete])
+    
 }
