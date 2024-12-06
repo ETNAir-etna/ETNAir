@@ -2,7 +2,7 @@ import { Reservation } from "./Reservation"
 import { Review } from "./Review"
 
 export interface Property {
-    title      : string
+    title: string
     description?: string
     propertyType: string
     occupancyMax?  : number

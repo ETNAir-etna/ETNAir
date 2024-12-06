@@ -4,6 +4,8 @@ export interface Reservation {
     propertyId: string
     startDate: Date
     endDate  : Date
+    checkIn: string
+    checkOut: string
     NumberOfguests: number
     totalPrice: number
     status: string
