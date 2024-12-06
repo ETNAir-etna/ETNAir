@@ -3,8 +3,12 @@ import { UserController } from '../controllers/user.controller';
 
 const router = Router();
 
-router.get('/', UserController.getUser)
+router.get('/all', UserController.getUsers)
 
-router.post('/', UserController.addUser)
+router.get('/:id', UserController.getUser)
+
+// auth
+
+// router.post('/', UserController.addUser)
 
 export default router;
