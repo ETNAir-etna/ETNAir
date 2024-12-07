@@ -1,17 +1,21 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
+var createError = require('http-errors')
 
-export default async function sendJsonPromise<T>(req: Request, res: Response, promise: Promise<T>, notFoundMessage: string ) {
-    try {
-        const result = await promise;
-        if (!result) {
-            return res.status(404).json({ message: notFoundMessage });
-        } 
-            // console.log(result)
+export const  sendJsonPromise  = <T>(promise: Promise<T>, notFoundMessage: string)  =>
+
+    async (req: Request, res: Response, next : NextFunction ) => {
+        try {
+            const result = await promise;
+            if (!result) {
+                throw createError(404, notFoundMessage)
+            } 
+
             return res.status(200).json(result);
-        
-    } catch (error) {
-        console.error("Erreur attrapée :", error);
-        return res.status(500).json({ error: error instanceof Error ? error.message : error });
+            
+        } catch (error) {
+            next(error)
+        }
     }
-}
+
+
 

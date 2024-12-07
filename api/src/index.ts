@@ -5,7 +5,8 @@ import dotenv from 'dotenv';
 dotenv.config()
 /* ROUTES */
 import { serverLogger } from './configs/logger';
-import { morganMiddleware } from './middleware/morgan';
+import { morganMiddleware } from './middleware/morgan.middleware';
+import { errorHandler } from './middleware/errorHandler.middleware';
 
 
 const app: Application = express();
@@ -16,14 +17,18 @@ app.use(morganMiddleware)
 
 app.use(router)
 
-app.use((req, res) => {
-    res.status(404);
-    res.send('<h1>Error 404: Resource not found</h1>')
-})
+
+app.use(errorHandler)
+
 
 app.use("*", (req: Request, res: Response) => {
-    res.status(500).send('Bad request');
+    res.status(400).json({error: {
+        status : 400,
+        message: 'Bad request'
+    }});
 });
+
+
 
 
 const port = process.env.API_PORT || 3001;

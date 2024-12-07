@@ -79,5 +79,6 @@ const controllersLogger = createLogger('controllers');
 const servicesLogger = createLogger('services');
 const serverLogger = createLogger('server')
 const httpLogger = createLogger('http')
+const errorLogger = createLogger('errorHandler')
 
-export { routesLogger, dbLogger, apiLogger, controllersLogger, servicesLogger, serverLogger, httpLogger };
+export { routesLogger, dbLogger, apiLogger, controllersLogger, servicesLogger, serverLogger, httpLogger , errorLogger};
