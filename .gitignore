@@ -1,15 +1,22 @@
 
-# NODE MODULES
+# Exclude Node.js dependencies for the API
 api/node_modules/
 
-# GIT files
+# Exclude custom Git configurations
 .gitmessage
 
-# database volumes
+# Exclude database volumes
 api/db/data
 
-# ENV Variables
+# Exclude environment variable files
 .env*
-api/.env.*
+api/.env*
 
+# Exclude API build files
 api/dist
+
+# Exclude database migration files
+api/migrations
+
+# Exclude logs and audit files
+.logs

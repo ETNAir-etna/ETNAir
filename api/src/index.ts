@@ -1,13 +1,11 @@
 import express, { Request, Response, Application } from 'express';
 import path from 'path';
 import router from "./routes/index";
-import * as dotenv from 'dotenv';
-/* ROUTES */
-import homeRoutes from './routes/home.routes';
-import userRoutes from './routes/user.routes';
-import accommodationsRoutes from './routes/property.routes';
-
+import dotenv from 'dotenv';
 dotenv.config()
+/* ROUTES */
+import { serverLogger } from './configs/logger';
+
 
 const app: Application = express();
 
@@ -27,8 +25,6 @@ app.use("*", (req: Request, res: Response) => {
 
 
 const port = process.env.API_PORT || 3001;
-
-console.log(process.env.API_PORT)
 app.listen(port, () => {
-    console.log(`App listening on port  http://localhost:${port}`)
+    serverLogger.info(`App listening on port  http://localhost:${port}`)
 }) 
