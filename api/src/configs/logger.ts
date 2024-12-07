@@ -43,26 +43,31 @@ const DailyRotateTransport = (level: string, filename: string) => {
 const createLogger = (labelName: string): Logger => {
     return winston.createLogger({
         levels: logLevels,
-        level: process.env.NODE_ENV === "production" 
-        ? 'info'
-        : process.env.LOG_LEVEL || 'debug',
+        level: process.env.NODE_ENV === "dev" 
+        ? process.env.LOG_LEVEL || 'debug'
+        : 'info',
         format: combine(
             label({ label: labelName }),
             timestamp({format: 'DD-MM-YYYY - HH:mm:ss'}),
             align(),
             printf(({ level, message, label, timestamp }) => {
                 const icon: string = levelIcons[level as keyof typeof logLevels]  || '❔';
-                return `[${timestamp}]  ${icon} ${colorize().colorize(level, level.toUpperCase())} - ${label} : ${message}`
+                const formattedLevel = process.env.NODE_ENV === "dev"
+                ? colorize().colorize(level, level.toUpperCase())
+                : level.toUpperCase();
+                return `[${timestamp}]  ${icon} ${formattedLevel} - ${label} : ${message}`
             })
         ),
         transports: 
-        process.env.NODE_ENV === "production"
-        ? [
+        process.env.NODE_ENV === "dev"
+
+        ? [ new winston.transports.Console()]
+        : [
             DailyRotateTransport('info', 'combined.log'),
             DailyRotateTransport('warn', 'warn.log'),
             DailyRotateTransport('error', 'error.log'),
         ]
-        : [ new winston.transports.Console()]
+        
 
     })
 }
@@ -73,5 +78,6 @@ const apiLogger = createLogger('API');
 const controllersLogger = createLogger('controllers');
 const servicesLogger = createLogger('services');
 const serverLogger = createLogger('server')
+const httpLogger = createLogger('http')
 
-export { routesLogger, dbLogger, apiLogger, controllersLogger, servicesLogger, serverLogger };
+export { routesLogger, dbLogger, apiLogger, controllersLogger, servicesLogger, serverLogger, httpLogger };

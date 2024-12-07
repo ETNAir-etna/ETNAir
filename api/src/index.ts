@@ -1,16 +1,18 @@
 import express, { Request, Response, Application } from 'express';
 import path from 'path';
-import router from "./routes/index";
+import router from "./routes";
 import dotenv from 'dotenv';
 dotenv.config()
 /* ROUTES */
 import { serverLogger } from './configs/logger';
+import { morganMiddleware } from './middleware/morgan';
 
 
 const app: Application = express();
 
 // app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.json());
+app.use(morganMiddleware)
 
 app.use(router)
 
