@@ -1,13 +1,13 @@
 import { Router } from 'express';
 
-import { AccommodationController } from '../controllers/accomodation.controller';
+import { PropertyController } from '../controllers/property.controller';
 
 const router = Router();
 
-router.get('/', AccommodationController.getAllAccommodations);
+router.get('/all', PropertyController.getAllProperties);
 
-router.get('/:id', AccommodationController.getAccommodationById);
+router.get('/:id', PropertyController.getPropertyById);
 
-router.get('/create', AccommodationController.createAccommodation);
+// router.post('/create', PropertyController.createProperty);
 
 export default router;

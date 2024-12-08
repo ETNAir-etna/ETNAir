@@ -1,6 +1,8 @@
 
 import { PrismaClient } from '@prisma/client';
-import { User } from '../../../shared/interfaces/User';
+import { User } from '../../../shared/types/User';
+// import { User } from '@prisma/client';
+
 const prisma = new PrismaClient();
 
 export class UserModel  {
@@ -14,7 +16,7 @@ export class UserModel  {
         return await prisma.user.findUnique({where: { id }});
     }
 
-        // static async findAll(): Promise<User[]> {
+    //     static async findAll(): Promise<User[]> {
     //     const bob = prisma.user.findMany({ include: { wishlists: true } });
     //     return bob[0].wishlists
     // }

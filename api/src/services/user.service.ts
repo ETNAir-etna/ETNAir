@@ -1,7 +1,10 @@
-// services/user.service.ts
+// // services/user.service.ts
+import { User } from '../../../shared/types/User';
+// import { User } from '@prisma/client';
 import { UserModel } from '../models/UserModel';
-import { User } from '../../../shared/interfaces/User';
 
+
+// // import { User } from '@prisma/client';
 export class UserService {
 
     static async getUsers(): Promise<User[] | null> {

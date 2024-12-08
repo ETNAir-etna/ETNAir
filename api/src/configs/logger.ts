@@ -45,7 +45,7 @@ const createLogger = (labelName: string): Logger => {
         levels: logLevels,
         level: process.env.NODE_ENV === "dev" 
         ? process.env.LOG_LEVEL || 'debug'
-        : 'info',
+        : 'info', 
         format: combine(
             label({ label: labelName }),
             timestamp({format: 'DD-MM-YYYY - HH:mm:ss'}),
@@ -71,6 +71,7 @@ const createLogger = (labelName: string): Logger => {
 
     })
 }
+console.log(process.env.NODE_ENV)
 
 const routesLogger = createLogger('routes');
 const dbLogger = createLogger('DB');
