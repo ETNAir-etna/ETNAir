@@ -1,34 +1,48 @@
 # STEP 1 : Build the Typescript app
 FROM node:18-alpine AS builder
 
-WORKDIR /app
+RUN mkdir api && cd api
 
-COPY package*.json ./
+
+COPY api/package* .
 RUN npm ci
 
-COPY tsconfig.json ./
-COPY prisma ./prisma/
-COPY migrations ./migrations/
+COPY api/migrations/ ./migrations/
+COPY api/prisma/ ./prisma/
+COPY shared/ ./shared/
+COPY api/tsconfig.json .
+COPY api/src/ ./src/
 COPY .env ./.env
 
-COPY src ./src
+RUN npx prisma generate
 
-RUN npm run build
+RUN npm run build 
 
 RUN npm prune --production
 
-# STEP 2: FINAL image to execute the server
+
+
+# # STEP 2: FINAL image to execute the server
 FROM node:18-alpine
 
 WORKDIR /app
 
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/prisma ./prisma/
-COPY --from=builder /app/migrations ./migrations
-COPY --from=builder /app/.env ./
-COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder ../package*.json ./
+COPY --from=builder ../node_modules ./node_modules
+COPY --from=builder ../migrations ./migrations
+COPY --from=builder ../prisma ./prisma/
+COPY --from=builder ../.env ./
+
+COPY --from=builder ../dist ./dist
+
+# CMD ["sh", "-c", "echo 'JE SUIS DANS /racine' && ls && \
+# echo 'JE SUIS DANS /racine/MIG' && cd migrations && ls && cd .. && \
+# echo 'JE SUIS DANS /racine/PRISA' && cd prisma && ls && cd schema"]
+
+RUN mkdir -p dist/api && \
+    mv dist/prisma dist/api && \
+    mv dist/src dist/api
 
 RUN npm install -g prisma
 
-CMD ["sh", "-c", "npx prisma migrate deploy && node dist/index.js"]
+CMD ["sh", "-c", "npx prisma migrate deploy  && node dist/api/prisma/seed.js && node dist/api/src/index.js"]
