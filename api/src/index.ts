@@ -2,7 +2,9 @@ import express, { Request, Response, Application } from 'express';
 import path from 'path';
 import router from "./routes";
 import dotenv from 'dotenv';
-dotenv.config()
+
+dotenv.config();
+
 /* ROUTES */
 import { serverLogger } from './configs/logger';
 import { morganMiddleware } from './middleware/morgan.middleware';
@@ -27,8 +29,6 @@ app.use("*", (req: Request, res: Response) => {
         message: 'Bad request'
     }});
 });
-
-
 
 
 const port = process.env.API_PORT || 3001;
