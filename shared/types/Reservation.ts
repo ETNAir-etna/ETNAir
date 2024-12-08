@@ -1,4 +1,4 @@
-export interface Reservation {                    
+export type Reservation = {                    
     guestId: string
     hostId: string
     propertyId: string

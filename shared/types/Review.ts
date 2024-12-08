@@ -1,10 +1,10 @@
-export interface Review {
-    createdBy?: string
+export type Review = {
+    createdBy?: string | null
     fullName : string
     profileImg: string
     reviewType: string
-    reservationId?: string
-    propertyId? : string
+    reservationId?: string | null
+    propertyId? : string | null
     content  : string
     rating: number
     publishedAt: Date

@@ -1,4 +1,4 @@
-export interface Wishlist {
+export type Wishlist = {
     name: string             
     userId: string 
     propertyId: string
