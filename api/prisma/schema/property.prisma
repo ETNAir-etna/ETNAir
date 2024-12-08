@@ -20,7 +20,7 @@ model Property {
     totalBedrooms         Int?
     totalBathrooms        Int?
     area                  Float?
-    pricePerNight         Decimal
+    pricePerNight         Float
     mainImgUrl            String
     publishedAt           DateTime             @default(now())
     updatedAt             DateTime             @updatedAt
