@@ -12,4 +12,3 @@ dist/
 .logs
 
 # Exclude nodemon config (for local development only)
-nodemon.json
