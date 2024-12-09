@@ -15,7 +15,7 @@ api/db/data
 api/dist
 
 # Exclude database migration files
-api/migrations
+# api/migrations
 
 # Exclude logs and audit files
 .logs
