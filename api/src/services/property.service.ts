@@ -16,7 +16,7 @@ export class PropertyService {
         return PropertyModel.findById(id);
     }
 
-    // static async createProperty(data: Property): Promise<Property | null> {
-    //     return PropertyModel.createProperty(data);
-    // }
+    static async createProperty(data: Prisma.PropertyCreateInput): Promise<Property> {
+        return PropertyModel.createProperty(data);
+    }
 }
