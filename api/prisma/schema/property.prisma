@@ -36,7 +36,7 @@ model Property {
     longitude             Float?
     equipments            String[]
     ownerId               String
-    pictures              PropertyImages[]
+    pictures              String[]
 
 
     // RELATIONS
@@ -55,11 +55,11 @@ model Property {
     @@index([occupancyMax])
 }
 
-model PropertyImages {
-    id                    Int          @id @default(autoincrement())
-    propertyId            String
-    url                   String
-    property              Property                  @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+// model PropertyImages {
+//     id                    Int          @id @default(autoincrement())
+//     propertyId            String
+//     url                   String
+//     property              Property                  @relation(fields: [propertyId], references: [id], onDelete: Cascade)
 
-    @@unique([url, propertyId])
-}
+//     @@unique([url, propertyId])
+// }

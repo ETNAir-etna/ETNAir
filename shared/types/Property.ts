@@ -1,18 +1,18 @@
-import { Reservation } from "./Reservation"
-import { Review } from "./Review"
+
+import { PropertyType } from "@prisma/client";
+import { Property as PrismaProperty } from '@prisma/client';
 
 export type Property = {
+    ownerId: string
     title: string
     description?: string | null
-    propertyType: string
-    occupancyMax?  : number | null
-    totalBedrooms? : number | null
+    propertyType: PropertyType
+    occupancyMax?: number | null
+    totalBedrooms?: number | null
     totalBathrooms?: number | null
     area?: number | null
     pricePerNight: number
-    mainImgUrl : string
-    publishedAt: Date
-    updatedAt  : Date
+    mainImgUrl: string
     roomNumber?: number | null
     floorNumber?: number | null
     unitNumber?: number | null
@@ -20,13 +20,36 @@ export type Property = {
     streetName: string
     city: string
     zip?: string | null
-    country?: string | null
-    latitude? : number | null
+    country: string
+    latitude?: number | null
     longitude?: number | null
-    equipments : string[]
-    ownerId : string
+    equipments: string[]
     pictures?: string[]
-    reservations?: Reservation[]
-    reviews?: Review[]
-    
+}
+
+export const PropertyDTO = (property: PrismaProperty): Property => {
+    return {
+        ownerId: property.ownerId,
+        title: property.title,
+        description: property.description || "",
+        propertyType: property.propertyType,
+        occupancyMax: property.occupancyMax ?? null,
+        totalBedrooms: property.totalBedrooms ?? null,
+        totalBathrooms: property.totalBathrooms ?? null,
+        area: property.area ?? null,
+        pricePerNight: property.pricePerNight,
+        mainImgUrl: property.mainImgUrl,
+        roomNumber: property.roomNumber ?? null,
+        floorNumber: property.floorNumber ?? null,
+        unitNumber: property.unitNumber ?? null,
+        streetNumber: property.streetNumber,
+        streetName: property.streetName,
+        city: property.city,
+        zip: property.zip ?? null,
+        country: property.country,
+        latitude: property.latitude ?? null,
+        longitude: property.longitude ?? null,
+        equipments: property.equipments || [],
+        pictures: property.pictures || []
+    };
 }
