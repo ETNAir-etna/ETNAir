@@ -3,7 +3,6 @@ FROM node:18-alpine AS builder
 
 RUN mkdir api && cd api
 
-
 COPY api/package* .
 RUN npm ci
 
@@ -19,8 +18,6 @@ RUN npx prisma generate
 RUN npm run build 
 
 RUN npm prune --production
-
-
 
 # # STEP 2: FINAL image to execute the server
 FROM node:18-alpine
