@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+     
+      - uses: actions/checkout@v4
+
+    
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' 
+
+  
+      - name: Install Node.js dependencies
+        run: |
+          npm ci 
+
+
+      - name: Run Prisma migrations
+        run: |
+          npx prisma migrate deploy 
+
+    
+      - name: Validate HTML and CSS
+        run: |
+          npx html-validate "public/**/*.html" 
+          npx stylelint "public/**/*.css" 
+
+     
+      - name: Build the application
+        run: |
+          npm run build 
+
+    
+      - name: Run tests
+        run: |
+          npm test 
+
+    
+      - name: Build Docker image
+        run: |
+          docker build -t api .
+
+    
+      - name: Deploy with Docker Compose
+        run: |
+          docker-compose up -d --build
