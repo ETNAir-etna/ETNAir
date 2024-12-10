@@ -12,27 +12,49 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Check out the repository
       - uses: actions/checkout@v4
 
-      # Set up Python environment
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      # Set up Node.js environment
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
-          python-version: '3.9'
+          node-version: '18' # Remplacez par la version de Node.js utilisée dans votre projet
 
-      # Install dependencies
-      - name: Install dependencies
+      # Install Node.js dependencies
+      - name: Install Node.js dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          npm ci # 'ci' garantit une installation stricte avec package-lock.json
 
-      # Run tests
+      # Run Prisma migrations
+      - name: Run Prisma migrations
+        run: |
+          npx prisma migrate deploy # Applique les migrations dans la base de données
+
+      # Validate HTML and CSS files
+      - name: Validate HTML and CSS
+        run: |
+          npx html-validate "public/**/*.html" # Vérification des fichiers HTML
+          npx stylelint "public/**/*.css" # Vérification des fichiers CSS
+
+      # Build the application
+      - name: Build the application
+        run: |
+          npm run build # Commande de build pour générer l'application
+
+      # Run tests (including TTS if applicable)
       - name: Run tests
         run: |
-          pytest
+          npm test # Tester les fonctionnalités, incluant les fonctionnalités TTS si configurées dans le projet
 
-      # Deploy (example, if you have a deployment step)
-      - name: Deploy to server
+      # Build Docker image
+      - name: Build Docker image
         run: |
-          ssh user@yourserver 'deploy your_project_command'
+          docker build -t your_project_image_name .
+
+      # Deploy with Docker Compose
+      - name: Deploy with Docker Compose
+        run: |
+          docker-compose up -d --build
+
 
