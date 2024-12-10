@@ -1,7 +1,3 @@
-# Groupe de ayad_f 1046734
-
-
-
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
@@ -15,14 +11,14 @@ Already a pro? Just edit this README.md and make it your own. Want to make it ea
 
 ```
 cd existing_repo
-git remote add origin https://rendu-git.etna-alternance.net/module-9760/activity-52723/group-1046734.git
+git remote add origin https://rendu-git.etna-alternance.net/module-9806/activity-52729/group-1046931.git
 git branch -M main
 git push -uf origin main
 ```
 
-## Integrate with your tools
 
 - [ ] [Set up project integrations](https://rendu-git.etna-alternance.net/module-9760/activity-52723/group-1046734/-/settings/integrations)
+
 
 ## Collaborate with your team
 

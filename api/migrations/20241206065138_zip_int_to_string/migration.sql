@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Property" ALTER COLUMN "zip" SET DATA TYPE TEXT;

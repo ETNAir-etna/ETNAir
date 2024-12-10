@@ -1,0 +1,14 @@
+# Exclude Node.js dependencies
+node_modules/
+
+# Exclude Docker-specific files
+Dockerfile
+.dockerignore
+
+# Exclude build output
+dist/
+
+# Exclude logs
+.logs
+
+# Exclude nodemon config (for local development only)

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: etnair-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: etnair-api
+  template:
+    metadata:
+      labels:
+        app: etnair-api
+    spec:
+      containers:
+      - name: etnair-api
+        image: ayadf/etnair-api:latest  
+        env:
+        - name: DB_HOST
+          value: postgres
+        - name: DB_USER
+          value: etnair_user
+        - name: DB_PASSWORD
+          value: etnair_pass
+        - name: DB_NAME
+          value: etnair_db
+        ports:
+        - containerPort: 5000

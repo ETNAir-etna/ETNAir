@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: etnair-api
+spec:
+  selector:
+    app: etnair-api
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 50000 
