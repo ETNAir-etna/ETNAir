@@ -9,21 +9,28 @@ export class UserModel  {
 
     static async findAll(): Promise<User[]> {
         return prisma.user.findMany();
-    }
+    };
 
     static async findById(id: string): Promise<User | null> {
-        console.log(id);
-        return await prisma.user.findUnique({where: { id }});
+        return prisma.user.findUnique({where: { id }});
+    };
+
+    static async createUser(email: string, password: string) {
+        return prisma.user.create({
+            data : {
+                email: email,
+                password: password
+            }
+        })
+    };
+
+    static async connectUser(email: string, password: string) {
+        // TODO : finish the login of the user 
     }
 
-    //     static async findAll(): Promise<User[]> {
-    //     const bob = prisma.user.findMany({ include: { wishlists: true } });
-    //     return bob[0].wishlists
-    // }
-
-    // static async create(data: Partial<User>): Promise<User> {
-    //     return await prisma.user.create({ data });
-    // }
+    static async disconnectUser() {
+        // TODO : finish the logout of the user 
+    }
 
     // static async update(id: string, data: Partial<User>): Promise<User> {
     //     return await prisma.user.update({ where: { id }, data });

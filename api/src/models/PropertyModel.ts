@@ -1,5 +1,4 @@
 import { PrismaClient, Prisma } from '@prisma/client';
-// // import { Property } from '@prisma/client';
 import { Property, PropertyDTO } from '../../../shared/types/Property';
 
 const prisma = new PrismaClient();
