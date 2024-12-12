@@ -1,5 +1,6 @@
 // // services/user.service.ts
 import { User } from '../../../shared/types/User';
+import { Result } from '../interfaces/result';
 // import { User } from '@prisma/client';
 import { UserModel } from '../models/UserModel';
 
@@ -7,12 +8,14 @@ import { UserModel } from '../models/UserModel';
 // // import { User } from '@prisma/client';
 export class UserService {
 
-    static async getUsers(): Promise<User[] | null> {
-        return UserModel.findAll();
+    static async getUsers(): Promise<Result> {
+        const data: User[] = await UserModel.findAll();
+        return { action: "data", data: data, success : true};
     }
 
-    static getUserById(id: string): Promise<User | null> {
-        return UserModel.findById(id);
+    static async getUserById(id: string): Promise<Result> {
+        const data: User | null = await UserModel.findById(id);
+        return { action: "data", data: data, success : true};
     }
 
     // static async updateUser(id: string, data: Partial<User>): Promise<User> {

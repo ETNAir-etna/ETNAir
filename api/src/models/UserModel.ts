@@ -1,6 +1,8 @@
 
 import { PrismaClient } from '@prisma/client';
 import { User } from '../../../shared/types/User';
+import { comparePassword } from '../utils/hashPassword.util';
+var createError = require('http-errors');
 // import { User } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -15,6 +17,15 @@ export class UserModel  {
         return prisma.user.findUnique({where: { id }});
     };
 
+    static async findByEmail(email: string) {
+        return prisma.user.findUnique({
+            where: { email: email },
+            select: { 
+                password: true
+            },
+        });
+    }
+
     static async createUser(email: string, password: string) {
         return prisma.user.create({
             data : {
@@ -24,8 +35,17 @@ export class UserModel  {
         })
     };
 
-    static async connectUser(email: string, password: string) {
-        // TODO : finish the login of the user 
+    static async connectUser(email: string): Promise<string> {
+        const user = await this.findByEmail(email)
+        
+        if (!user ) {
+            // TODO : Change the message
+            throw createError(404, "User not found, try to create a account");
+        }
+        else {
+            return user.password
+        }
+        
     }
 
     static async disconnectUser() {

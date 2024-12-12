@@ -11,9 +11,9 @@ router.use("/user", UserRouter);
 
 router.use('/auth', AuthRouter);
 
-router.use('/etnair', HomeRouter);
-
 router.use('/property', PropertyRouter);
+
+router.use('/', HomeRouter);
 
 
 

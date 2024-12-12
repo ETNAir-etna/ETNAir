@@ -1,3 +1,5 @@
+import { Result } from "../interfaces/result";
+
 let createError = require("http-errors");
 
 const bcrypt = require("bcrypt");
@@ -9,21 +11,21 @@ export const hashPassword = async (password: string) => {
         return hashedPassword;
     } catch (error) {
         // TODO : find the error message to send in the catch og hashed function
-        throw createError(500, "A VOIR");
+        throw createError(500, "A VOIR dans haspassword");
     }
 }; 
 
-export const comparePassword = async(password: string) => {
+export const comparePassword = async(password: string, hashedPassword : string): Promise<boolean> => {
     try {
         const match = await bcrypt.compare(password, hashedPassword);
         if (match) {
-            console.log('✅ Mot de passe valide');
+            return true
         } else {
-            console.log('❌ Mot de passe invalide');
+            // TODO : find a good status error code
+            throw createError(404, "Invalid password");
         }
-        return match;
     } catch (error) {
-        console.error('Erreur lors de la vérification du mot de passe :', error);
-        throw error;
+        // TODO : change the error message && find good status error code
+        throw createError(400, "SERVOR ERROR try again in compare function");
     }
 }
