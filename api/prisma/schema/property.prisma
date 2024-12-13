@@ -1,65 +1,50 @@
+model Property {
+  id             String             @id @default(uuid())
+  title          String
+  description    String?
+  propertyType   PropertyType
+  occupancyMax   Int?
+  totalBedrooms  Int?
+  totalBathrooms Int?
+  area           Float?
+  pricePerNight  Float
+  mainImgUrl     String
+  publishedAt    DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  roomNumber     Int?
+  floorNumber    Int?
+  unitNumber     Int?
+  streetNumber   Int
+  streetName     String
+  city           String
+  zip            String?
+  country        String
+  latitude       Float?
+  longitude      Float?
+  equipments     String[]
+  ownerId        String
+  pictures       String[]
+  owner          User               @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  reservations   Reservation[]
+  reviews        Review[]
+  wishlist       WishlistProperty[]
 
+  @@index([pricePerNight])
+  @@index([ownerId])
+  @@index([city])
+  @@index([country])
+  @@index([equipments])
+  @@index([totalBedrooms])
+  @@index([propertyType])
+  @@index([occupancyMax])
+}
 
 enum PropertyType {
-    APARTMENT
-    HOUSE
-    VILLA
-    BUNGALOW
-    CONDO
-    LOFT
-    ROOM
-}
-
-
-model Property {
-    id                    String                @id @default(uuid())
-    title                 String
-    description           String?
-    propertyType          PropertyType
-    occupancyMax          Int?
-    totalBedrooms         Int?
-    totalBathrooms        Int?
-    area                  Float?
-    pricePerNight         Float
-    mainImgUrl            String
-    publishedAt           DateTime             @default(now())
-    updatedAt             DateTime             @updatedAt
-    roomNumber            Int?
-    floorNumber           Int?
-    unitNumber            Int?
-    streetNumber          Int
-    streetName            String
-    city                  String
-    zip                   String?
-    country               String
-    latitude              Float?
-    longitude             Float?
-    equipments            String[]
-    ownerId               String
-    pictures              PropertyImages[]
-
-
-    // RELATIONS
-    wishlist              WishlistProperty[]
-    reservations          Reservation[]
-    reviews               Review[]
-    owner                 User                      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-
-    @@index([pricePerNight])
-    @@index([ownerId])
-    @@index([city])
-    @@index([country])
-    @@index([equipments])
-    @@index([totalBedrooms])
-    @@index([propertyType])
-    @@index([occupancyMax])
-}
-
-model PropertyImages {
-    id                    Int          @id @default(autoincrement())
-    propertyId            String
-    url                   String
-    property              Property                  @relation(fields: [propertyId], references: [id], onDelete: Cascade)
-
-    @@unique([url, propertyId])
+  APARTMENT
+  HOUSE
+  VILLA
+  BUNGALOW
+  CONDO
+  LOFT
+  ROOM
 }

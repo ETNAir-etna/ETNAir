@@ -1,6 +1,6 @@
 import express, { Request, Response, Application } from 'express';
 import path from 'path';
-import router from "./routes";
+import router from "./routes/routes";
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -28,10 +28,10 @@ app.use("*", (req: Request, res: Response) => {
         status : 400,
         message: 'Bad request'
     }});
-});
+}); 
 
 
 const port = process.env.API_PORT || 3001;
 app.listen(port, () => {
     serverLogger.info(`App listening on port  http://localhost:${port}`)
-}) 
+})  

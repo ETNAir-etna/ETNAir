@@ -9,14 +9,13 @@ api/node_modules/
 api/db/data
 
 # Exclude environment variable files
-.env*
-api/.env*
+./env*
 
 # Exclude API build files
 api/dist
 
 # Exclude database migration files
-api/migrations
+# api/migrations
 
 # Exclude logs and audit files
 .logs

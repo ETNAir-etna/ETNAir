@@ -71,7 +71,6 @@ const createLogger = (labelName: string): Logger => {
 
     })
 }
-console.log(process.env.NODE_ENV)
 
 const routesLogger = createLogger('routes');
 const dbLogger = createLogger('DB');
