@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { Result } from '../interfaces/result';
 var createError = require('http-errors');
 
-export const  sendJsonPromise  = (promise: Promise<Result>, notFoundMessage: string)  =>
+export const  sendJsonPromise  = (promise: Promise<Result>, notFoundMessage?: string)  =>
 
     async (req: Request, res: Response, next : NextFunction ) => {
         

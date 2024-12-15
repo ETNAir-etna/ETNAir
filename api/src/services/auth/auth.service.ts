@@ -12,8 +12,11 @@ export class AuthService {
         try {
             const data = await UserModel.createUser(email, hash);
             return { action: "create", data, success: true, redirect: true, url: '/' };
-        } catch(error) {
-            return ErrorManager.handlePrismaError(error);
+        } catch(error: any) {
+            if (error.code) {
+                return ErrorManager.handlePrismaError(error);
+            };
+            throw error
         };
     };
 

@@ -1,15 +1,21 @@
 import { Request, Response, NextFunction } from 'express';
-import { validationResult } from 'express-validator/lib/validation-result';
-var createError = require('http-errors');
+import { ValidationError } from 'express-validator';
+import { Result, validationResult } from 'express-validator/lib/validation-result';
 
 
-export const checkValidators = (req: Request, res: Response, next: NextFunction) => {
+export const checkValidators = (req: Request, res: Response, next: NextFunction): void => {
 
-    const ValidatorsErrors = validationResult(req);
+    const validationErrors = validationResult(req);
 
-    if (!ValidatorsErrors.isEmpty()) {
-        return next(createError(400, "VALIDATOR INVALID"));
-    };
+    if (!validationErrors.isEmpty()) {
+        res.status(400).json({
+            status: 400,
+            success: false,
+            errors: validationErrors.array(),
+        });
+    } else {
+        next();
+    }
 
-    next();
+    
 };

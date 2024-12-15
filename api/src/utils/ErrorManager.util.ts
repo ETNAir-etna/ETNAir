@@ -24,14 +24,4 @@ export class ErrorManager {
             message: "An unexpected database error occurred."
         };
     }
-
-    static handleValidationError(errors: any[]): Result {
-        const messages = errors.map(err => `${err.param}: ${err.msg}`);
-        return {
-            action: "validate",
-            success: false,
-            redirect: false,
-            message: messages.join(", ")
-        };
-    }
 }
