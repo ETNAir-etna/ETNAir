@@ -2,36 +2,115 @@ import { Request, Response, NextFunction } from 'express';
 import { Result } from '../interfaces/result';
 var createError = require('http-errors');
 
-export const  sendJsonPromise  = (promise: Result, notFoundMessage: string)  =>
+export const  sendJsonPromise  = (promise: Promise<Result>, notFoundMessage: string)  =>
 
     async (req: Request, res: Response, next : NextFunction ) => {
         
-        
         try {
             
-            const result =  promise;
+            const result = await promise;
+
+            if (!result.success) {
+                return res.status(result.status || 400).json(result)
+            }
+
+            if (result.action === "create") {
+        
+                if (result.redirect && result.url) {
+                    return res.redirect(302, result.url)
+                }
+
+                return res.status(201).json(result)
+
+            }
+            // else if (result.action === "data") {
+            //     if (JSON. stringify(result.data) === '{}' ) {
+            //         return res.status(204).json(result);
+            //     }
+            //     return res.status(200).json(result);
+            // }
 
             
-            if (!result) {
-                return next(createError(404, notFoundMessage));
-            } 
-
-            if (result.action === "redirect" && result.url) {
-                return res.redirect(result.url)
-            }
-            else if (result.action === "data") {
-                if (JSON. stringify(result.data) === '{}' ) {
-                    return res.status(204).json(result);
-                }
-                return res.status(200).json(result);
-            }
             
 
             
             
         } catch (error) {
-            return (next(error));
+            next(error);
         }
     } 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // if (!result) {
+    //     return next(createError(404, notFoundMessage));
+    // };
 

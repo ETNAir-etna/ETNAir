@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-/* ROUTES */
+/* MIDDLEWARE */
 import { serverLogger } from './configs/logger';
 import { morganMiddleware } from './middleware/morgan.middleware';
 import { errorHandler } from './middleware/errorHandler.middleware';
@@ -19,17 +19,16 @@ app.use(morganMiddleware)
 
 app.use(router)
 
-
 app.use(errorHandler)
 
-
 app.use("*", (req: Request, res: Response) => {
-    res.status(400).json({error: {
-        status : 400,
-        message: 'Bad request'
-    }});
-}); 
-
+    res.status(404).json({
+        error: {
+            status: 404,
+            message: "Route not found",
+        },
+    });
+});
 
 const port = process.env.API_PORT || 3001;
 app.listen(port, () => {

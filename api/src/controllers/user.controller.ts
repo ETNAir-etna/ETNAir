@@ -14,21 +14,4 @@ export class UserController {
         sendJsonPromise(await UserService.getUserById(id), "User not in the database" )(req, res, next);
     }
 
-    static async registerUser(req: Request, res: Response, next: NextFunction): Promise<void> {
-        // TODO : : Find a message to send
-        const { email, password } = req.body
-        sendJsonPromise(await AuthService.registerUser(email, password), "MESSAGE to find REGISTER")(req, res, next);
-    }
-
-    static async loginUser(req: Request, res: Response, next: NextFunction): Promise<void> {
-        // TODO : Find a way to custom a message send to the front
-        const { email, password } = req.body
-        sendJsonPromise(await AuthService.loginUser(email, password), "MESSAGE to find LOGIN")(req, res, next);
-    }
-
-    static async logoutUser(req: Request, res: Response, next: NextFunction): Promise<void> {
-        // TODO : FINISH the logout routes
-        sendJsonPromise(await AuthService.logoutUser(), "MESSAGE to find LOGOUT")(req, res, next);
-    }
-
 }

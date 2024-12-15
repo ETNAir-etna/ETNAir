@@ -1,15 +1,20 @@
 
 import { Result } from '../../interfaces/result';
 import { UserModel } from '../../models/UserModel';
+import { ErrorManager } from '../../utils/ErrorManager.util';
 import { comparePassword, hashPassword } from '../../utils/hashPassword.util';
-
+var createError = require('http-errors');
 
 export class AuthService {
 
     static async registerUser(email: string, password: string): Promise<Result> {
         const hash = await hashPassword(password);
-        const data = UserModel.createUser(email, hash);
-        return { action: "redirect", data: data, success : true, url: '#'};
+        try {
+            const data = await UserModel.createUser(email, hash);
+            return { action: "create", data, success: true, redirect: true, url: '/' };
+        } catch(error) {
+            return ErrorManager.handlePrismaError(error);
+        };
     };
 
     static async loginUser(email: string, password: string): Promise<Result> {
