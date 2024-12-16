@@ -72,7 +72,7 @@ async function createProperty( users: Prisma.UserCreateManyInput[], count: numbe
             totalBedrooms: faker.number.int({ min: 1, max: 6 }),
             totalBathrooms: faker.number.int({ min: 1, max: 4 }),
             area: faker.number.float({ min: 30, max: 500, fractionDigits: 1 }),
-            pricePerNight: faker.number.float({ min: 50, max: 1000, fractionDigits: 2 }),
+            pricePerNight: faker.number.float({ min: 50, max: 1000 }),
             mainImgUrl: faker.image.urlLoremFlickr({ category: 'house' }), 
             streetNumber: faker.number.int({ min: 1, max: 5000 }),
             streetName: faker.location.street(),
