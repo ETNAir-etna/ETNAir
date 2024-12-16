@@ -35,7 +35,9 @@ export class UserController {
     next: NextFunction
   ): Promise<void> {
     const { id } = req.params;
-    const updatedData: User = req.body;
+    const updatedData = req.body;
+    console.log(id);
+    console.log(updatedData);
     sendJsonPromise(
       await UserService.updateUser(id, updatedData),
       "User not found or update failed"
