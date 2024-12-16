@@ -1,3 +1,10 @@
+
+export interface ErrorDetails {
+    status: number,
+    message: string
+}
+
+
 export interface Result {
     action?: string
     data?: Object | null
@@ -6,4 +13,5 @@ export interface Result {
     message?: string;
     redirect?: boolean
     status?: number
+    error?: ErrorDetails
 }

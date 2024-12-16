@@ -1,6 +1,6 @@
 import { body } from "express-validator/lib/middlewares/validation-chain-builders";
 
-export const registerValidators = [
+export const registerValidation = [
 
     body('email')
         .trim() 
@@ -26,4 +26,15 @@ export const registerValidators = [
     
             return true;
         })
+];
+
+export const loginValidation = [
+    body('email')
+        .trim() 
+        .notEmpty().withMessage('Email is required.')
+        .normalizeEmail(),
+
+    body('password')
+        .trim()
+        .notEmpty().withMessage('Password is required.')
 ];

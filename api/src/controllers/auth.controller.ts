@@ -13,13 +13,11 @@ export class AuthController {
     };
 
     static async loginUser(req: Request, res: Response, next: NextFunction): Promise<void> {
-        // TODO : Find a way to custom a message send to the front
         const { email, password } = req.body;
-        sendJsonPromise(AuthService.loginUser(email, password), "Registration failed.")(req, res, next);
+        sendJsonPromise(AuthService.loginUser(email, password))(req, res, next);
     };
 
     static async logoutUser(req: Request, res: Response, next: NextFunction): Promise<void> {
-        // TODO : FINISH the logout routes
-        sendJsonPromise(AuthService.logoutUser(), "MESSAGE to find LOGOUT")(req, res, next);
+        sendJsonPromise(AuthService.logoutUser())(req, res, next);
     };
 }
