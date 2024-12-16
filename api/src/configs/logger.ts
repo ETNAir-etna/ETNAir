@@ -3,7 +3,7 @@ import 'winston-daily-rotate-file';
 
 const { combine, timestamp, printf, colorize, align, label } = winston.format;
 
-
+// TODO : Voir pourquoi je n'ai pas accès à tous ? comme trace
 const logLevels = {
     fatal: 0,
     error: 1,
@@ -42,10 +42,10 @@ const DailyRotateTransport = (level: string, filename: string) => {
 
 const createLogger = (labelName: string): Logger => {
     return winston.createLogger({
-        levels: logLevels,
         level: process.env.NODE_ENV === "dev" 
         ? process.env.LOG_LEVEL || 'debug'
         : 'info', 
+        levels: logLevels,
         format: combine(
             label({ label: labelName }),
             timestamp({format: 'DD-MM-YYYY - HH:mm:ss'}),
@@ -77,8 +77,8 @@ const dbLogger = createLogger('DB');
 const apiLogger = createLogger('API');
 const controllersLogger = createLogger('controllers');
 const servicesLogger = createLogger('services');
-const serverLogger = createLogger('server')
-const httpLogger = createLogger('http')
-const errorLogger = createLogger('errorHandler')
+const serverLogger = createLogger('server');
+const httpLogger = createLogger('http');
+const errorLogger = createLogger('errorHandler');
 
 export { routesLogger, dbLogger, apiLogger, controllersLogger, servicesLogger, serverLogger, httpLogger , errorLogger};

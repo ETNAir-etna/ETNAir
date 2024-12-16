@@ -4,7 +4,8 @@
   "main": "dist/api/src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "seed": "ts-node prisma/seed.ts",
+    "seed:dev": "ts-node prisma/devSeed.ts",
+    "seed:prod": "ts-node prisma/prodSeed.ts",
     "build": "tsc",
     "start": "npm run build && node dist/api/src/index.js",
     "dev": "nodemon"
@@ -31,6 +32,7 @@
     "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
+    "@faker-js/faker": "^9.3.0",
     "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.0",
     "@types/morgan": "^1.9.9",

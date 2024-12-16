@@ -11,6 +11,7 @@
         "POSTGRES_HOST":"localhost",
         "API_PORT":3000,
         "DATABASE_URL":"postgresql://etnair_user:etnair_pwd@localhost:5432/etnair_db?schema=public",
-        "NODE_ENV":"dev"
+        "NODE_ENV":"dev",
+        "LOG_LEVEL": "silly"
     }
 }

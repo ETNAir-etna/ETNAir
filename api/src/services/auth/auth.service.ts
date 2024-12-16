@@ -17,7 +17,8 @@ export class AuthService {
             throw Error();
         }
         await comparePassword(password, user!.password);
-        return { action: "login", success: true, redirect: true, url: "/dashboard" };
+        
+        return { action: "login", success: true, redirect: true, url: "/profile" };
     };
 
     static async logoutUser() {
