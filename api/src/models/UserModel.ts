@@ -20,8 +20,9 @@ export class UserModel  {
     static async findByEmail(email: string) {
         return prisma.user.findUnique({
             where: { email: email },
-            select: { 
-                password: true
+            select: {
+                id: true,
+                password: true,
             },
         });
     }
