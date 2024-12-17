@@ -10,6 +10,15 @@ export const  sendJsonPromise  = (promise: Promise<Result>, notFoundMessage?: st
             const result = await promise;
 
             if (result) {
+
+
+
+                if (!result.data) {
+                    return res.status(404).json(result)
+                }
+
+
+
                 if (result.action === "create") {
         
                     if (result.redirect && result.url) {
@@ -24,9 +33,10 @@ export const  sendJsonPromise  = (promise: Promise<Result>, notFoundMessage?: st
                         return res.redirect(302, result.url)
                     }
 
-                    return res.status(200).json(result)
     
                 }
+
+                return res.status(200).json(result)
                 // else if (result.action === "data") {
                 //     if (JSON. stringify(result.data) === '{}' ) {
                 //         return res.status(204).json(result);
@@ -35,12 +45,6 @@ export const  sendJsonPromise  = (promise: Promise<Result>, notFoundMessage?: st
                 // }
 
             }
-
-            
-
-            
-            
-
             
             
         } catch (error) {

@@ -1,4 +1,4 @@
-
+import { User as PrismaProperty } from '@prisma/client';
 
 export type User = {
 
@@ -6,10 +6,10 @@ export type User = {
     email: string;
     password: string;
     firstName?: string | null;
-    lasrName?: string | null;
+    lastName?: string | null;
     gender?: string | null;
     phoneNumber?: string | null;
-    role: string;
+    role?: string;
     status: string[];
     createdAt: Date;
     updatedAt: Date;
@@ -17,7 +17,7 @@ export type User = {
     hostRating?: number | null;
     summary?: string | null;
     profileImg?: string | null;
-    requestForDelete: boolean;
-    isSuperHost: boolean;
+    requestForDelete?: boolean;
+    isSuperHost?: boolean;
         
 }

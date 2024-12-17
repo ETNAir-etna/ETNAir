@@ -1,5 +1,5 @@
 -- CreateEnum
-CREATE TYPE "PropertyType" AS ENUM ('APARTMENT', 'HOUSE', 'VILLA', 'BUNGALOW', 'CONDO', 'LOFT', 'ROOM');
+CREATE TYPE "PropertyType" AS ENUM ('APARTMENT', 'HOUSE', 'VILLA', 'BUNGALOW', 'CONDO', 'LOFT', 'ROOM', 'STUDIO');
 
 -- CreateEnum
 CREATE TYPE "reservationType" AS ENUM ('GUEST_REQUEST', 'HOST_REQUEST');
@@ -11,14 +11,14 @@ CREATE TYPE "reservationStatus" AS ENUM ('PENDING', 'ACCEPTED', 'REJECTED', 'PAY
 CREATE TYPE "reviewTypes" AS ENUM ('USER', 'PROPERTY');
 
 -- CreateEnum
-CREATE TYPE "Gender" AS ENUM ('MAN', 'WOMAN', 'OTHER');
+CREATE TYPE "Gender" AS ENUM ('OTHER', 'FEMALE', 'MALE');
 
 -- CreateEnum
 CREATE TYPE "Role" AS ENUM ('ADMIN', 'USER');
 
 -- CreateTable
 CREATE TABLE "Property" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT,
     "propertyType" "PropertyType" NOT NULL,
@@ -26,7 +26,7 @@ CREATE TABLE "Property" (
     "totalBedrooms" INTEGER,
     "totalBathrooms" INTEGER,
     "area" DOUBLE PRECISION,
-    "pricePerNight" DECIMAL(65,30) NOT NULL,
+    "pricePerNight" INTEGER NOT NULL,
     "mainImgUrl" TEXT NOT NULL,
     "publishedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -36,34 +36,27 @@ CREATE TABLE "Property" (
     "streetNumber" INTEGER NOT NULL,
     "streetName" TEXT NOT NULL,
     "city" TEXT NOT NULL,
-    "zip" INTEGER,
+    "zip" TEXT,
     "country" TEXT NOT NULL,
     "latitude" DOUBLE PRECISION,
     "longitude" DOUBLE PRECISION,
     "equipments" TEXT[],
-    "ownerId" INTEGER NOT NULL,
+    "ownerId" TEXT NOT NULL,
+    "pictures" TEXT[],
 
     CONSTRAINT "Property_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "PropertyImages" (
-    "id" SERIAL NOT NULL,
-    "propertyId" INTEGER NOT NULL,
-    "url" TEXT NOT NULL,
-
-    CONSTRAINT "PropertyImages_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
 CREATE TABLE "Reservation" (
-    "id" SERIAL NOT NULL,
-    "guestId" INTEGER NOT NULL,
-    "hostId" INTEGER NOT NULL,
-    "propertyId" INTEGER NOT NULL,
-    "description" TEXT NOT NULL,
+    "id" TEXT NOT NULL,
+    "guestId" TEXT NOT NULL,
+    "hostId" TEXT NOT NULL,
+    "propertyId" TEXT NOT NULL,
     "startDate" TIMESTAMP(3) NOT NULL,
     "endDate" TIMESTAMP(3) NOT NULL,
+    "checkIn" TEXT NOT NULL,
+    "checkOut" TEXT NOT NULL,
     "NumberOfguests" INTEGER NOT NULL,
     "totalPrice" DOUBLE PRECISION NOT NULL,
     "status" "reservationStatus" NOT NULL DEFAULT 'PENDING',
@@ -76,30 +69,31 @@ CREATE TABLE "Reservation" (
 
 -- CreateTable
 CREATE TABLE "Review" (
-    "id" SERIAL NOT NULL,
-    "createdBy" INTEGER,
+    "id" TEXT NOT NULL,
+    "createdBy" TEXT,
     "fullName" TEXT NOT NULL,
-    "prrofileImg" TEXT NOT NULL,
+    "profileImg" TEXT NOT NULL,
     "reviewType" "reviewTypes" NOT NULL,
-    "reservationId" INTEGER,
-    "propertyId" INTEGER,
+    "reservationId" TEXT,
+    "propertyId" TEXT,
     "content" TEXT NOT NULL,
     "rating" INTEGER NOT NULL,
     "publishedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "directedTo" TEXT,
 
     CONSTRAINT "Review_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "User" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
-    "firstName" VARCHAR(35) NOT NULL,
-    "lasrName" VARCHAR(35) NOT NULL,
-    "gender" "Gender",
-    "phoneNumber" BIGINT,
+    "firstName" VARCHAR(35),
+    "lastName" VARCHAR(35),
+    "gender" "Gender" DEFAULT 'OTHER',
+    "phoneNumber" TEXT,
     "role" "Role" NOT NULL DEFAULT 'USER',
     "status" TEXT[],
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -117,9 +111,9 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "Wishlist" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "userId" INTEGER NOT NULL,
+    "userId" TEXT NOT NULL,
     "propertyId" INTEGER NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -129,8 +123,8 @@ CREATE TABLE "Wishlist" (
 
 -- CreateTable
 CREATE TABLE "WishlistProperty" (
-    "wishlistId" INTEGER NOT NULL,
-    "propertyId" INTEGER NOT NULL,
+    "wishlistId" TEXT NOT NULL,
+    "propertyId" TEXT NOT NULL,
 
     CONSTRAINT "WishlistProperty_pkey" PRIMARY KEY ("wishlistId","propertyId")
 );
@@ -139,7 +133,25 @@ CREATE TABLE "WishlistProperty" (
 CREATE INDEX "Property_pricePerNight_idx" ON "Property"("pricePerNight");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "PropertyImages_url_propertyId_key" ON "PropertyImages"("url", "propertyId");
+CREATE INDEX "Property_ownerId_idx" ON "Property"("ownerId");
+
+-- CreateIndex
+CREATE INDEX "Property_city_idx" ON "Property"("city");
+
+-- CreateIndex
+CREATE INDEX "Property_country_idx" ON "Property"("country");
+
+-- CreateIndex
+CREATE INDEX "Property_equipments_idx" ON "Property"("equipments");
+
+-- CreateIndex
+CREATE INDEX "Property_totalBedrooms_idx" ON "Property"("totalBedrooms");
+
+-- CreateIndex
+CREATE INDEX "Property_propertyType_idx" ON "Property"("propertyType");
+
+-- CreateIndex
+CREATE INDEX "Property_occupancyMax_idx" ON "Property"("occupancyMax");
 
 -- CreateIndex
 CREATE INDEX "Reservation_guestId_idx" ON "Reservation"("guestId");
@@ -208,9 +220,6 @@ CREATE UNIQUE INDEX "Wishlist_name_userId_key" ON "Wishlist"("name", "userId");
 ALTER TABLE "Property" ADD CONSTRAINT "Property_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "PropertyImages" ADD CONSTRAINT "PropertyImages_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE CASCADE ON UPDATE CASCADE;
-
--- AddForeignKey
 ALTER TABLE "Reservation" ADD CONSTRAINT "Reservation_guestId_fkey" FOREIGN KEY ("guestId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
@@ -218,6 +227,9 @@ ALTER TABLE "Reservation" ADD CONSTRAINT "Reservation_hostId_fkey" FOREIGN KEY (
 
 -- AddForeignKey
 ALTER TABLE "Reservation" ADD CONSTRAINT "Reservation_propertyId_fkey" FOREIGN KEY ("propertyId") REFERENCES "Property"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Review" ADD CONSTRAINT "Review_directedTo_fkey" FOREIGN KEY ("directedTo") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Review" ADD CONSTRAINT "Review_createdBy_fkey" FOREIGN KEY ("createdBy") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;

@@ -1,6 +1,7 @@
 
 export interface ErrorDetails {
-    status: number,
+    errorType : string
+    status: number
     message: string
 }
 

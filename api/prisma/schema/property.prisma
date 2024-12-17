@@ -21,7 +21,7 @@ model Property {
     totalBedrooms         Int?
     totalBathrooms        Int?
     area                  Float?
-    pricePerNight         Float
+    pricePerNight         Int
     mainImgUrl            String
     publishedAt           DateTime             @default(now())
     updatedAt             DateTime             @updatedAt
@@ -55,12 +55,3 @@ model Property {
     @@index([propertyType])
     @@index([occupancyMax])
 }
-
-// model PropertyImages {
-//     id                    Int          @id @default(autoincrement())
-//     propertyId            String
-//     url                   String
-//     property              Property                  @relation(fields: [propertyId], references: [id], onDelete: Cascade)
-
-//     @@unique([url, propertyId])
-// }

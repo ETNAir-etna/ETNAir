@@ -67,7 +67,7 @@ async function createProperty( users: Prisma.UserCreateManyInput[], count: numbe
         const property = {
             title: faker.lorem.words(3),
             description: faker.lorem.paragraph(2),
-            propertyType: faker.helpers.arrayElement(['APARTMENT', 'HOUSE', 'VILLA', 'BUNGALOW', 'CONDO', 'LOFT', 'ROOM']),
+            propertyType: faker.helpers.arrayElement(['APARTMENT', 'HOUSE', 'VILLA', 'STUDIO', 'BUNGALOW', 'CONDO', 'LOFT', 'ROOM']),
             occupancyMax: faker.number.int({ min: 1, max: 12 }),
             totalBedrooms: faker.number.int({ min: 1, max: 6 }),
             totalBathrooms: faker.number.int({ min: 1, max: 4 }),

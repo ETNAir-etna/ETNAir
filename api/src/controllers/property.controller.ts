@@ -8,16 +8,31 @@ import { Property } from '../../../shared/types/Property';
 export class PropertyController {
 
     static async getAllProperties(req: Request, res: Response, next : NextFunction) {
-        sendJsonPromise(await PropertyService.getProperties())(req, res, next);
-    }
+        sendJsonPromise(PropertyService.getProperties())(req, res, next);
+    };
 
     static async getPropertyById(req: Request, res: Response, next : NextFunction) {
         const { id } = req.params
-        sendJsonPromise(await PropertyService.getPropertyById(id))(req, res, next);
-    }
+        sendJsonPromise(PropertyService.getPropertyById(id))(req, res, next);
+    };
 
     static async createProperty(req: Request, res: Response, next : NextFunction) {
         const data: Prisma.PropertyCreateInput = req.body
-        sendJsonPromise(await PropertyService.createProperty(data))(req, res, next)
-    }
+        sendJsonPromise(PropertyService.createProperty(data))(req, res, next)
+    };
+
+    static async editProperty(req: Request, res: Response, next : NextFunction) {
+        const data: Prisma.PropertyCreateInput = req.body
+        sendJsonPromise(PropertyService.editProperty(data))(req, res, next)
+    };
+
+    static async deleteProperty(req: Request, res: Response, next : NextFunction) {
+        const { id } = req.body
+        sendJsonPromise(PropertyService.deleteProperty(id))(req, res, next)
+    };
+
+    static async deleteAllProperties(req: Request, res: Response, next : NextFunction) {
+        const { id } = req.body
+        sendJsonPromise(PropertyService.deleteAllProperties(id))(req, res, next)
+    };
 }   

@@ -5,7 +5,6 @@ import { AuthService } from "../services/auth/auth.service";
 
 
 export class AuthController {
-
     
     static async registerUser(req: Request, res: Response, next: NextFunction): Promise<void> {
         const { email, password } = req.body;

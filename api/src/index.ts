@@ -1,5 +1,4 @@
 import express, { Request, Response, Application } from 'express';
-import path from 'path';
 import router from "./routes/routes";
 import dotenv from 'dotenv';
 
@@ -15,6 +14,7 @@ const app: Application = express();
 
 // app.use(express.static(path.join(__dirname, '../public')));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(morganMiddleware)
 
 app.use(router)
