@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { UserService } from '../services/user.service';
 import { sendJsonPromise } from '../helpers/sendJsonPromise.helper';
 import { AuthService } from '../services/auth/auth.service';
+import jwt from 'jsonwebtoken';
 
 export class UserController {
 
@@ -22,7 +23,7 @@ export class UserController {
 
     static async loginUser(req: Request, res: Response, next: NextFunction): Promise<void> {
         // TODO : Find a way to custom a message send to the front
-        const { email, password } = req.body
+        const { email, password } = req.body;
         sendJsonPromise(await AuthService.loginUser(email, password), "MESSAGE to find LOGIN")(req, res, next);
     }
 
@@ -30,5 +31,10 @@ export class UserController {
         // TODO : FINISH the logout routes
         sendJsonPromise(await AuthService.logoutUser(), "MESSAGE to find LOGOUT")(req, res, next);
     }
+
+    static getProfile(req: Request, res: Response):void {
+        res.send(`Welcome `);
+    }
+
 
 }

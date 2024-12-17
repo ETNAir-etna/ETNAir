@@ -2,6 +2,8 @@ import express, { Request, Response, Application } from 'express';
 import path from 'path';
 import router from "./routes/routes";
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+
 
 dotenv.config();
 
@@ -14,6 +16,7 @@ import { errorHandler } from './middleware/errorHandler.middleware';
 const app: Application = express();
 
 // app.use(express.static(path.join(__dirname, '../public')));
+app.use(cookieParser()); // Ajoutez ceci avant vos middlewares de route
 app.use(express.json());
 app.use(morganMiddleware)
 
