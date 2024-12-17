@@ -64,13 +64,13 @@ export class PropertyModel {
         });
     };
 
-    static async deleteManyProperties(id : string): Promise<boolean> {
-        const allDeleted = await prisma.property.deleteMany({
+    static async deleteManyProperties(ownerId : string): Promise<number> {
+        const deleteResult = await prisma.property.deleteMany({
             where: {
-                id: id
+                ownerId: ownerId,
             },
         });
-        return allDeleted ? true : false;
+        return deleteResult.count
     };
 
 

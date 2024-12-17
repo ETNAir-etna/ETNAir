@@ -15,4 +15,5 @@ export interface Result {
     redirect?: boolean
     status?: number
     error?: ErrorDetails
+    deletedCount?: number
 }

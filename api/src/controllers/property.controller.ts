@@ -32,7 +32,7 @@ export class PropertyController {
     };
 
     static async deleteAllProperties(req: Request, res: Response, next : NextFunction) {
-        const { id } = req.body
-        sendJsonPromise(PropertyService.deleteAllProperties(id))(req, res, next)
+        const { ownerId } = req.body
+        sendJsonPromise(PropertyService.deleteAllProperties(ownerId))(req, res, next)
     };
 }   
