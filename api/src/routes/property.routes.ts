@@ -12,10 +12,10 @@ router.get('/:id', PropertyController.getPropertyById);
 
 router.post('/create', propertyValidations, checkValidators , PropertyController.createProperty);
 
-router.put('/update', propertyValidations, checkValidators , PropertyController.editProperty);
+router.put('/update', propertyValidations, checkValidators , PropertyController.updateProperty);
 
-router.delete('/delete', PropertyController.deleteProperty)
+router.delete('/delete', PropertyController.deleteProperty);
 
-router.delete('/delete/all', PropertyController.deleteAllProperties)
+router.delete('/delete/all', PropertyController.deleteAllProperties);
 
 export default router;

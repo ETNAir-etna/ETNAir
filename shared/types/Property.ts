@@ -27,7 +27,7 @@ export type Property = {
     equipments?: string[]
     pictures: string[]
     ownerId: string
-}
+};
 
 export const PropertyDTO = (property: PrismaProperty): Property => {
     return {
@@ -55,4 +55,4 @@ export const PropertyDTO = (property: PrismaProperty): Property => {
         equipments: property.equipments || [],
         pictures: property.pictures || []
     };
-}
+};

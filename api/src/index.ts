@@ -1,14 +1,13 @@
 import express, { Request, Response, Application } from 'express';
 import router from "./routes/routes";
 import dotenv from 'dotenv';
-
 dotenv.config();
 
-/* MIDDLEWARE */
 import { serverLogger } from './configs/logger';
+
+/* MIDDLEWARE */
 import { morganMiddleware } from './middleware/morgan.middleware';
 import { errorHandler } from './middleware/errorHandler.middleware';
-
 
 const app: Application = express();
 
@@ -17,6 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morganMiddleware)
 
+/* ROUTER / ROUTES */
 app.use(router)
 
 app.use(errorHandler)

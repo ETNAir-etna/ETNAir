@@ -15,13 +15,9 @@ export const  sendJsonPromise  = (promise: Promise<Result>, notFoundMessage?: st
                     return res.status(200).json(result);
                 }
 
-
-
                 if (!result.data) {
-                    return res.status(404).json(result)
-                }
-
-
+                    return res.status(404).json(result);
+                };
 
                 if (result.action === "create") {
         
@@ -29,32 +25,25 @@ export const  sendJsonPromise  = (promise: Promise<Result>, notFoundMessage?: st
                         return res.redirect(302, result.url)
                     };
     
-                    return res.status(201).json(result)
-                }
+                    return res.status(201).json(result);
+                };
+
                 if (result.action === "login") {
             
                     if (result.redirect && result.url) {
                         return res.redirect(302, result.url)
-                    }
-
-    
-                }
+                    };
+                };
 
                 return res.status(200).json(result)
-                // else if (result.action === "data") {
-                //     if (JSON. stringify(result.data) === '{}' ) {
-                //         return res.status(204).json(result);
-                //     }
-                //     return res.status(200).json(result);
-                // }
 
-            }
+            };
             
             
         } catch (error) {
             next(error);
-        }
-    } 
+        };
+};
 
 
 

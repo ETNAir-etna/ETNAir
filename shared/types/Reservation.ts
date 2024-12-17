@@ -15,7 +15,7 @@ export type Reservation = {
     reservationType?: reservationType | null;           
     createdAt: Date ;
     updatedAt: Date ;
-}
+};
 
 export const ReservationDTO = (reservation: PrismaReservation): Reservation => {
     return {
@@ -32,5 +32,5 @@ export const ReservationDTO = (reservation: PrismaReservation): Reservation => {
         reservationType: reservation.reservationType ?? null, 
         createdAt: reservation.createdAt,
         updatedAt: reservation.updatedAt,
-    }
-}
+    };
+};

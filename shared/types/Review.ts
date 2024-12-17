@@ -14,7 +14,7 @@ export type Review = {
     publishedAt: Date;
     updatedAt: Date;
     directedTo?: string | null;
-}
+};
 
 export const ReviewDTO = (review: PrismaReview): Review => {
     return {
@@ -30,5 +30,5 @@ export const ReviewDTO = (review: PrismaReview): Review => {
         publishedAt: review.publishedAt,
         updatedAt: review.updatedAt,
         directedTo: review.directedTo ?? null,
-    }
-}
+    };
+};

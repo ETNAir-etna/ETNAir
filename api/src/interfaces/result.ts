@@ -1,10 +1,8 @@
-
 export interface ErrorDetails {
     errorType : string
     status: number
     message: string
-}
-
+};
 
 export interface Result {
     action?: string
@@ -16,4 +14,4 @@ export interface Result {
     status?: number
     error?: ErrorDetails
     deletedCount?: number
-}
+};

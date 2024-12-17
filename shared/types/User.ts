@@ -17,7 +17,7 @@ export type User = {
     profileImg?: string | null;
     requestForDelete?: boolean;
     isSuperHost?: boolean;
-}
+};
 
 export const UserDTO = (user: PrismaUser): User => {
     return {
@@ -37,5 +37,5 @@ export const UserDTO = (user: PrismaUser): User => {
         profileImg: user.profileImg ?? null,
         requestForDelete: user.requestForDelete ?? false,
         isSuperHost: user.isSuperHost ?? false
-    }
-}
+    };
+};

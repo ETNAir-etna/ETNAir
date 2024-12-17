@@ -1,7 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { ValidationError } from 'express-validator';
-import { Result, validationResult } from 'express-validator/lib/validation-result';
-
+import { validationResult } from 'express-validator/lib/validation-result';
 
 export const checkValidators = (req: Request, res: Response, next: NextFunction): void => {
 
@@ -16,6 +14,5 @@ export const checkValidators = (req: Request, res: Response, next: NextFunction)
     } else {
         next();
     }
-
     
 };

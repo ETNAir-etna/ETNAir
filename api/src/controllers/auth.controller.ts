@@ -2,8 +2,6 @@ import { NextFunction, Request, Response  } from "express";
 import { sendJsonPromise } from "../helpers/sendJsonPromise.helper";
 import { AuthService } from "../services/auth/auth.service";
 
-
-
 export class AuthController {
     
     static async registerUser(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -19,4 +17,4 @@ export class AuthController {
     static async logoutUser(req: Request, res: Response, next: NextFunction): Promise<void> {
         sendJsonPromise(AuthService.logoutUser())(req, res, next);
     };
-}
+};

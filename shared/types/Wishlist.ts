@@ -6,7 +6,7 @@ export type Wishlist = {
     userId: string
     createdAt: Date
     updatedAt: Date
-}
+};
 
 export const WishlistDTO = (wishlist: PrismaWishlist): Wishlist => {
     return {
@@ -15,5 +15,5 @@ export const WishlistDTO = (wishlist: PrismaWishlist): Wishlist => {
         userId: wishlist.userId,
         createdAt: wishlist.createdAt,
         updatedAt: wishlist.updatedAt
-    }
-}
+    };
+};

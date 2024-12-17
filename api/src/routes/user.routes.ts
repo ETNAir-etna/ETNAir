@@ -1,12 +1,16 @@
 import { Router } from 'express';
 import { UserController } from '../controllers/user.controller';
+import { checkValidators } from '../middleware/checkValidators.middleware';
+import { editUser } from '../validators/user.validator';
 
 const router = Router();
 
-router.get('/all', UserController.getUsers)
+router.get('/all', UserController.getUsers);
 
-router.get('/:id', UserController.getUser)
+router.get('/:id', UserController.getUser);
 
-// TODO : add createPropertyValidator, checkValidators edit user route
+router.put('/update', UserController.updateUser);
+
+router.delete('/delete', editUser, checkValidators, UserController.deleteUser);
 
 export default router;

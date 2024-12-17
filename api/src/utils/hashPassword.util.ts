@@ -10,6 +10,6 @@ export const comparePassword = async(password: string, hashedPassword : string):
     const isMatch = await bcrypt.compare(password, hashedPassword);
     if (!isMatch) {
         throw new Error("Invalid password");
-    }
+    };
     return isMatch;
 };

@@ -16,6 +16,10 @@ api/dist
 
 # Exclude database migration files
 # api/migrations
+# api/prisma/migrations
 
 # Exclude logs and audit files
 .logs
+
+# Useful script in DEV MODE
+api/scripts
