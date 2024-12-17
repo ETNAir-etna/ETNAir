@@ -56,17 +56,16 @@ export class PropertyModel {
         return PropertyDTO(updateUser);
     };
 
-    static async deleteProperty(id : string): Promise<boolean> {
-        const deleted = await prisma.user.delete({
+    static async deleteProperty(id : string): Promise<void> {
+        await prisma.property.delete({
             where: {
                 id: id,
             },
         });
-        return deleted ? true : false;
     };
 
     static async deleteManyProperties(id : string): Promise<boolean> {
-        const allDeleted = await prisma.user.deleteMany({
+        const allDeleted = await prisma.property.deleteMany({
             where: {
                 id: id
             },

@@ -18,8 +18,7 @@ export class PropertyService {
     };
 
     static async createProperty(propertyInfos: Prisma.PropertyCreateInput): Promise<Result> {
-        const data: Property = await PropertyModel.createProperty(propertyInfos);
-        // TODO : choose the final URL
+        await PropertyModel.createProperty(propertyInfos);
         return { action: "create", redirect: true, success : true, url: "#"};
     };
 

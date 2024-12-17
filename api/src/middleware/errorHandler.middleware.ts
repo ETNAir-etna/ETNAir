@@ -6,8 +6,8 @@ import { Prisma } from '@prisma/client';
 
 export const errorHandler: ErrorRequestHandler = (err , req, res, next) => {
 
-    errorLogger.error(err);
-    // console.error(`[ERROR]: ${err.message || "Unknown error"}`, err);
+    // errorLogger.error(err);
+    console.error(`[ERROR]: ${err.message || "Unknown error"}`, err);
 
     // SYSTEM : errorHandler
     let statusCode = 500;
@@ -38,7 +38,7 @@ export const errorHandler: ErrorRequestHandler = (err , req, res, next) => {
             statusCode = 500;
             errorMessage = "Database initialization failed.";
         } else if (err instanceof Prisma.PrismaClientRustPanicError) {
-            errorType = "PRISMA"
+            
             statusCode = 500;
             errorMessage = "An unexpected error occurred in Prisma.";
         }

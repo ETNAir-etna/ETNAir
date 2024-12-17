@@ -9,7 +9,11 @@ export const  sendJsonPromise  = (promise: Promise<Result>, notFoundMessage?: st
             
             const result = await promise;
 
-            if (result) {
+            if (result && result.success) {
+
+                if (result.action === "delete") {
+                    return res.status(200).json(result);
+                }
 
 
 
