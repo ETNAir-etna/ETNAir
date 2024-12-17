@@ -1,13 +1,40 @@
 import { PrismaClient, Prisma } from '@prisma/client';
 import { Property, PropertyDTO } from '../../../shared/types/Property';
+import { PropertyFilter } from '../../../shared/types/PropertyFilter';
 
 const prisma = new PrismaClient();
 
 export class PropertyModel {
 
 
-    static async findAll(): Promise<Property[]> {
-        const properties = await prisma.property.findMany();
+    static async findAll(filter : PropertyFilter): Promise<Property[]> {
+        const skipItems: number = (filter.page - 1) * filter.numberByPage
+        const properties = await prisma.property.findMany({
+            orderBy: {
+                publishedAt : filter.publishedAt,
+                pricePerNight : filter.pricePerNight,
+            },
+            where: {
+                country: filter.country,
+                city: filter.city,
+                propertyType: filter.propertyType,
+                roomNumber: {
+                    gte : filter.roomNumber,
+                },
+                occupancyMax: {
+                    gte : filter.occupancyMax,
+                },
+                totalBedrooms: {
+                    gte : filter.totalBedrooms,
+                },
+                equipments: filter.equipments
+                ? {
+                    hasSome: filter.equipments
+                } : undefined
+            },
+            skip: skipItems,
+            take: filter.numberByPage,
+        });
         console.log(properties)
         return properties.map( property => PropertyDTO(property));
     };

@@ -95,7 +95,7 @@ async function createProperty( users: Prisma.UserCreateManyInput[], count: numbe
 async function main() {
 
     const usersList = await createHosts(50);
-    const propertiesList = await createProperty(usersList, 15);
+    const propertiesList = await createProperty(usersList, 25);
 
     await prisma.user.createMany({
         data : usersList

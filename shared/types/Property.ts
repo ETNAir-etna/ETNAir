@@ -27,6 +27,7 @@ export type Property = {
     equipments?: string[]
     pictures: string[]
     ownerId: string
+    publishedAt: Date;
 };
 
 export const PropertyDTO = (property: PrismaProperty): Property => {
@@ -53,6 +54,7 @@ export const PropertyDTO = (property: PrismaProperty): Property => {
         latitude: property.latitude ?? null,
         longitude: property.longitude ?? null,
         equipments: property.equipments || [],
-        pictures: property.pictures || []
+        pictures: property.pictures || [],
+        publishedAt: property.publishedAt
     };
 };

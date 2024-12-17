@@ -6,7 +6,7 @@ import { propertyValidations } from '../validators/property.validator';
 
 const router = Router();
 
-router.get('/all', PropertyController.getAllProperties);
+router.post('/all', PropertyController.getAllProperties);
 
 router.get('/:id', PropertyController.getPropertyById);
 

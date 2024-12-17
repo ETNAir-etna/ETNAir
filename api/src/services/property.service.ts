@@ -2,10 +2,11 @@ import { Prisma } from "@prisma/client";
 import { PropertyModel } from "../models/PropertyModel";
 import { Property } from "../../../shared/types/Property";
 import { Result } from "../interfaces/result";
+import { PropertyFilter } from "../../../shared/types/PropertyFilter";
 
 export class PropertyService {
-    static async getProperties(): Promise<Result> {
-        const data: Property[] = await PropertyModel.findAll();
+    static async getProperties(filter : PropertyFilter): Promise<Result> {
+        const data: Property[] = await PropertyModel.findAll(filter);
         return { action: "data", data: data, success: true };
     }
 
