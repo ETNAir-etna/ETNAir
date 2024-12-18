@@ -1,6 +1,7 @@
 import express, { Request, Response, Application } from 'express';
 import router from "./routes/routes";
 import dotenv from 'dotenv';
+import cors from 'cors';
 dotenv.config();
 
 import { serverLogger } from './configs/logger';
@@ -8,6 +9,8 @@ import { serverLogger } from './configs/logger';
 /* MIDDLEWARE */
 import { morganMiddleware } from './middleware/morgan.middleware';
 import { errorHandler } from './middleware/errorHandler.middleware';
+import { corsOptions } from './configs/cors.config';
+
 
 const app: Application = express();
 
@@ -15,6 +18,7 @@ const app: Application = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morganMiddleware)
+app.use(cors(corsOptions));
 
 /* ROUTER / ROUTES */
 app.use(router)

@@ -1,6 +1,7 @@
 
 # Exclude Node.js dependencies for the API
 api/node_modules/
+client/node_modules/
 
 # Exclude custom Git configurations
 .gitmessage
@@ -23,3 +24,6 @@ api/dist
 
 # Useful script in DEV MODE
 api/scripts
+
+# Backend tests
+api/tests/

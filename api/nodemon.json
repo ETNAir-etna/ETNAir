@@ -12,6 +12,7 @@
         "API_PORT":3000,
         "DATABASE_URL":"postgresql://etnair_user:etnair_pwd@localhost:5432/etnair_db?schema=public",
         "NODE_ENV":"dev",
-        "LOG_LEVEL": "silly"
+        "LOG_LEVEL": "silly",
+        "CLIENT_URL": "http://localhost:5173"
     }
 }
