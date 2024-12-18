@@ -16,3 +16,6 @@ nodemon.json
 
 # SCRIPTS
 scripts/
+
+# TESTS
+tests/
