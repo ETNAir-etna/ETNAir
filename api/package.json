@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "dist/api/src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"TESTS START\" && jest --config=configs/jest.config.js",
     "seed:dev": "ts-node prisma/devSeed.ts",
     "seed:prod": "ts-node prisma/prodSeed.ts",
     "build": "tsc",
@@ -43,6 +43,7 @@
     "@types/node": "^22.10.1",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.7",
+    "jest": "^29.7.0",
     "nodemon": "^3.1.7",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
