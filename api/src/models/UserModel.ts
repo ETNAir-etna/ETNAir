@@ -24,12 +24,13 @@ export class UserModel  {
     };
 
     static async createUser(email: string, password: string) {
-        return await prisma.user.create({
+        const user = await prisma.user.create({
             data : {
                 email: email,
                 password: password
             }
         });
+        return user.email
     };
 
     static async updateUser(data: Prisma.UserCreateInput): Promise<User> {

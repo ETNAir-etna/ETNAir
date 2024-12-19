@@ -1,4 +1,5 @@
 
+import { servicesLogger } from '../../configs/logger';
 import { Result } from '../../interfaces/result';
 import { UserModel } from '../../models/UserModel';
 import { comparePassword, hashPassword } from '../../utils/hashPassword.util';
@@ -8,6 +9,7 @@ export class AuthService {
     static async registerUser(email: string, password: string): Promise<Result> {
         const hash = await hashPassword(password);
         const user = await UserModel.createUser(email, hash);
+        servicesLogger.silly(`Welcome ${user} !`)
         return { action: "create", data: user, success: true, redirect: true, url: "/" };
     };
 
