@@ -1,92 +1,139 @@
-# Groupe de ayad_f 1046734
+# ETNAir Project
 
+Welcome to the **ETNAir** project! This platform provides a seamless experience for both tenants and hosts. Tenants can browse and book properties, while hosts can list and manage their properties. The project consists of a back-end built with **Node.js** and **PostgreSQL**, and a front-end developed using **React**, **Redux**, and **Vite** for a fast, responsive user interface.
 
+---
 
-## Getting started
+## 📝 Table of Contents
+- [🌟 Project Overview](#-project-overview)
+- [✨ Key Features](#-key-features)
+- [⚙️ Front-End](#-front-end)
+- [🔧 Back-End](#-back-end)
+- [🚀 Installation](#-installation)
+- [📚 Documentation](#-documentation)
+- [🤝 Team Members](#-team-members)
+- [📜 License](#-license)
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+---
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## 🌟 Project Overview
 
-## Add your files
+ETNAir is a full-stack application designed to connect tenants and property hosts. The platform provides intuitive user interfaces and efficient backend services to facilitate property search, booking, and listing management. The system supports real-time data interaction between the front-end and back-end.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+### 🎯 Objectives
+- **Responsive design** for tenants and hosts across all devices.
+- **State management** using Redux for front-end data management.
+- **Seamless integration** between the front-end and the back-end.
+- **Optimized performance** with Vite for fast build and development.
 
+---
+
+## ✨ Key Features
+
+### 👥 User-Facing Features
+- 🔍 **Search** and filter properties (location, price, amenities).
+- 🏠 **Publish listings** as a host.
+- 📅 **Book properties** with an easy-to-use checkout process.
+- 🏞️ **Property details page** for tenants to view detailed property information.
+
+### 📊 State Management
+- ⚙️ **Redux Toolkit** for managing state across the front-end.
+- 🌍 **React Router** for smooth page navigation.
+
+### 🛠️ Technical Stack
+- 🖥️ **React** for front-end development.
+- 🛠️ **Vite** for build tools and development server.
+- 🌐 **React-Redux** for global state management.
+- ✨ **Styled Components** for styling React components.
+- 🗄️ **Node.js** and **PostgreSQL** for the back-end, handling the application logic and database interactions.
+- 📡 **Express** for building the API endpoints.
+  
+---
+
+## ⚙️ Front-End
+
+The front-end of ETNAir is built using **React** and **Redux** for state management, along with **Vite** as the build tool. This part of the project is responsible for displaying data, managing user interactions, and handling page navigation.
+
+### Key Technologies
+- **React**: Used for building the user interface.
+- **Redux**: Manages the global state of the application.
+- **Vite**: Optimized build tool for fast development and production builds.
+- **React Router**: For handling client-side routing and navigation.
+
+For more detailed information on the front-end setup and installation, please refer to the [front-end README](./client/README.md).
+
+---
+
+## 🔧 Back-End
+
+The back-end of ETNAir is built with **Node.js**, **Express**, and **PostgreSQL**. It handles the API, manages database interactions, and serves the data to the front-end. The back-end is designed to be scalable, with a focus on performance and ease of use.
+
+### Key Technologies
+- **Node.js**: JavaScript runtime used for building the server-side logic.
+- **Express**: Web framework for building the API endpoints.
+- **PostgreSQL**: Relational database to store and manage property, user, and booking data.
+- **Sequelize**: ORM for managing database interactions.
+
+For more detailed information on the back-end setup and installation, please refer to the [back-end README](./api/README.md).
+
+---
+
+## 🚀 Installation
+
+### General Setup
+To set up the full project, you'll need to install and configure both the front-end and back-end.
+
+1. **Clone the repository**:
+```bash
+   git clone https://github.com/your-repo/etnair.git
+   cd etnair
 ```
-cd existing_repo
-git remote add origin https://rendu-git.etna-alternance.net/module-9760/activity-52723/group-1046734.git
-git branch -M main
-git push -uf origin main
+2. **Set up the back-end**:
+
+- Navigate to the api/ directory.
+```bash
+    cd api
 ```
+- Install dependencies:
+```bash
+    npm install
+```
+- Configure your database (see the back-end documentation for more details).
+- Run the back-end server:
+```bash
+    npm run dev
+```
+4. **Set up the front-end**:
 
-## Integrate with your tools
+- Navigate to the client/ directory.
+```bash
+    cd client
+```
+- Install dependencies:
+```bash
+npm install
+```
+- Run the development server:
+```bash
+npm run dev
+```
+The front-end will be available at http://localhost:3000, and the back-end API at http://localhost:5000.
 
-- [ ] [Set up project integrations](https://rendu-git.etna-alternance.net/module-9760/activity-52723/group-1046734/-/settings/integrations)
+## 📚 Documentation
+For detailed documentation, please refer to the individual README files for both the front-end and back-end:
 
-## Collaborate with your team
+- Front-End Documentation
+- Back-End Documentation
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+## 🤝 Team Members
+A special thanks to the talented team behind this project 🎉:
 
-## Test and Deploy
+- Eliot Modeste
+- Maël Aguessy
+- Fatima-Zora Ayad
+- Joey Bervin
 
-Use the built-in continuous integration in GitLab.
+## 📜 License
+⚠️ This project is not currently licensed. For sharing or modifying the code, please contact the team to clarify usage rights.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+✨ Thank you for exploring ETNAir. We hope this project offers both a great user experience and a valuable learning opportunity! 💻```
