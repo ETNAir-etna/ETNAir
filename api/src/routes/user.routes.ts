@@ -8,8 +8,6 @@ router.get('/all', UserController.getUsers)
 
 router.get('/:id', UserController.getUser)
 
-router.get('/profil', verifyToken, UserController.getProfile)
-
 // TODO : add createPropertyValidator, checkValidators edit user route
 
 export default router;

@@ -9,8 +9,8 @@ const router = Router() ;
 
 router.post('/register', registerValidators, checkValidators, UserController.registerUser);
 
-router.post('/login',  UserController.loginUser);
+router.post('/login', UserController.loginUser);
 
-router.post('/logout', UserController.logoutUser)
+router.post('/logout', UserController.logoutUser);
 
 export default router;

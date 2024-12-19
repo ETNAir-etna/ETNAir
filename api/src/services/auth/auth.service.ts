@@ -11,7 +11,7 @@ export class AuthService {
     static async registerUser(email: string, password: string): Promise<Result> {
         const hash = await hashPassword(password);
         const data = UserModel.createUser(email, hash);
-        return { action: "redirect", data: data, success: true, url: '#' };
+        return { action: "redirect", data: data, success: true, url: '/login' };
     };
 
     static async loginUser(email: string, password: string): Promise<Result> {
@@ -27,9 +27,12 @@ export class AuthService {
         return { key: true, token: newToken, action: "redirect", success: true, url: '/profile' };
     };
 
-    static async logoutUser() {
-        return { action: "redirect", success: true, url: '/' };
+    static async logoutUser(): Promise<Result> {
+        return { key: false, action: "redirect", success: true, url: "/" };
     };
 
+    static async profileUser(): Promise<Result> {
+        return { action: "redirect", success: false };
+    };
 
 };

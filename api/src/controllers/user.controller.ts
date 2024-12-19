@@ -16,7 +16,6 @@ export class UserController {
     }
 
     static async registerUser(req: Request, res: Response, next: NextFunction): Promise<void> {
-        // TODO : : Find a message to send
         const { email, password } = req.body
         sendJsonPromise(await AuthService.registerUser(email, password), "MESSAGE to find REGISTER")(req, res, next);
     }
@@ -32,9 +31,11 @@ export class UserController {
         sendJsonPromise(await AuthService.logoutUser(), "MESSAGE to find LOGOUT")(req, res, next);
     }
 
-    static getProfile(req: Request, res: Response):void {
-        res.send(`Welcome `);
+    static async getProfile(req: Request, res: Response): Promise<void>{
+        res.send('Welcome User');
     }
 
-
+static async getBlacklist(req: Request, res: Response): Promise<void>{
+        res.send('Welcome User');
+    }
 }

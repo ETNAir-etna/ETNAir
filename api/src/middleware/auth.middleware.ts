@@ -11,10 +11,10 @@ export const verifyToken = (req: Request, res: Response, next: NextFunction) => 
       res.locals.user = decoded;
       next();
     } else {
-      next(createError(401, 'Unauthorized'));
+      next(createError(401, "Unauthorized"));
     }
   } catch (err) {
-    throw (err);
+    throw(err)
   }
 };
 

@@ -18,11 +18,4 @@ export class UserService {
         return { action: "data", data: data, success : true};
     }
 
-    // static async updateUser(id: string, data: Partial<User>): Promise<User> {
-    //     return UserModel.update(id, data);
-    // }
-
-    // static async deleteUser(id: string): Promise<void> {
-    //     await UserModel.delete(id);
-    // }
 }
