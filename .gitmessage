@@ -1,0 +1,34 @@
+# Commit message convention (Based on Conventional Commits)
+
+<type>(<scope>): <short summary>
+
+# Body (optional)
+# A detailed description of the change.
+# Mention any relevant details, including the reasoning for the change.
+
+# Footer (optional)
+# Include references to issues or breaking changes.
+# Example:
+# BREAKING CHANGE: description of breaking change.
+# Closes #123, Fixes #456, Resolves #789.
+
+# Examples:
+# feat(api): add user authentication with JWT
+# fix(database): resolve connection pooling issue
+# docs(readme): update project setup instructions
+# refactor(api): optimize route handling logic
+
+# Allowed <type> values:
+# feat      - A new feature
+# fix       - A bug fix
+# docs      - Documentation only changes
+# style     - Changes that do not affect code logic (formatting, missing semicolons, etc.)
+# refactor  - Code changes that neither fix a bug nor add a feature
+# perf      - Changes to improve performance
+# test      - Adding or updating tests
+# build     - Changes that affect the build system or external dependencies
+# ci        - Changes to CI configuration files or scripts
+# chore     - Minor changes not affecting the source code (e.g., updating build tasks)
+# revert    - Reverts a previous commit
+
+# NOTE: Use imperative tense for the summary (e.g., "add", "fix", "update").

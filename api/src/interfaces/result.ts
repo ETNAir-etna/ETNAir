@@ -1,17 +1,17 @@
 export interface ErrorDetails {
     errorType : string
-    status: number
     message: string
+    status: number
 };
 
 export interface Result {
-    action?: string
+    action: string
     data?: Object | null
-    success: boolean
-    url?: string
+    deletedCount?: number
+    error?: ErrorDetails
     message?: string;
     redirect?: boolean
     status?: number
-    error?: ErrorDetails
-    deletedCount?: number
+    success: boolean
+    url?: string
 };

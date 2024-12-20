@@ -4,7 +4,7 @@ api/node_modules/
 client/node_modules/
 
 # Exclude custom Git configurations
-.gitmessage
+#.gitmessage
 
 # Exclude database volumes
 api/db/data
