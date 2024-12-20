@@ -26,7 +26,7 @@ app.use(cors(corsOptions));
 
 /* ROUTER / ROUTES */
 
-app.use(router);
+app.use("/api-etnair", router);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(errorHandler);
@@ -44,7 +44,7 @@ app.use("*", (req: Request, res: Response) => {
 
 const port = process.env.API_PORT || 3001;
 app.listen(port, () => {
-  serverLogger.info(`App listening on port  http://localhost:${port}`);
+  serverLogger.info(`App listening on port  http://localhost:${port}/api-etnair`);
   serverLogger.info(
     `Swagger docs available at http://localhost:${port}/api-docs`
   );
