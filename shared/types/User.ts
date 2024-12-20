@@ -1,14 +1,13 @@
-import { User as PrismaUser } from "@prisma/client";
+import { User as PrismaUser, Gender, Role } from "@prisma/client";
 
 export type User = {
   id: string;
   email: string;
-  password: string;
   firstName?: string | null;
-  lasrName?: string | null;
-  gender?: string | null;
+  lastName?: string | null;
+  gender?: Gender | null;
   phoneNumber?: string | null;
-  role: string;
+  role: Role;
   status: string[];
   createdAt: Date;
   updatedAt: Date;
@@ -16,27 +15,27 @@ export type User = {
   hostRating?: number | null;
   summary?: string | null;
   profileImg?: string | null;
-  requestForDelete: boolean;
-  isSuperHost: boolean;
+  requestForDelete?: boolean;
+  isSuperHost?: boolean;
 };
 
-export const DTOUser = (User: PrismaUser): User => {
+export const UserDTO = (user: PrismaUser): User => {
   return {
-    id: User.id,
-    email: User.email,
-    firstName: User.firstName ?? null,
-    lasrName: User.lasrName ?? null,
-    gender: User.gender ?? null,
-    phoneNumber: User.phoneNumber ?? null,
-    role: User.role,
-    status: User.status[], 
-    createdAt: User.createdAt,
-    updatedAt: User.updatedAt,
-    guestRating: User.guestRating ?? null,
-    hostRating: User.hostRating ?? null,
-    summary: User.summary ?? null,
-    profileImg: User.profileImg ?? null,
-    requestForDelete: User.requestForDelete,
-    isSuperHost: User.isSuperHost,
+    id: user.id,
+    email: user.email,
+    firstName: user.firstName ?? null,
+    lastName: user.lastName ?? null,
+    gender: user.gender ?? null,
+    phoneNumber: user.phoneNumber ?? null,
+    role: user.role,
+    status: user.status,
+    createdAt: user.createdAt,
+    updatedAt: user.updatedAt,
+    guestRating: user.guestRating ?? null,
+    hostRating: user.hostRating ?? null,
+    summary: user.summary ?? null,
+    profileImg: user.profileImg ?? null,
+    requestForDelete: user.requestForDelete ?? false,
+    isSuperHost: user.isSuperHost ?? false,
   };
 };

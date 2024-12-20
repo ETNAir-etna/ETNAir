@@ -1,46 +1,49 @@
-model User {
-  id                String        @id @default(uuid())
-  email             String        @unique
-  password          String
-  firstName         String?       @db.VarChar(35)
-  lasrName          String?       @db.VarChar(35)
-  gender            Gender?
-  phoneNumber       String?       @unique
-  role              Role          @default(USER)
-  status            String[]
-  createdAt         DateTime      @default(now())
-  updatedAt         DateTime      @updatedAt
-  guestRating       Float?
-  hostRating        Float?
-  summary           String?
-  profileImg        String?
-  requestForDelete  Boolean       @default(false)
-  rating            Float?
-  isSuperHost       Boolean       @default(false)
-  properties        Property[]
-  hostReservations  Reservation[] @relation("GuestId")
-  guestReservations Reservation[] @relation("HostId")
-  sentReviews       Review[]      @relation("ReviewCreatorId")
-  receivedReviews   Review[]      @relation("ReviewReceiverId")
-  wishlists         Wishlist[]
-
-  @@index([email])
-  @@index([phoneNumber])
-  @@index([status])
-  @@index([role])
-  @@index([createdAt])
-  @@index([guestRating])
-  @@index([hostRating])
-  @@index([requestForDelete])
-}
-
 enum Gender {
-  MAN
-  WOMAN
-  OTHER
+    OTHER
+    FEMALE
+    MALE
 }
 
 enum Role {
-  ADMIN
-  USER
+    ADMIN
+    USER
+}
+
+model User {
+    id                    String                @id @default(uuid()) 
+    email                 String                @unique
+    password              String
+    firstName             String?               @db.VarChar(35)
+    lastName              String?               @db.VarChar(35)
+    gender                Gender?               @default(OTHER)
+    phoneNumber           String?               @unique
+    role                  Role                  @default(USER)
+    status                String[]
+    createdAt             DateTime              @default(now())
+    updatedAt             DateTime              @updatedAt
+    guestRating           Float?
+    hostRating            Float?
+    summary               String?               @db.Text
+    profileImg            String?
+    requestForDelete      Boolean               @default(false)
+    rating                Float?
+    isSuperHost           Boolean               @default(false)
+
+    // RELATIONS
+    wishlists             Wishlist[]
+    guestReservations     Reservation[]         @relation("HostId")
+    hostReservations      Reservation[]         @relation("GuestId")
+    sentReviews           Review[]              @relation("ReviewCreatorId")
+    receivedReviews       Review[]              @relation("ReviewReceiverId")
+    properties            Property[]
+
+    @@index([email])
+    @@index([phoneNumber])
+    @@index([status])
+    @@index([role])
+    @@index([createdAt])
+    @@index([guestRating])
+    @@index([hostRating])
+    @@index([requestForDelete])
+    
 }

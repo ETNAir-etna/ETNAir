@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 import { UserService } from "../services/user.service";
 import { sendJsonPromise } from "../helpers/sendJsonPromise.helper";
+import { Prisma } from "@prisma/client";
 import { AuthService } from "../services/auth/auth.service";
-import { User } from "../../../shared/types/User";
+import jwt from "jsonwebtoken";
 
 export class UserController {
   static async getUsers(
@@ -10,11 +11,7 @@ export class UserController {
     res: Response,
     next: NextFunction
   ): Promise<void> {
-    sendJsonPromise(await UserService.getUsers(), "No user found")(
-      req,
-      res,
-      next
-    );
+    sendJsonPromise(UserService.getUsers())(req, res, next);
   }
 
   static async getUser(
@@ -23,10 +20,7 @@ export class UserController {
     next: NextFunction
   ): Promise<void> {
     const { id } = req.params;
-    sendJsonPromise(
-      await UserService.getUserById(id),
-      "User not in the database"
-    )(req, res, next);
+    sendJsonPromise(UserService.getUserById(id))(req, res, next);
   }
 
   static async updateUser(
@@ -35,13 +29,8 @@ export class UserController {
     next: NextFunction
   ): Promise<void> {
     const { id } = req.params;
-    const updatedData = req.body;
-    console.log(id);
-    console.log(updatedData);
-    sendJsonPromise(
-      await UserService.updateUser(id, updatedData),
-      "User not found or update failed"
-    )(req, res, next);
+    const data: Prisma.UserCreateInput = req.body;
+    sendJsonPromise(UserService.updateUser(id, data))(req, res, next);
   }
 
   static async deleteUser(
@@ -49,10 +38,15 @@ export class UserController {
     res: Response,
     next: NextFunction
   ): Promise<void> {
-    const { id } = req.params;
-    sendJsonPromise(
-      await UserService.deleteUser(id),
-      "User not found or deletion failed"
-    )(req, res, next);
+    const { id } = req.body;
+    sendJsonPromise(UserService.deleteUser(id))(req, res, next);
+  }
+
+  static async getProfile(req: Request, res: Response): Promise<void> {
+    res.send("Welcome User");
+  }
+
+  static async getBlacklist(req: Request, res: Response): Promise<void> {
+    res.send("Welcome User");
   }
 }

@@ -2,38 +2,76 @@ import { NextFunction, Request, Response } from "express";
 import { sendJsonPromise } from "../helpers/sendJsonPromise.helper";
 import { PropertyService } from "../services/property.service";
 import { Prisma } from "@prisma/client";
-import { Property } from "../../../shared/types/Property";
+import {
+  PropertyDTO,
+  PropertyFilter,
+} from "../../../shared/types/PropertyFilter";
 
 export class PropertyController {
   static async getAllProperties(
     req: Request,
     res: Response,
     next: NextFunction
-  ) {
-    sendJsonPromise(await PropertyService.getProperties(), "No Property found")(
-      req,
-      res,
-      next
+  ): Promise<void> {
+    const { page } = req.query ?? undefined;
+    const body = req.body;
+    console.log(body);
+    const data: PropertyFilter = PropertyDTO(
+      body,
+      body.numberByPage,
+      Number(page),
+      body.publishedAt,
+      body.pricePerNight
     );
+    sendJsonPromise(PropertyService.getProperties(data))(req, res, next);
   }
 
   static async getPropertyById(
     req: Request,
     res: Response,
     next: NextFunction
-  ) {
+  ): Promise<void> {
     const { id } = req.params;
-    sendJsonPromise(
-      await PropertyService.getPropertyById(id),
-      "This property isn't in the database"
-    )(req, res, next);
+    sendJsonPromise(PropertyService.getPropertyById(id))(req, res, next);
   }
 
-  static async createProperty(req: Request, res: Response, next: NextFunction) {
+  static async createProperty(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
     const data: Prisma.PropertyCreateInput = req.body;
-    sendJsonPromise(
-      await PropertyService.createProperty(data),
-      "Couldn't create Property, try again."
-    )(req, res, next);
+    sendJsonPromise(PropertyService.createProperty(data))(req, res, next);
+  }
+
+  static async updateProperty(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    const data: Prisma.PropertyCreateInput = req.body;
+    sendJsonPromise(PropertyService.updateProperty(data))(req, res, next);
+  }
+
+  static async deleteProperty(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    const { id } = req.body;
+    sendJsonPromise(PropertyService.deleteProperty(id))(req, res, next);
+  }
+
+  static async deleteAllProperties(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    const { ownerId } = req.body;
+    sendJsonPromise(PropertyService.deleteAllProperties(ownerId))(
+      req,
+      res,
+      next
+    );
   }
 }

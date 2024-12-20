@@ -1,8 +1,7 @@
-import { PropertyType } from "@prisma/client";
-import { Property as PrismaProperty } from "@prisma/client";
+import { Property as PrismaProperty, PropertyType } from "@prisma/client";
 
 export type Property = {
-  ownerId: string;
+  id: string;
   title: string;
   description?: string | null;
   propertyType: PropertyType;
@@ -22,12 +21,15 @@ export type Property = {
   country: string;
   latitude?: number | null;
   longitude?: number | null;
-  equipments: string[];
-  pictures?: string[];
+  equipments?: string[];
+  pictures: string[];
+  ownerId: string;
+  publishedAt: Date;
 };
 
 export const PropertyDTO = (property: PrismaProperty): Property => {
   return {
+    id: property.id,
     ownerId: property.ownerId,
     title: property.title,
     description: property.description || "",
@@ -50,5 +52,6 @@ export const PropertyDTO = (property: PrismaProperty): Property => {
     longitude: property.longitude ?? null,
     equipments: property.equipments || [],
     pictures: property.pictures || [],
+    publishedAt: property.publishedAt,
   };
 };

@@ -1,10 +1,9 @@
 // // services/user.service.ts
+import { Prisma } from "@prisma/client";
 import { User } from "../../../shared/types/User";
 import { Result } from "../interfaces/result";
-// import { User } from '@prisma/client';
 import { UserModel } from "../models/UserModel";
 
-// // import { User } from '@prisma/client';
 export class UserService {
   static async getUsers(): Promise<Result> {
     const data: User[] = await UserModel.findAll();
@@ -16,19 +15,12 @@ export class UserService {
     return { action: "data", data: data, success: true };
   }
 
-  static async updateUser(id: string, data: Partial<User>): Promise<Result> {
-    const user = await UserModel.findById(id);
-
-    if (!user) {
-      return { action: "update", success: false };
-    }
-
-    const updateResult = await UserModel.update(id, data);
-
-    if (updateResult) {
-      return { action: "update", success: true };
-    }
-    return { action: "update", success: false };
+  static async updateUser(
+    id: string,
+    data: Prisma.UserCreateInput
+  ): Promise<Result> {
+    await UserModel.update(id, data);
+    return { action: "data", success: true };
   }
 
   static async deleteUser(id: string): Promise<Result> {
