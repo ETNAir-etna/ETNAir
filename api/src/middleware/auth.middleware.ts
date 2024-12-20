@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
-import jwt from 'jsonwebtoken'
-const createError = require('http-errors');
+import jwt from 'jsonwebtoken';
+import createError from 'http-errors';
 
 export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.jwt;
