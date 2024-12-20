@@ -13,6 +13,10 @@ export const sendJsonPromise =
         return next(createError(404, notFoundMessage));
       }
 
+      if (!result) {
+        return next(createError(404, notFoundMessage));
+      }
+
       if (result.key === true) {
         res.cookie("jwt", result.token, {
           httpOnly: true,
@@ -30,10 +34,6 @@ export const sendJsonPromise =
           return res.status(200).json(result);
         }
 
-        if (!result.data) {
-          return res.status(404).json(result);
-        }
-
         if (result.action === "create") {
           if (result.redirect && result.url) {
             return res.redirect(302, result.url);
@@ -41,6 +41,16 @@ export const sendJsonPromise =
 
           return res.status(201).json(result);
         }
+
+        if (result.action === "log") {
+          if (result.redirect && result.url) {
+            return res.redirect(302, result.url);
+          }
+        }
+
+        // if (!result.data) {
+        //     return res.status(404).json(result);
+        // };
 
         if (result.action === "login") {
           if (result.redirect && result.url) {

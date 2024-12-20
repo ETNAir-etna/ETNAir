@@ -28,8 +28,7 @@ export class AuthService {
             process.env.JWT_SECRET!,
             { expiresIn: process.env.JWT_EXPIRES_IN || '1h' }
         );
-        
-        return { key: true, token: newToken, action: "login", success: true, redirect: true, url: "/profile" };
+        return { key: true, token: newToken, action: "log", success: true, redirect: true, url: "/profile" };
     };
 
         
@@ -47,7 +46,7 @@ export class AuthService {
     // };
 
     static async logoutUser(): Promise<Result> {
-        return { action: "logout", redirect: true, success : true, url: '/'};
+        return { key: false, action: "log", redirect: true, success : true, url: '/'};
     };
 
     static async profileUser(): Promise<Result> {
