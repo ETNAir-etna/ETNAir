@@ -9,7 +9,6 @@ export class PropertyController {
     static async getAllProperties(req: Request, res: Response, next : NextFunction): Promise<void> {
         const { page } = req.query ?? undefined;
         const body = req.body;
-        console.log(body);
         const data: PropertyFilter = PropertyDTO(body, body.numberByPage, Number(page), body.publishedAt, body.pricePerNight)
         sendJsonPromise(PropertyService.getProperties(data))(req, res, next);
     };

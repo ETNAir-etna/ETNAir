@@ -27,14 +27,19 @@ const router = Router() ;
  *             schema:
  *               $ref: '#/components/schemas/UserResponse'
  *       400:
- *         description: Validation error.
+ *         description: Validation error (e.g., invalid email format).
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ApiResponse'
+ *               $ref: '#/components/schemas/ValidationErrorApiResponse'
+ *       409:
+ *         description: Prisma error (e.g., email already exists).
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/PrismaErrorApiResponse'
  */
 router.post('/register', registerValidation, checkValidators, AuthController.registerUser);
-
 
 /**
  * @swagger
@@ -62,7 +67,7 @@ router.post('/register', registerValidation, checkValidators, AuthController.reg
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/ApiResponse'
+ *               $ref: '#/components/schemas/ErrorApiResponse'
  */
 router.post('/login', loginValidation, checkValidators, AuthController.loginUser);
 

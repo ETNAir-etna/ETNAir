@@ -7,11 +7,23 @@ const router = Router();
  * @swagger
  * /:
  *   get:
- *     summary: Ping the server
+ *     summary: Check server status
+ *     description: Returns a simple response to confirm the server is running and reachable.
+ *     tags:
+ *       - Server
  *     responses:
  *       200:
- *         description: Pong!
+ *         description: The server is up and running.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Pong!
  */
+
 router.get('/', HomeController.getHome);
 
 export default router;
