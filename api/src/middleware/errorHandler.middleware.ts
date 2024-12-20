@@ -2,6 +2,7 @@ import {ErrorRequestHandler } from 'express';
 import { errorLogger } from "../configs/logger";
 import { Result } from '../interfaces/result';
 import { Prisma } from '@prisma/client';
+import { isHttpError } from 'http-errors';
 
 
 export const errorHandler: ErrorRequestHandler = (err , req, res, next) => {
@@ -58,12 +59,27 @@ export const errorHandler: ErrorRequestHandler = (err , req, res, next) => {
         }
     }
     
-
-    // if (err.name === "JsonWebTokenError") {
-    //     statusCode = 401;
-    //     errorMessage = "Invalid or missing token.";
-    // }
-
+    if (err.name === "TokenExpiredError") {
+        statusCode = 401;
+        errorMessage = "JWT expired. Please log in again.";
+    } 
+    
+    if (err.name === "JsonWebTokenError") {
+        statusCode = 401;
+        errorMessage = "Invalid JWT. Please log in again.";
+    } 
+    
+    if (err.name === "NotBeforeError") {
+        statusCode = 401;
+        errorMessage = "Token is not yet valid. Please check your system time.";
+    }
+    
+    
+    if (isHttpError(err)) {
+        statusCode = err.status;
+        errorMessage = err.message;
+    }
+    
     const errorResult: Result = {
         action: "Error",
         success: false,
@@ -77,5 +93,5 @@ export const errorHandler: ErrorRequestHandler = (err , req, res, next) => {
     }
 
     res.status(statusCode).json(errorResult);
-
+    
 };

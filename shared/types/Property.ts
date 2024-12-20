@@ -1,6 +1,4 @@
-
-import { PropertyType } from "@prisma/client";
-import { Property as PrismaProperty } from '@prisma/client';
+import { Property as PrismaProperty, PropertyType } from '@prisma/client';
 
 
 export type Property = {

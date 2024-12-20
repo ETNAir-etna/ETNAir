@@ -2,8 +2,9 @@ import express, { Request, Response, Application } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from './configs/swaggerConfig'; 
 import router from "./routes/routes";
-
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+
 import cors from 'cors';
 dotenv.config();
 
@@ -18,6 +19,7 @@ import { corsOptions } from './configs/cors.config';
 const app: Application = express();
 
 // app.use(express.static(path.join(__dirname, '../public')));
+app.use(cookieParser()); // Ajoutez ceci avant vos middlewares de route
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morganMiddleware)

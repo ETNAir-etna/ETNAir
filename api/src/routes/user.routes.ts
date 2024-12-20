@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { UserController } from '../controllers/user.controller';
 import { checkValidators } from '../middleware/checkValidators.middleware';
 import { editUser } from '../validators/user.validator';
+import { verifyToken } from '../middleware/auth.middleware';
 
 const router = Router();
 

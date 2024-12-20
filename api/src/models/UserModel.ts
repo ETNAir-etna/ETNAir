@@ -17,8 +17,9 @@ export class UserModel  {
     static async findByEmail(email: string) {
         return await prisma.user.findUniqueOrThrow({
             where: { email: email },
-            select: { 
-                password: true
+            select: {
+                id: true,
+                password: true,
             },
         });
     };

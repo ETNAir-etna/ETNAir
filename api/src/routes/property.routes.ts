@@ -3,6 +3,7 @@ import { Router } from 'express';
 import { PropertyController } from '../controllers/property.controller';
 import { checkValidators } from '../middleware/checkValidators.middleware';
 import { propertyValidations } from '../validators/property.validator';
+// import { createPropertyValidator } from '../validators/property.validator';
 
 const router = Router();
 

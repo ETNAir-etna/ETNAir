@@ -5,7 +5,9 @@ export interface ErrorDetails {
 };
 
 export interface Result {
-    action?: string
+    key?: boolean
+    token?: string
+    action: string
     data?: Object | null
     success: boolean
     url?: string
