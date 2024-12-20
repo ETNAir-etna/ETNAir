@@ -14,10 +14,10 @@ model Wishlist {
 }
 
 model WishlistProperty {
-  wishlistId  String
-  propertyId  String
-  wishlist    Wishlist   @relation(fields: [wishlistId], references: [id], onDelete: Cascade)
-  property    Property   @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  wishlistId String
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  wishlist   Wishlist @relation(fields: [wishlistId], references: [id], onDelete: Cascade)
 
   @@id([wishlistId, propertyId])
 }

@@ -2,12 +2,13 @@ import {ErrorRequestHandler } from 'express';
 import { errorLogger } from "../configs/logger";
 import { Result } from '../interfaces/result';
 import { Prisma } from '@prisma/client';
+import { isHttpError } from 'http-errors';
 
 
 export const errorHandler: ErrorRequestHandler = (err , req, res, next) => {
 
-    errorLogger.error(err);
-    // console.error(`[ERROR]: ${err.message || "Unknown error"}`, err);
+    // errorLogger.error(err);
+    console.error(`[ERROR]: ${err.message || "Unknown error"}`, err);
 
     // SYSTEM : errorHandler
     let statusCode = 500;
@@ -38,7 +39,6 @@ export const errorHandler: ErrorRequestHandler = (err , req, res, next) => {
             statusCode = 500;
             errorMessage = "Database initialization failed.";
         } else if (err instanceof Prisma.PrismaClientRustPanicError) {
-            
             statusCode = 500;
             errorMessage = "An unexpected error occurred in Prisma.";
         }
@@ -58,12 +58,27 @@ export const errorHandler: ErrorRequestHandler = (err , req, res, next) => {
         }
     }
     
-
-    // if (err.name === "JsonWebTokenError") {
-    //     statusCode = 401;
-    //     errorMessage = "Invalid or missing token.";
-    // }
-
+    if (err.name === "TokenExpiredError") {
+        statusCode = 401;
+        errorMessage = "JWT expired. Please log in again.";
+    } 
+    
+    if (err.name === "JsonWebTokenError") {
+        statusCode = 401;
+        errorMessage = "Invalid JWT. Please log in again.";
+    } 
+    
+    if (err.name === "NotBeforeError") {
+        statusCode = 401;
+        errorMessage = "Token is not yet valid. Please check your system time.";
+    }
+    
+    
+    if (isHttpError(err)) {
+        statusCode = err.status;
+        errorMessage = err.message;
+    }
+    
     const errorResult: Result = {
         action: "Error",
         success: false,
@@ -77,5 +92,5 @@ export const errorHandler: ErrorRequestHandler = (err , req, res, next) => {
     }
 
     res.status(statusCode).json(errorResult);
-
+    
 };
