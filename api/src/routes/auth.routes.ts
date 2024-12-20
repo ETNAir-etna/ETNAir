@@ -43,16 +43,7 @@ const router = Router();
  *             schema:
  *               $ref: '#/components/schemas/PrismaErrorApiResponse'
  */
-<<<<<<< HEAD
 router.post('/register', registerValidation, checkValidators, AuthController.registerUser);
-=======
-router.post(
-  "/register",
-  registerValidation,
-  checkValidators,
-  AuthController.registerUser
-);
->>>>>>> 723295e17a2e8f2c7a97e19a54ffab2e53ff3332
 
 /**
  * @swagger
