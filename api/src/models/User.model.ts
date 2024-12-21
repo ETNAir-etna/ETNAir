@@ -4,6 +4,7 @@ import { User } from "../../../shared/types/User";
 const prisma = new PrismaClient();
 
 export class UserModel {
+  
   static async findAll(): Promise<User[]> {
     return prisma.user.findMany();
   }

@@ -100,5 +100,4 @@ export class PropertyModel {
         return deleteResult.count
     };
 
-
 };

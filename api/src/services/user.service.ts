@@ -2,7 +2,7 @@
 import { Prisma } from "@prisma/client";
 import { User } from "../../../shared/types/User";
 import { Result } from "../interfaces/result";
-import { UserModel } from "../models/UserModel";
+import { UserModel } from "../models/User.model";
 
 export class UserService {
   static async getUsers(): Promise<Result> {

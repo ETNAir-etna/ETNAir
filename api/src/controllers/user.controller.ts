@@ -26,11 +26,8 @@ export class UserController {
     sendJsonPromise(UserService.deleteUser(id))(req, res, next);
   }
 
-  static async getProfile(req: Request, res: Response): Promise<void> {
-    res.send("Welcome User");
+  static async getBlacklist(req: Request, res: Response): Promise<void> {
+    res.send("Welcome User BLACKLIST");
   }
 
-  static async getBlacklist(req: Request, res: Response): Promise<void> {
-    res.send("Welcome User");
-  }
 }

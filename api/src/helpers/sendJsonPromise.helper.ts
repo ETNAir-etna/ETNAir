@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { Result } from "../interfaces/result";
-import { UserModel } from "../models/UserModel";
+import { UserModel } from "../models/User.model";
 var createError = require("http-errors");
 
 export const sendJsonPromise =

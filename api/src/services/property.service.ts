@@ -1,5 +1,5 @@
 import { Prisma } from "@prisma/client";
-import { PropertyModel } from "../models/PropertyModel";
+import { PropertyModel } from "../models/Property.model";
 import { Property } from "../../../shared/types/Property";
 import { Result } from "../interfaces/result";
 import { PropertyFilter } from "../../../shared/types/PropertyFilter";
