@@ -3,7 +3,8 @@ import { Result } from "../interfaces/result";
 import bcrypt from "bcrypt";
 
 export const hashPassword = async (password: string): Promise<string> => {
-  return bcrypt.hash(password, 10);
+  const salt: number = Number(process.env.BCRYPT_SALT) || 12;
+  return bcrypt.hash(password, salt);
 };
 
 export const comparePassword = async (

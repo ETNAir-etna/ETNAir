@@ -1,0 +1,37 @@
+
+# Exclude Node.js dependencies for the API
+node_modules/
+
+# Exclude database volumes
+db/data
+
+# Exclude environment variable files
+.env
+
+# Exclude API build files
+dist
+
+# Exclude database migration files
+migrations
+prisma/migrations
+
+# Exclude logs and audit files
+.logs
+
+# Useful script in DEV MODE
+scripts/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Seed
+prisma/devSeed.ts
+prisma/prodSeed.ts

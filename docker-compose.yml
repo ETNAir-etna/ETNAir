@@ -6,11 +6,11 @@ services:
       - .env
     volumes:
       - etnair_db_data:/var/lib/postgresql/datay
-      - ./.env:/.env
+      # - ./.env:/.env
     networks:
       - etnair_network
     ports:
-      - "${POSTGRES_PORT}:5432"
+      - "5432:5432"
     restart: always
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
@@ -27,7 +27,7 @@ services:
       - .env
       - ./api/.env
     ports:
-      - "${API_PORT}:3000"
+      - "3000:3000"
     depends_on:
       postgres:
         condition: service_healthy
