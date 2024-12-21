@@ -1,13 +1,13 @@
 {
   "name": "api",
   "version": "1.0.0",
-  "main": "dist/api/src/index.js",
+  "main": "dist/api/src/server.js",
   "scripts": {
     "test": "echo \"TESTS START\" && jest --config=configs/jest.config.js",
     "seed:dev": "ts-node prisma/devSeed.ts",
     "seed:prod": "ts-node prisma/prodSeed.ts",
     "build": "tsc",
-    "start": "npm run build && node dist/api/src/index.js",
+    "start": "npm run build && node dist/api/src/server.js",
     "dev": "nodemon"
   },
   "prisma": {

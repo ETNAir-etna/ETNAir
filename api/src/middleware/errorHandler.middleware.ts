@@ -7,8 +7,8 @@ import { isHttpError } from 'http-errors';
 
 export const errorHandler: ErrorRequestHandler = (err , req, res, next) => {
 
-    // errorLogger.error(err);
-    console.error(`[ERROR]: ${err.message || "Unknown error"}`, err);
+    errorLogger.error(err);
+    //console.error(`[ERROR]: ${err.message || "Unknown error"}`, err);
 
     // SYSTEM : errorHandler
     let statusCode = 500;

@@ -2,7 +2,7 @@
   "watch": ["src"],
   "ignore": [],
   "ext": "ts",
-  "exec": "ts-node src/index.ts",
+  "exec": "ts-node src/server.ts",
   "signal": "SIGINT",
   "env": {
     "POSTGRES_USER": "etnair_user",

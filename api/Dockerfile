@@ -42,4 +42,4 @@ RUN mkdir -p dist/api && \
 
 RUN npm install -g prisma
 
-CMD ["sh", "-c", "npx prisma migrate deploy  && node dist/api/prisma/seed.js && node dist/api/src/index.js"]
+CMD ["sh", "-c", "npx prisma migrate deploy  && node dist/api/prisma/seed.js && node dist/api/src/server.js"]
