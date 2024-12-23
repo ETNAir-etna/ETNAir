@@ -3,7 +3,6 @@ import 'winston-daily-rotate-file';
 
 const { combine, timestamp, printf, colorize, align, label } = winston.format;
 
-// TODO : Voir pourquoi je n'ai pas accès à tous ? comme trace
 const logLevels = {
     fatal: 0,
     error: 1,

@@ -1,17 +1,13 @@
 import { Request, Response, NextFunction } from "express";
 import { Result } from "../interfaces/result";
-import { UserModel } from "../models/User.model";
 var createError = require("http-errors");
 
+// TODO : Voir si toujours utile de garder dans les paramètres notFoundMessage
 export const sendJsonPromise =
   (promise: Promise<Result>, notFoundMessage?: string) =>
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const result = await promise;
-
-      if (!result) {
-        return next(createError(404, notFoundMessage));
-      }
 
       if (!result) {
         return next(createError(404, notFoundMessage));
@@ -23,9 +19,7 @@ export const sendJsonPromise =
           secure: process.env.NODE_ENV === "production",
           sameSite: "strict",
         });
-      }
-
-      if (result.key === false) {
+      } else if (result.key === false) {
         res.clearCookie("jwt", { httpOnly: true, secure: true });
       }
 
@@ -52,11 +46,6 @@ export const sendJsonPromise =
         //     return res.status(404).json(result);
         // };
 
-        if (result.action === "login") {
-          if (result.redirect && result.url) {
-            return res.redirect(302, result.url);
-          }
-        }
 
         return res.status(200).json(result);
       }

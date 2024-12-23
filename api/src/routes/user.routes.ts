@@ -9,7 +9,7 @@ router.get("/all", UserController.getUsers);
 
 router.get("/:id", UserController.getUser);
 
-router.put("/update", editUser, checkValidators, UserController.updateUser);
+router.put("/update/:id", editUser, checkValidators, UserController.updateUser);
 
 router.delete("/:id", UserController.deleteUser);
 
