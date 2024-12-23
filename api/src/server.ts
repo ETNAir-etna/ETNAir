@@ -43,6 +43,7 @@ app.use("*", (req: Request, res: Response) => {
   });
 });
 
+if (require.main === module) {
 const port = process.env.API_PORT || 3001;
 app.listen(port, () => {
   serverLogger.info(`App listening on port  http://localhost:${port}/api-etnair`);
@@ -50,3 +51,6 @@ app.listen(port, () => {
     `Swagger docs available at http://localhost:${port}/api-docs`
   );
 });
+}
+
+export default app

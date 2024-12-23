@@ -1,16 +1,18 @@
 import { Prisma, PrismaClient } from "@prisma/client";
-import { User } from "../../../shared/types/User";
+import { User, UserDTO } from "../../../shared/types/User";
 
 const prisma = new PrismaClient();
 
 export class UserModel {
   
   static async findAll(): Promise<User[]> {
-    return prisma.user.findMany();
+    const users = await prisma.user.findMany();
+    return users.map(user => UserDTO(user));
   }
 
-  static async findById(id: string): Promise<User | null> {
-    return prisma.user.findUnique({ where: { id } });
+  static async findById(id: string): Promise<User> {
+    const user = await prisma.user.findUniqueOrThrow({ where: { id } });
+    return UserDTO(user);
   }
 
   static async findByEmail(email: string) {
@@ -24,6 +26,7 @@ export class UserModel {
   }
 
   static async createUser(email: string, password: string) {
+    // TODO : Vérifier les données renvoyée et tout faire passer au DTO si fuite
     return prisma.user.create({
       data: {
         email: email,
@@ -32,10 +35,8 @@ export class UserModel {
     });
   }
 
-  static async update(
-    id: string,
-    data: Prisma.PropertyUpdateInput
-  ): Promise<User> {
+  static async update(id: string,data: Prisma.PropertyUpdateInput ): Promise<User> {
+    // TODO : Vérifier les données renvoyée et tout faire passer au DTO si fuite
     return await prisma.user.update({ where: { id }, data });
   }
 

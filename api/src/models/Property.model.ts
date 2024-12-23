@@ -35,13 +35,12 @@ export class PropertyModel {
             skip: skipItems,
             take: filter.numberByPage,
         });
-        console.log(properties)
         return properties.map( property => PropertyDTO(property));
     };
 
-    static async findById(id: string): Promise<Property | null> {
-        const property = await prisma.property.findUnique({where: {id : id}});
-        return !property ? null : PropertyDTO(property);
+    static async findById(id: string): Promise<Property> {
+        const property = await prisma.property.findUniqueOrThrow({where: {id : id}});
+        return PropertyDTO(property);
     };
 
     static async createProperty(data : Prisma.PropertyCreateInput): Promise<Property> {
