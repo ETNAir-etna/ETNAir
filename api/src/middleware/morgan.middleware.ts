@@ -15,7 +15,7 @@ const formatLog = (tokens: morgan.TokenIndexer, req: any, res: any) => {
     const authorization = tokens.req(req, res, 'authorization') || '';
     const method = tokens.method(req, res);
     const url = tokens.url(req, res);
-    const status = process.env.NODE_ENV === "dev" ? colorStatus(Number(tokens.status(req, res))) : tokens.status(req, res);
+    const status = process.env.NODE_ENV === "prod" ?  tokens.status(req, res): colorStatus(Number(tokens.status(req, res)));
     const responseTime = tokens['response-time'](req, res);
 
     return `${authorization} ${method} ${url} ${status} - ${responseTime} ms`;

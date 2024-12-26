@@ -14,10 +14,7 @@ export class AuthService {
     servicesLogger.silly(`Welcome ${user} !`);
     return {
       action: "create",
-      data: user,
       success: true,
-      redirect: true,
-      url: "/",
     };
   }
 

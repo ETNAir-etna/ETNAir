@@ -16,6 +16,7 @@ export const errorHandler: ErrorRequestHandler = (err , req, res, next) => {
     let errorType = "SERVER"
     let redirect;
     let url;
+    let details;
 
     // PRISMA : errorHandler
     if (err instanceof Prisma.PrismaClientKnownRequestError) {
@@ -85,9 +86,10 @@ export const errorHandler: ErrorRequestHandler = (err , req, res, next) => {
         url: redirect ? url : undefined,
         redirect: redirect || false,
         error: {
-            errorType: errorType,
+            errorType: err.errorType ?? errorType,
             status: statusCode,
-            message: errorMessage.trim()
+            message: errorMessage.trim(),
+            details: err.details,
         }
     }
 

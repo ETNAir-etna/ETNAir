@@ -5,7 +5,6 @@ import {
 } from "../validators/auth.validator";
 import { checkValidators } from "../middleware/checkValidators.middleware";
 import { AuthController } from "../controllers/auth.controller";
-import { verifyToken } from "../middleware/auth.middleware";
 
 const router = Router();
 

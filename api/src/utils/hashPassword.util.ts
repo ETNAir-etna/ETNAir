@@ -15,10 +15,7 @@ export const hashPassword = async (password: string): Promise<string> => {
  * @param  {string} hashedPassword
  * @returns Promise
  */
-export const comparePassword = async (
-  password: string,
-  hashedPassword: string
-): Promise<boolean> => {
+export const comparePassword = async (password: string, hashedPassword: string): Promise<boolean> => {
   const isMatch = await bcrypt.compare(password, hashedPassword);
   if (!isMatch) {
     throw new Error("Invalid password");

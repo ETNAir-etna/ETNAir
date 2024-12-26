@@ -7,14 +7,16 @@ import { propertyValidations } from '../validators/property.validator';
 
 const router = Router();
 
+router.get('/all', PropertyController.getAllProperties);
+
 router.get('/:id', PropertyController.getPropertyById);
 
 router.post('/create', propertyValidations, checkValidators , PropertyController.createProperty);
 
 router.put('/update', propertyValidations, checkValidators , PropertyController.updateProperty);
 
-router.delete('/delete', PropertyController.deleteProperty);
+router.delete('/delete/all/:ownerId', PropertyController.deleteAllProperties);
 
-router.delete('/delete/all', PropertyController.deleteAllProperties);
+router.delete('/delete/:id/:ownerId', PropertyController.deleteProperty);
 
 export default router;

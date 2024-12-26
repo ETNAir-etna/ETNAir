@@ -3,16 +3,21 @@ import { sendJsonPromise } from "../helpers/sendJsonPromise.helper";
 import { PropertyService } from "../services/property.service";
 import { Prisma } from "@prisma/client";
 import {
-  PropertyDTO,
+  PropertyFilterDTO,
   PropertyFilter,
 } from "../../../shared/types/PropertyFilter";
+import { Property, PropertyDTO } from "../../../shared/types/Property";
 
 export class PropertyController {
   
   static async getAllProperties( req: Request, res: Response, next: NextFunction ): Promise<void> {
     const { page } = req.query ?? undefined;
-    const body = req.body;
-    const data: PropertyFilter = PropertyDTO( body, body.numberByPage, Number(page), body.publishedAt, body.pricePerNight );
+    let data : PropertyFilter = req.body;
+    data = {
+      ...data,
+      page : Number(page)
+    } 
+    // const data: PropertyFilter = PropertyFilterDTO( body, body.numberByPage, Number(page), body.publishedAt, body.pricePerNight );
     sendJsonPromise(PropertyService.getProperties(data))(req, res, next);
   }
 
@@ -22,23 +27,22 @@ export class PropertyController {
   }
 
   static async createProperty( req: Request, res: Response, next: NextFunction ): Promise<void> {
-    const data: Prisma.PropertyCreateInput = req.body;
+    const data: Property = PropertyDTO(req.body);
     sendJsonPromise(PropertyService.createProperty(data))(req, res, next);
   }
 
   static async updateProperty( req: Request, res: Response, next: NextFunction ): Promise<void> {
-    const data: Prisma.PropertyCreateInput = req.body;
+    const data: Property = PropertyDTO(req.body);
     sendJsonPromise(PropertyService.updateProperty(data))(req, res, next);
   }
 
-  static async deleteProperty( req: Request, res: Response, next: NextFunction
-  ): Promise<void> {
-    const { id } = req.body;
-    sendJsonPromise(PropertyService.deleteProperty(id))(req, res, next);
+  static async deleteProperty( req: Request, res: Response, next: NextFunction): Promise<void> {
+    const { id, ownerId } = req.params;
+    sendJsonPromise(PropertyService.deleteProperty(id, ownerId))(req, res, next);
   }
 
   static async deleteAllProperties( req: Request, res: Response, next: NextFunction ): Promise<void> {
-    const { ownerId } = req.body;
+    const { ownerId } = req.params;
     sendJsonPromise(PropertyService.deleteAllProperties(ownerId))( req, res, next );
   }
 }
