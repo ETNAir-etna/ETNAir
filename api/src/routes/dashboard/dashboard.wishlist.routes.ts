@@ -1,15 +1,15 @@
 import { Router } from 'express';
-import { DashboardWishlistController } from '../../controllers/dashboard/dashboard.wishlist.controller';
+import { WishlistController } from '../../controllers/wishlist.controller';
 
 const router = Router();
 
 
-router.put('/:token', DashboardWishlistController.addToUserWishlist);
+router.put('/:token', WishlistController.addToUserWishlist);
 
-router.post('/:token', DashboardWishlistController.createWishlist);
+router.post('/:token', WishlistController.createWishlist);
 
-router.delete('/:token/:wishlistId/:propertyId', DashboardWishlistController.deleteFromUserWishlist);
+router.delete('/:token/:wishlistId/:propertyId', WishlistController.deleteFromUserWishlist);
 
-router.delete('/:token/:wishlistId', DashboardWishlistController.deleteUserWishList);
+router.delete('/:token/:wishlistId', WishlistController.deleteUserWishList);
 
 export default router

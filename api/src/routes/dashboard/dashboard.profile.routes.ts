@@ -1,13 +1,13 @@
 import { Router } from 'express';
-import { DashboardProfileController } from '../../controllers/dashboard/dashboard.profile.controller';
+import { UserController } from '../../controllers/user.controller';
+import { checkRole } from '../../middleware/checkRole';
+import { checkValidators } from '../../middleware/checkValidators.middleware';
+import { editUser } from '../../validators/user.validator';
 
 const router = Router();
 
+router.put("/update/:id", editUser, checkValidators, UserController.updateUser);
 
-router.get('/:token', DashboardProfileController.getProfile);
-
-router.put('/:token', DashboardProfileController.updateProfile);
-
-router.delete('/:token', DashboardProfileController.deleteProfile);
+router.delete("/:id", checkRole(['ADMIN']), UserController.deleteUser);
 
 export default router

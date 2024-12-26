@@ -16,7 +16,7 @@ export type PropertyFilter = {
 };
 
 
-export const PropertyDTO = (property: PrismaProperty, numberByPage: number, page: number, publishedAt: Prisma.SortOrder, pricePerNight: Prisma.SortOrder ): PropertyFilter => {
+export const PropertyFilterDTO = (property: PrismaProperty, numberByPage: number, page: number, publishedAt: Prisma.SortOrder, pricePerNight: Prisma.SortOrder ): PropertyFilter => {
     return {
         publishedAt : publishedAt ?? undefined,
         pricePerNight : pricePerNight ?? undefined,

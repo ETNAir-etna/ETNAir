@@ -1,13 +1,14 @@
 import { Router } from 'express';
-import { DashboardReservationController } from '../../controllers/dashboard/dashboard.reservation.controller';
+import { ReservationController } from '../../controllers/reservation.controller';
+
 
 const router = Router();
 
 
-router.put('/:token', DashboardReservationController.cancelReservation);
+router.put('/:token', ReservationController.cancelReservation);
 
-router.post('/:token', DashboardReservationController.createReservation);
+router.post('/:token', ReservationController.createReservation);
 
-router.put('/:token', DashboardReservationController.updateReservation);
+router.put('/:token', ReservationController.updateReservation);
 
 export default router

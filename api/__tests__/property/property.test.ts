@@ -29,7 +29,7 @@ describe("POST /api-etnair/property/create", () => {
         (PropertyModel.createProperty  as MockedFunction).mockResolvedValue(mockProperty);
 
         const response = await request(app)
-            .post("/api-etnair/property/create")
+            .post("/api-etnair/dashboard/property/create")
             .send(mockProperty);
 
         console.log(response.body)

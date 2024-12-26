@@ -1,8 +1,5 @@
 import { Router } from "express";
-import {
-  registerValidation,
-  loginValidation,
-} from "../validators/auth.validator";
+import { registerValidation, loginValidation } from "../validators/auth.validator";
 import { checkValidators } from "../middleware/checkValidators.middleware";
 import { AuthController } from "../controllers/auth.controller";
 

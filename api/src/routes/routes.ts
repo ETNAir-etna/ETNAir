@@ -6,6 +6,7 @@ import DashboardProfileRouter from "./dashboard/dashboard.profile.routes";
 import DashboardPropertyRouter from "./dashboard/dashboard.property.routes";
 import DashboardReservationRouter from "./dashboard/dashboard.reservation.routes";
 import DashboardReviewRouter from "./dashboard/dashboard.review.routes";
+import DashboardUserRouter from "./dashboard/dashboard.user.routes";
 import DashboardWishlistRouter from "./dashboard/dashboard.wishlist.routes";
 import PropertyRouter from "./property.routes";
 import { verifyToken } from "../middleware/auth.middleware";
@@ -21,6 +22,8 @@ router.use('/dashboard/property', verifyToken, DashboardPropertyRouter);
 router.use('/dashboard/reservation', verifyToken, DashboardReservationRouter);
 
 router.use('/dashboard/review', verifyToken, DashboardReviewRouter);
+
+router.use('/dashboard/user', verifyToken, DashboardUserRouter);
 
 router.use('/dashboard/wishlist', verifyToken, DashboardWishlistRouter);
 

@@ -2,8 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import { UserService } from "../services/user.service";
 import { sendJsonPromise } from "../helpers/sendJsonPromise.helper";
 import { Prisma } from "@prisma/client";
-import { AuthService } from "../services/auth/auth.service";
-import jwt from "jsonwebtoken";
 
 export class UserController {
   static async getUsers( req: Request, res: Response, next: NextFunction ): Promise<void> {

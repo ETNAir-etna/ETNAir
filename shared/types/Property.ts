@@ -32,7 +32,7 @@ export const PropertyDTO = (property: PrismaProperty): Property => {
     id: property.id,
     ownerId: property.ownerId,
     title: property.title,
-    description: property.description || "",
+    description: property.description?.trim() === "" ? null : property.description ?? null,
     propertyType: property.propertyType,
     occupancyMax: property.occupancyMax ?? null,
     totalBedrooms: property.totalBedrooms ?? null,

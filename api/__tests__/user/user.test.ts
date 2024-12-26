@@ -22,7 +22,7 @@ describe("GET /api-etnair/user/all", () => {
 
         (UserModel.findAll as MockedFunction).mockResolvedValue(mockUsers);
 
-        const response = await request(app).get("/api-etnair/user/all");
+        const response = await request(app).get("/api-etnair/dashboard/user/all");
 
         expect(response.status).toBe(200);
 
@@ -77,7 +77,7 @@ describe("PUT api-etnair/user/update/:id", () => {
         (UserModel.update as MockedFunction).mockResolvedValue(oldMockUser);
 
         const response = await request(app)
-            .put(`/api-etnair/user/update/${mockId}`)
+            .put(`/api-etnair/dashboard/user/update/${mockId}`)
             .send({ lastName: "Stark-Parks" });
 
         expect(response.status).toBe(200);
