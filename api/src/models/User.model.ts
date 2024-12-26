@@ -21,6 +21,7 @@ export class UserModel {
       select: {
         id: true,
         password: true,
+        role: true,
       },
     });
   }

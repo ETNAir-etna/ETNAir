@@ -24,7 +24,7 @@ export class AuthService {
       throw Error();
     }
     await comparePassword(password, user.password);
-    const newToken = jwt.sign({ id: user.id, email }, process.env.JWT_SECRET!, {
+    const newToken = jwt.sign({ id: user.id, email, role: user.role }, process.env.JWT_SECRET!, {
       expiresIn: process.env.JWT_EXPIRES_IN || "1h",
     });
     return {
