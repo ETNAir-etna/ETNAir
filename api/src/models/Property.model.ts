@@ -43,7 +43,7 @@ export class PropertyModel {
         return PropertyDTO(property);
     };
 
-    static async createProperty(data : Prisma.PropertyCreateInput): Promise<Property> {
+    static async createProperty(data : Property): Promise<Property> {
         const newProperty = await prisma.property.create({
             data : {
                 ...data,
@@ -61,10 +61,11 @@ export class PropertyModel {
         return PropertyDTO(newProperty);
     };
 
-    static async updateProperty(data : Prisma.PropertyCreateInput): Promise<Property> {
+    static async updateProperty(data : Property): Promise<Property> {
         const updateUser = await prisma.property.update({
             where: {
                 id: data.id,
+                ownerId: data.ownerId
             },
             data : {
                 ...data,
@@ -82,10 +83,11 @@ export class PropertyModel {
         return PropertyDTO(updateUser);
     };
 
-    static async deleteProperty(id : string): Promise<void> {
+    static async deleteProperty(id : string, ownerId : string): Promise<void> {
         await prisma.property.delete({
             where: {
                 id: id,
+                ownerId: ownerId
             },
         });
     };
@@ -96,6 +98,8 @@ export class PropertyModel {
                 ownerId: ownerId,
             },
         });
+        console.log("Delete result from Prisma:", deleteResult); // Ajoutez ce log
+
         return deleteResult.count
     };
 

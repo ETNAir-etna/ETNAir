@@ -41,9 +41,9 @@ const DailyRotateTransport = (level: string, filename: string) => {
 
 const createLogger = (labelName: string): Logger => {
     return winston.createLogger({
-        level: process.env.NODE_ENV === "dev" 
-        ? process.env.LOG_LEVEL || 'debug'
-        : 'info', 
+        level: process.env.NODE_ENV === "prod" 
+        ? 'info'
+        : process.env.LOG_LEVEL, 
         levels: logLevels,
         format: combine(
             label({ label: labelName }),
@@ -51,21 +51,22 @@ const createLogger = (labelName: string): Logger => {
             align(),
             printf(({ level, message, label, timestamp }) => {
                 const icon: string = levelIcons[level as keyof typeof logLevels]  || '❔';
-                const formattedLevel = process.env.NODE_ENV === "dev"
-                ? colorize().colorize(level, level.toUpperCase())
-                : level.toUpperCase();
+                const formattedLevel = process.env.NODE_ENV === "prod"
+                ? level.toUpperCase() 
+                : colorize().colorize(level, level.toUpperCase());
                 return `[${timestamp}]  ${icon} ${formattedLevel} - ${label} : ${message}`
             })
         ),
         transports: 
-        process.env.NODE_ENV === "dev"
+        process.env.NODE_ENV === "prod"
 
-        ? [ new winston.transports.Console()]
-        : [
+        
+        ? [
             DailyRotateTransport('info', 'combined.log'),
             DailyRotateTransport('warn', 'warn.log'),
             DailyRotateTransport('error', 'error.log'),
         ]
+        : [ new winston.transports.Console()]
         
 
     })

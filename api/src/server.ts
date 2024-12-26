@@ -43,8 +43,8 @@ app.use("*", (req: Request, res: Response) => {
   });
 });
 
-if (require.main === module) {
-const port = process.env.API_PORT || 3001;
+if (process.env.NODE_ENV === "dev") {
+const port = process.env.API_PORT ?? 3001;
 app.listen(port, () => {
   serverLogger.info(`App listening on port  http://localhost:${port}/api-etnair`);
   serverLogger.info(

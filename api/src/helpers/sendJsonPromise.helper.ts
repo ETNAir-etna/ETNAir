@@ -9,6 +9,8 @@ export const sendJsonPromise =
     try {
       const result = await promise;
 
+      console.log("Final result before sending response:", result);
+
       if (!result) {
         return next(createError(404, notFoundMessage));
       }
@@ -16,7 +18,7 @@ export const sendJsonPromise =
       if (result.key === true) {
         res.cookie("jwt", result.token, {
           httpOnly: true,
-          secure: process.env.NODE_ENV === "production",
+          secure: process.env.NODE_ENV === "prod",
           sameSite: "strict",
         });
       } else if (result.key === false) {
@@ -24,15 +26,11 @@ export const sendJsonPromise =
       }
 
       if (result && result.success) {
-        if (result.action === "delete") {
-          return res.status(200).json(result);
-        }
+        // if (result.action === "delete") {
+        //   return res.status(200).json(result);
+        // }
 
-        if (result.action === "create") {
-          if (result.redirect && result.url) {
-            return res.redirect(302, result.url);
-          }
-
+        if (result.action === "create" || result.action === "update") {
           return res.status(201).json(result);
         }
 

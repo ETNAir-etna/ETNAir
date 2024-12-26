@@ -120,7 +120,7 @@
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true /* Skip type checking all .d.ts files. */
   },
-  "include": ["src/**/*.ts", "../shared", "prisma/**/*.ts", "tests/**/*.ts"],
+  "include": ["src/**/*.ts", "../shared", "prisma/**/*.ts", "tests/**/*.ts", "__tests__/auth/auth.register.test.ts"],
   "exclude": [
     "node_modules",
     "dist",

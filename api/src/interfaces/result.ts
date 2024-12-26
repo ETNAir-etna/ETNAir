@@ -2,6 +2,7 @@ export interface ErrorDetails {
     errorType : string
     message: string
     status: number
+    details?: string | any[]
 };
 
 export interface Result {
