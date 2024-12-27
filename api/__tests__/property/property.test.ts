@@ -2,8 +2,11 @@ import request from "supertest";
 import app from "../../src/server";
 import { PropertyModel } from "../../src/models/Property.model";
 import { describe, expect, it, jest } from "@jest/globals";
+import jwt from "jsonwebtoken";
 
 type MockedFunction = jest.Mock<any>;
+
+const token = jwt.sign({ id: 1, email: "admin@admin.com", role: "ADMIN" }, process.env.JWT_SECRET || "test-secret");
 
 jest.mock("../../src/models/Property.model", () => ({
     PropertyModel : {
@@ -11,8 +14,7 @@ jest.mock("../../src/models/Property.model", () => ({
     }
 }));
 
-
-describe("POST /api-etnair/property/create", () => {
+describe("POST /api-etnair/dashboard/property/create", () => {
     it("should create a property and return status 201 with redirect info", async () => {
         const mockProperty = {
                 title: "WOOOW WOOOW",
@@ -30,9 +32,8 @@ describe("POST /api-etnair/property/create", () => {
 
         const response = await request(app)
             .post("/api-etnair/dashboard/property/create")
-            .send(mockProperty);
-
-        console.log(response.body)
+            .send(mockProperty)
+            .set("Cookie", `jwt=${token}`);
 
         expect(response.status).toBe(201);
 
