@@ -18,7 +18,18 @@ services:
       timeout: 5s
       retries: 5
 
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: pgadmin_etnair
+    env_file:
+      - .env
+    ports:
+      - "8080:80"
+    networks:
+      - etnair_network
+
   api:
+    image: etnair-api
     build:
       context: .
       dockerfile: api/Dockerfile
@@ -34,16 +45,23 @@ services:
     networks:
       - etnair_network
 
-
-  pgadmin:
-    image: dpage/pgadmin4:latest
-    container_name: pgadmin_etnair
+  client:
+    image: etnair-client
+    build:
+      context: .
+      dockerfile: ./client/Dockerfile
+    container_name: etnair-client
     env_file:
       - .env
+      - ./client/.env
     ports:
-      - "8080:80"
+      - "5173:5173"
+    depends_on:
+      api:
+        condition: service_healthy
     networks:
       - etnair_network
+  
 
 networks:
   etnair_network:

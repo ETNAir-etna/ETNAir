@@ -18,4 +18,4 @@ nodemon.json
 scripts/
 
 # TESTS
-tests/
+__tests__/

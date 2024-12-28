@@ -1,0 +1,15 @@
+
+node_modules
+
+# Exclude Docker-specific files
+Dockerfile
+.dockerignore
+
+# Exclude build output
+dist
+
+# Exclude git file
+.gitignore
+
+# Excludeenv variables
+.env

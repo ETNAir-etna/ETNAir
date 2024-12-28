@@ -1,6 +1,6 @@
 // // services/user.service.ts
 import { Prisma } from "@prisma/client";
-import { User } from "../../../shared/types/User";
+import { User } from "@etnair/shared/dist/types";
 import { Result } from "../interfaces/result";
 import { UserModel } from "../models/User.model";
 
@@ -15,7 +15,10 @@ export class UserService {
     return { action: "data", data: data, success: true };
   }
 
-  static async updateUser(id: string, data: Prisma.UserCreateInput): Promise<Result> {
+  static async updateUser(
+    id: string,
+    data: Prisma.UserCreateInput
+  ): Promise<Result> {
     await UserModel.update(id, data);
     return { action: "data", success: true };
   }

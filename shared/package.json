@@ -1,0 +1,35 @@
+{
+  "name": "@joeybervin/shared",
+  "version": "1.0.2",
+  "description": "Shared library for API and Client for ETNAir project.",
+  "homepage": "https://github.com/Joeybervin/ETNAir#readme",
+  "bugs": {
+    "url": "https://github.com/Joeybervin/ETNAir/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joeybervin/ETNAir.git"
+  },
+  "license": "MIT",
+  "author": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "private": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && tsc"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "devDependencies": {
+    "prisma": "^6.1.0",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.1.0"
+  }
+}

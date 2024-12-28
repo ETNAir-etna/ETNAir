@@ -1,20 +1,5 @@
-import { Prisma, PropertyType } from "@prisma/client";
-import { Property as PrismaProperty } from '@prisma/client';
-
-export type PropertyFilter = {
-    publishedAt? : Prisma.SortOrder
-    pricePerNight? : Prisma.SortOrder
-    country: string
-    city: string
-    propertyType: PropertyType
-    roomNumber?: number
-    occupancyMax?: number
-    totalBedrooms?: number
-    equipments: string[]
-    numberByPage: number
-    page: number
-};
-
+import { Prisma, Property as PrismaProperty } from '@prisma/client';
+import { PropertyFilter } from '../types/PropertyFilter';
 
 export const PropertyFilterDTO = (property: PrismaProperty, numberByPage: number, page: number, publishedAt: Prisma.SortOrder, pricePerNight: Prisma.SortOrder ): PropertyFilter => {
     return {
@@ -30,4 +15,4 @@ export const PropertyFilterDTO = (property: PrismaProperty, numberByPage: number
         numberByPage: numberByPage ?? 2,
         page: page ?? 1
     }
-}
+};

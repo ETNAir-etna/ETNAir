@@ -32,10 +32,6 @@ COPY --from=builder ../.env ./
 
 COPY --from=builder ../dist ./dist
 
-# CMD ["sh", "-c", "echo 'JE SUIS DANS /racine' && ls && \
-# echo 'JE SUIS DANS /racine/MIG' && cd migrations && ls && cd .. && \
-# echo 'JE SUIS DANS /racine/PRISA' && cd prisma && ls && cd schema"]
-
 RUN mkdir -p dist/api && \
     mv dist/prisma dist/api && \
     mv dist/src dist/api
