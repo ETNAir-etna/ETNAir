@@ -1,6 +1,6 @@
 // // services/user.service.ts
 import { Prisma } from "@prisma/client";
-import { User } from "@etnair/shared/dist/types";
+import { User } from "@etnair-etna/shared/dist/types";
 import { Result } from "../interfaces/result";
 import { UserModel } from "../models/User.model";
 

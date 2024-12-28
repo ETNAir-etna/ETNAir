@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import { Property, PropertyFilter } from "@etnair/shared/dist/types";
-import { PropertyDTO } from "@etnair/shared/dist/dto";
+import { Property, PropertyFilter } from "@etnair-etna/shared/dist/types";
+import { PropertyDTO } from "@etnair-etna/shared/dist/dto";
 
 const prisma = new PrismaClient();
 

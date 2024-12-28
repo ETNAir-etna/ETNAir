@@ -1,5 +1,5 @@
 import { PropertyModel } from "../models/Property.model";
-import { Property, PropertyFilter } from "@etnair/shared/dist/types";
+import { Property, PropertyFilter } from "@etnair-etna/shared/dist/types";
 import { Result } from "../interfaces/result";
 
 export class PropertyService {

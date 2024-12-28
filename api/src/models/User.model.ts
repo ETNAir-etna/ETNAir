@@ -1,6 +1,6 @@
 import { Prisma, PrismaClient } from "@prisma/client";
-import { User } from "@etnair/shared/dist/types";
-import { UserDTO } from "@etnair/shared/dist/dto";
+import { User } from "@etnair-etna/shared/dist/types";
+import { UserDTO } from "@etnair-etna/shared/dist/dto";
 
 const prisma = new PrismaClient();
 

@@ -1,8 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { sendJsonPromise } from "../helpers/sendJsonPromise.helper";
 import { PropertyService } from "../services/property.service";
-import { PropertyFilter, Property } from "@etnair/shared/dist/types";
-import { PropertyDTO } from "@etnair/shared/dist/dto";
+import { PropertyFilter, Property, PropertyDTO } from "@etnair-etna/shared";
 
 export class PropertyController {
   static async getAllProperties(

@@ -1,3 +1,8 @@
+# Exclude dependencies installed
 node_modules
 
-.npmrc
+# Exclude sensitive environment variables
+.env
+
+# Exclude compiled or built files
+dist

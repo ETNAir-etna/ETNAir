@@ -1,6 +1,6 @@
 {
-  "name": "@joeybervin/shared",
-  "version": "1.0.2",
+  "name": "@etnair-etna/shared",
+  "version": "1.0.0",
   "description": "Shared library for API and Client for ETNAir project.",
   "homepage": "https://github.com/Joeybervin/ETNAir#readme",
   "bugs": {
@@ -8,19 +8,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Joeybervin/ETNAir.git"
+    "url": "git+https://github.com/ETNAir-etna/ETNAir.git"
   },
-  "license": "MIT",
+  "license": "ISC",
   "author": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "private": false,
   "files": [
-    "dist"
+    "dist",
+    "package.json",
+    "README.md"
   ],
   "scripts": {
     "clean": "rm -rf dist",
-    "build": "npm run clean && tsc"
+    "build": "npm run clean && tsc",
+    "publish:shared": "dotenv -e .env -- npm publish --access=restricted --registry=https://npm.pkg.github.com/"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
@@ -30,6 +33,7 @@
     "typescript": "^5.7.2"
   },
   "dependencies": {
-    "@prisma/client": "^6.1.0"
+    "@prisma/client": "^6.1.0",
+    "dotenv-cli": "^8.0.0"
   }
 }
