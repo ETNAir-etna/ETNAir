@@ -9,8 +9,6 @@ export const sendJsonPromise =
     try {
       const result = await promise;
 
-      console.log("Final result before sending response:", result);
-
       if (!result) {
         return next(createError(404, notFoundMessage));
       }

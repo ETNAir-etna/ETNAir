@@ -1,5 +1,5 @@
 import { hashPassword, comparePassword } from "../../src/utils/hashPassword.util";
-import { describe, expect, it, jest } from "@jest/globals";
+import { describe, expect, it } from "@jest/globals";
 
 describe("hashPassword", () => {
     it("should hash the password using bcrypt with the correct salt", async () => {

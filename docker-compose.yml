@@ -5,8 +5,7 @@ services:
     env_file:
       - .env
     volumes:
-      - etnair_db_data:/var/lib/postgresql/datay
-      # - ./.env:/.env
+      - etnair_db_data:/var/lib/postgresql/data
     networks:
       - etnair_network
     ports:
@@ -15,8 +14,8 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 10s
-      timeout: 5s
-      retries: 5
+      timeout: 10s
+      retries: 10
 
   pgadmin:
     image: dpage/pgadmin4:latest
@@ -24,44 +23,61 @@ services:
     env_file:
       - .env
     ports:
-      - "8080:80"
+      - "8082:82"
     networks:
       - etnair_network
 
-  api:
-    image: etnair-api
+  prisma-migrations:
+    image: etnair-prisma-image
     build:
-      context: .
-      dockerfile: api/Dockerfile
-    container_name: etnair-api
+      context: ./api
+      dockerfile: ./docker/Dockerfile.migrations
+    container_name: etnair-prisma
     env_file:
-      - .env
       - ./api/.env
-    ports:
-      - "3000:3000"
+    restart: "no"
     depends_on:
       postgres:
         condition: service_healthy
     networks:
       - etnair_network
 
-  client:
-    image: etnair-client
+  api:
+    image: etnair-api-image
     build:
-      context: .
-      dockerfile: ./client/Dockerfile
-    container_name: etnair-client
+      context: ./api
+      dockerfile: ./docker/Dockerfile.api
+    container_name: etnair-api
+    restart: always
     env_file:
-      - .env
-      - ./client/.env
+      - ./api/.env
     ports:
-      - "5173:5173"
+      - "3000:3000"
     depends_on:
-      api:
+      postgres:
         condition: service_healthy
+      prisma-migrations:
+        condition: service_completed_successfully
     networks:
       - etnair_network
-  
+
+  client:
+    image: etnair-client-image
+    build:
+      context: ./client
+      dockerfile: ./docker/Dockerfile.client
+    container_name: etnair-client
+    restart: always
+    env_file:
+      - ./client/.env
+    ports:
+      - "8080:80"
+    depends_on:
+      api:
+        condition: service_started
+    networks:
+      - etnair_network
+
 
 networks:
   etnair_network:

@@ -1,0 +1,35 @@
+FROM node:20-alpine AS prisma-builder
+
+WORKDIR /app
+
+COPY package*.json ./
+COPY .npmrc .npmrc
+
+RUN npm cache clean --force
+
+RUN npm ci
+RUN rm .npmrc
+
+COPY prisma ./prisma
+COPY tsconfig.prisma.json .
+COPY .env ./.env
+
+RUN npx prisma generate
+
+RUN npm run build:prisma
+
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY --from=prisma-builder /app/node_modules ./node_modules/
+COPY --from=prisma-builder /app/package*.json ./
+COPY --from=prisma-builder /app/prisma/migrations ./prisma/migrations
+COPY --from=prisma-builder /app/prisma/schema ./prisma/schema
+COPY --from=prisma-builder /app/.env ./
+
+COPY --from=prisma-builder /app/dist/prisma/ ./dist/
+
+RUN npm install -g prisma
+
+CMD ["sh", "-c", "npx prisma migrate dev --name init-prod && node dist/prodSeed.js"]

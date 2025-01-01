@@ -1,9 +1,7 @@
 import { faker } from '@faker-js/faker';
 
 import { Prisma, PrismaClient } from "@prisma/client";
-import bcrypt from 'bcrypt';
-import { getRandomInt } from '../src/utils/getRandom.util';
-import { dbLogger } from '../src/configs/logger';
+import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
@@ -28,7 +26,7 @@ async function createHosts(count: number): Promise<Prisma.UserCreateManyInput[]>
 
     for (let i = 0; i < count; i++) {
 
-        const statusRandom: string = getRandomInt(2) === 0 ? "host" : "guest";
+        const statusRandom: string = i % 2 === 0 ? "host" : "guest";
         
         const firstName: string[] = faker.helpers.uniqueArray(faker.person.firstName, 50);
         const lastName: string[] = faker.helpers.uniqueArray(faker.person.lastName, 50);
@@ -110,11 +108,10 @@ async function main() {
 try {
     main()
 } catch(e) {
-    dbLogger.error(e);
+    console.error(e);
     process.exit(1);
 } finally {
     prisma.$disconnect();
 };
 
-
-
+console.log("Database seeded successfully! PROD SEED");

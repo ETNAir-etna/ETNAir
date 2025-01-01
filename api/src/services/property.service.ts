@@ -3,6 +3,7 @@ import { Property, PropertyFilter } from "@etnair-etna/shared/dist/types";
 import { Result } from "../interfaces/result";
 
 export class PropertyService {
+  
   static async getProperties(filter: PropertyFilter): Promise<Result> {
     const data: Property[] = await PropertyModel.findAll(filter);
     return { action: "data", data, success: true };

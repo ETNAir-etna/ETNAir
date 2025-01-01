@@ -1,7 +1,9 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import dotenv from 'dotenv';
 
-// const apiUrl: string | undefined = process.env.VITE_ENV === "prod" ? process.env.API_URL : "http://localhost:3000";
+dotenv.config();
+
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -9,7 +11,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     outDir: 'dist',
-    assetsDir: 'assets',
+    // assetsDir: 'assets',
     emptyOutDir: true,
   },
   server: {
@@ -21,7 +23,7 @@ export default defineConfig({
     },
     proxy: {
       '/api-etnair': {
-        target: process.env.API_URL || "http://localhost:3000",
+        target: 'http://etnair-api:3000' ,
         changeOrigin: true,
       },
     },

@@ -1,7 +1,7 @@
 generator client {
   provider        = "prisma-client-js"
   // previewFeatures = ["prismaSchemaFolder", "relationJoins", "views", "fullTextSearchPostgres"] 
-  previewFeatures = ["prismaSchemaFolder"] 
+  previewFeatures = ["prismaSchemaFolder"]
 }
 
 datasource db {

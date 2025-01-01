@@ -13,17 +13,19 @@ import { serverLogger } from "./configs/logger";
 /* MIDDLEWARE */
 import { morganMiddleware } from "./middleware/morgan.middleware";
 import { errorHandler } from "./middleware/errorHandler.middleware";
-import { corsOptions } from "./configs/cors.config";
+// import { corsOptions } from "./configs/cors.config";
 
 
 const app: Application = express();
 
 // app.use(express.static(path.join(__dirname, '../public')));
+//app.use(express.static(path.join(__dirname, 'dist')));
 app.use(cookieParser()); // Ajoutez ceci avant vos middlewares de route
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morganMiddleware);
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(cors());
 
 /* ROUTER / ROUTES */
 
@@ -54,3 +56,4 @@ app.listen(port, () => {
 }
 
 export default app
+

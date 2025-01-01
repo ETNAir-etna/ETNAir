@@ -1,5 +1,6 @@
 export const corsOptions = {
-    origin: `${process.env.CORS_ALLOWED_ORIGINS}`,
+    origin: ["http://etnair-client:8080", "http://localhost:8080"],
     methods: 'GET,POST,PUT,DELETE',
     allowedHeaders: 'Content-Type,Authorization'
 };
+
