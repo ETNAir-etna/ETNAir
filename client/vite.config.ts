@@ -1,31 +1,32 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import dotenv from 'dotenv';
-
-dotenv.config();
-
+import { defineConfig, loadEnv } from 'vite';
+import react from '@vitejs/plugin-react';
 
 // https://vite.dev/config/
-export default defineConfig({
-  base: "/",
-  plugins: [react()],
-  build: {
-    outDir: 'dist',
-    // assetsDir: 'assets',
-    emptyOutDir: true,
-  },
-  server: {
-    port: 5173,
-    strictPort: true,
-    host: true,
-    watch: {
-      usePolling: true,
+export default defineConfig(({ mode }) => {
+  const env = loadEnv(mode, `${process.cwd()}/configs/env/`, "VITE_");
+
+  const apiUrl = env.VITE_API_URL ?? "http://localhost:3000";
+
+  return {
+    base: "/",
+    plugins: [react()],
+    build: {
+      outDir: 'dist',
+      emptyOutDir: true,
     },
-    proxy: {
-      '/api-etnair': {
-        target: 'http://etnair-api:3000' ,
-        changeOrigin: true,
+    server: {
+      port: 5173,
+      strictPort: true,
+      host: true,
+      watch: {
+        usePolling: true,
+      },
+      proxy: {
+        '/api-etnair': {
+          target: apiUrl,
+          changeOrigin: true,
+        },
       },
     },
-  },
-})
+  };
+});

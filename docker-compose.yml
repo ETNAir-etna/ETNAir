@@ -67,11 +67,11 @@ services:
     image: etnair-client-image
     build:
       context: ./client
-      dockerfile: ./docker/Dockerfile.client
+      dockerfile: ./configs/docker/Dockerfile.client
     container_name: etnair-client
     restart: always
     env_file:
-      - ./client/.env
+      - ./client/configs/env/.env.production
     ports:
       - "8080:80"
     depends_on:
@@ -83,6 +83,7 @@ services:
 
 networks:
   etnair_network:
+    name: etnair_network
     driver: bridge
 
 volumes:

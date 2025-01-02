@@ -1,0 +1,15 @@
+# Dependencies
+node_modules
+
+# Docker files
+Dockerfile
+.dockerignore
+
+#Compiled output files
+dist
+
+# Git ignore file
+.gitignore
+
+# Development environment variables
+*.env.development

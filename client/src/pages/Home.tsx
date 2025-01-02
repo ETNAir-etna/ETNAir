@@ -8,8 +8,8 @@ function Home() {
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        const baseUrl = process.env.REACT_APP_API_BASE_URL || ''; // Définit une URL dynamique
-        fetch(`${baseUrl}/api-etnair/property/all`)
+        // const baseUrl = process.env.REACT_APP_API_BASE_URL || ''; // Définit une URL dynamique
+        fetch(`api-etnair/property/all`)
             .then(response => {
                 console.log("RESPONSE : ", response);
                 if (!response.ok) {
@@ -17,9 +17,9 @@ function Home() {
                 }
                 return response.json();
             })
-            .then(data => {
-                setUsers(data);
-                console.log(data);
+            .then(response => {
+                setUsers(response.data);
+                console.log(response.data);
             })
             .catch(error => {
                 console.error("ERROR : ", error);
