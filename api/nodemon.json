@@ -3,5 +3,8 @@
   "ignore": [],
   "ext": "ts",
   "exec": "ts-node src/server.ts",
-  "signal": "SIGINT"
+  "signal": "SIGINT",
+  "env" : {
+    "NODE_ENV":"development"
+  }
 }

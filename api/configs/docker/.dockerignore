@@ -1,0 +1,20 @@
+# Ignore Node.js dependencies
+node_modules/
+
+# Ignore Docker-specific files
+docker
+
+# Ignore build output
+dist/
+
+# Ignore log files
+.logs
+
+# Ignore local development configurations
+nodemon.json
+
+# Ignore local scripts
+scripts/
+
+# Ignore test files and directories
+__tests__/

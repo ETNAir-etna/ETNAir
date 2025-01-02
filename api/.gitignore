@@ -1,27 +1,27 @@
-
-# Exclude Node.js dependencies for the API
+# Node.js dependencies for the API
 node_modules/
 
-# Exclude database volumes
+# Database volumes
 db/data
 
-# Exclude environment variable files
-.env
+# Environment variable files
+**/.env.development
+**/.env.production
 
-# Exclude API build files
+# API build files
 dist
 
-# Exclude database migration files
+# Database migration files
 migrations
 prisma/migrations
 
-# Exclude logs and audit files
+# Logs and audit files
 .logs
 
-# Useful script in DEV MODE
+# Development scripts
 scripts/
 
-# Editor directories and files
+# Editor-specific files
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -32,8 +32,9 @@ scripts/
 *.sln
 *.sw?
 
-# Seed
+# Seed files
 prisma/devSeed.ts
 prisma/prodSeed.ts
 
+# npm configuration
 .npmrc

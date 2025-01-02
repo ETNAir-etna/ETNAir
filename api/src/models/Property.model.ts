@@ -99,8 +99,6 @@ export class PropertyModel {
         ownerId: ownerId,
       },
     });
-    console.log("Delete result from Prisma:", deleteResult); // Ajoutez ce log
-
     return deleteResult.count;
   }
 }

@@ -7,7 +7,7 @@ import { isHttpError } from 'http-errors';
 
 export const errorHandler: ErrorRequestHandler = (err , req, res, next) => {
 
-    //errorLogger.error(err);
+    errorLogger.error(err);
     //console.error(`[ERROR]: ${err.message || "Unknown error"}`, err);
 
     // SYSTEM : errorHandler
@@ -18,7 +18,7 @@ export const errorHandler: ErrorRequestHandler = (err , req, res, next) => {
     let url;
     let details;
 
-    // PRISMA : errorHandler
+    /* ERROR : PRISMA */
     if (err instanceof Prisma.PrismaClientKnownRequestError) {
             errorType = "PRISMA"
             if (err.code === "P2025") {
@@ -44,7 +44,7 @@ export const errorHandler: ErrorRequestHandler = (err , req, res, next) => {
             errorMessage = "An unexpected error occurred in Prisma.";
         }
 
-    // BCRYPT : errorHandler
+    /* ERROR : BCRYPT */
     if (err.message.includes("salt") || err.message.includes("bcrypt")) {
         errorType = "BCRYPT"
         if (err.message.includes("data and salt arguments required")) {
@@ -59,6 +59,7 @@ export const errorHandler: ErrorRequestHandler = (err , req, res, next) => {
         }
     }
     
+    /* ERROR : jwt */
     if (err.name === "TokenExpiredError") {
         statusCode = 401;
         errorMessage = "JWT expired. Please log in again.";
@@ -72,6 +73,12 @@ export const errorHandler: ErrorRequestHandler = (err , req, res, next) => {
     if (err.name === "NotBeforeError") {
         statusCode = 401;
         errorMessage = "Token is not yet valid. Please check your system time.";
+    }
+
+    /* ERROR : CORS */
+    if (err.message === "Not allowed by CORS") {
+        statusCode = 403;
+        errorMessage = "CORS policy does not allow access from this origin";
     }
     
     

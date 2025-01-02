@@ -31,7 +31,6 @@ export class PropertyService {
 
   static async deleteAllProperties(ownerId: string): Promise<Result> {
     const count = await PropertyModel.deleteManyProperties(ownerId);
-    console.log("Deleted count:", count);
     return { action: "deleteAll", success: true, deletedCount: count };
   }
 }

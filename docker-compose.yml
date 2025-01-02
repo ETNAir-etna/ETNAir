@@ -31,10 +31,10 @@ services:
     image: etnair-prisma-image
     build:
       context: ./api
-      dockerfile: ./docker/Dockerfile.migrations
+      dockerfile: ./configs/docker/Dockerfile.migrations
     container_name: etnair-prisma
     env_file:
-      - ./api/.env
+      - ./api/configs/env/.env.production
     restart: "no"
     depends_on:
       postgres:
@@ -46,11 +46,13 @@ services:
     image: etnair-api-image
     build:
       context: ./api
-      dockerfile: ./docker/Dockerfile.api
+      dockerfile: ./configs/docker/Dockerfile.api
     container_name: etnair-api
     restart: always
+    environment:
+      - NODE_ENV=production
     env_file:
-      - ./api/.env
+      - ./api/configs/env/.env.production
     ports:
       - "3000:3000"
     depends_on:

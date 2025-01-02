@@ -1,0 +1,35 @@
+# STEP 1: Build the API application
+FROM node:20-alpine AS api-builder
+
+WORKDIR /app
+
+COPY package*.json ./
+COPY .npmrc .npmrc
+
+# Clean npm cache and install dependencies
+RUN npm cache clean --force
+RUN npm ci
+RUN rm .npmrc
+
+COPY . ./
+
+# Generate Prisma client
+RUN npx prisma generate
+
+# Build the API
+RUN npm run build:api
+
+# STEP 2: Prepare the production image
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY --from=api-builder /app/package*.json .
+COPY --from=api-builder /app/node_modules ./node_modules
+
+COPY --from=api-builder /app/configs/env/.env.production .
+
+COPY --from=api-builder /app/dist ./dist
+
+# Run the application in production mode
+CMD ["npm","run","start:prod"]
