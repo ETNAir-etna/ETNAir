@@ -4,8 +4,9 @@ import { UserModel } from "../../src/models/User.model";
 import { describe, expect, test, jest } from "@jest/globals";
 import jwt from "jsonwebtoken";
 
-
 type MockedFunction = jest.Mock<any>;
+
+console.log(process.env.JWT_SECRET);
 
 const token = jwt.sign({ id: 1, email: "admin@admin.com", role: "ADMIN" }, process.env.JWT_SECRET || "test-secret");
 
@@ -17,20 +18,17 @@ jest.mock("../../src/models/User.model", () => ({
     },
 }));
 
-describe("GET /api-etnair/user/all", () => {
+describe("GET /api-etnair/authenticated/admin/user/all", () => {
     test("should return a list of users with success=true", async () => {
         const mockUsers = [
             { id: 1, name: "Alice" },
             { id: 2, name: "Bob" },
         ];
 
-        
-
-
         (UserModel.findAll as MockedFunction).mockResolvedValue(mockUsers);
 
         const response = await request(app)
-            .get("/api-etnair/dashboard/user/all")
+            .get("/api-etnair/authenticated/admin/user/all")
             .set("Cookie", `jwt=${token}`);
 
         expect(response.status).toBe(200);
@@ -86,7 +84,7 @@ describe("PUT api-etnair/dashboard/profile/update/:id", () => {
         (UserModel.update as MockedFunction).mockResolvedValue(oldMockUser);
 
         const response = await request(app)
-            .put(`/api-etnair/dashboard/profile/update/${mockId}`)
+            .put(`/api-etnair/authenticated/account/profile/update/${mockId}`)
             .send({ lastName: "Stark-Parks" })
             .set("Cookie", `jwt=${token}`);
 

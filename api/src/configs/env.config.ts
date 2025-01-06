@@ -6,6 +6,9 @@ const envPath: string = env === "production" ? "" : 'configs/env/';
 
 try {
     switch (env) {
+        case 'test':
+            dotenv.config({ path: path.resolve(process.cwd(), `${envPath}.env.development`) });
+            break;
         case 'development':
             dotenv.config({ path: path.resolve(process.cwd(), `${envPath}.env.development`) });
             break;
