@@ -5,6 +5,7 @@ import App from './App'
 import { ThemeModeProvider } from './themes/ThemeModeProvider';
 import '@mui/material/styles';
 import { Box } from './components/muiComponents';
+import './i18n/i18n'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

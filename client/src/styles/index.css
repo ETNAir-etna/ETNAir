@@ -1,6 +1,7 @@
 
 html, body {
   max-width: 100vw;
+  min-height: 100vh;
   overflow: auto;
   scrollbar-width: none;
 }
