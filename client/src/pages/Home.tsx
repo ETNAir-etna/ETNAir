@@ -1,49 +1,50 @@
 import { useEffect, useState } from 'react';
-// import { Result } from '../interfaces/result';
 import { Property } from '@etnair-etna/shared';
+import { Alert, Container, List, ListItem, Typography } from '../components/muiComponents';
 
 function Home() {
-
-    const [users, setUsers] = useState<Property[]>([]);
+    const [properties, setProperties] = useState<Property[]>([]);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        // const baseUrl = process.env.REACT_APP_API_BASE_URL || ''; // Définit une URL dynamique
         fetch(`api-etnair/property/all`)
             .then(response => {
-                console.log("RESPONSE : ", response);
                 if (!response.ok) {
                     throw new Error('Erreur lors de la récupération des données');
                 }
                 return response.json();
             })
             .then(response => {
-                setUsers(response.data);
-                console.log(response.data);
+                setProperties(response.data);
             })
             .catch(error => {
                 console.error("ERROR : ", error);
                 setError(error.message);
             });
     }, []);
-    
 
     return (
-        <div>
-            <h1>Welcome to the Home Page</h1>
+        <Container sx={{ backgroundColor: 'background.paper' }}>
+            <Typography variant="h1" sx={{ color: 'text.primary' }}>
+                Welcome to the Home Page
+            </Typography>
 
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {error && (
+                <Alert severity="error" sx={{ marginBottom: 2 }}>
+                    {error}
+                </Alert>
+            )}
 
-            <ul>
-                {users.length > 0 ? (
-                    users.map(user => (
-                        <li key={user.id}>{user.title}</li>
-                    ))
-                ) : (
-                    <p>No users found</p>
-                )}
-            </ul>
-        </div>
+            {properties.length > 0 ? (
+                <List>
+                    {properties.map(user => (
+                        <ListItem sx={{ color: 'text.primary' }} key={user.id}>{user.title}</ListItem>
+                    ))}
+                </List>
+            ) : (
+                <Typography variant="body1">No properties found</Typography>
+            )}
+        </Container>
     );
 }
 

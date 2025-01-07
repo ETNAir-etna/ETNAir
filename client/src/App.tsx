@@ -1,10 +1,6 @@
 import { BrowserRouter, Route, Routes, Navigate, Outlet } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import store from './store';
-import './App.css'
 import { AccountLayout, HostingLayout, MainLayout } from './layout';
-import { Home, Search, User, Reservation, Auth, Account, Profile, Wishlist, Hosting, Dashboard } from './pages';
-import Travel from './pages/Travel';
+import { Travel, Home, Search, User, Reservation, Auth, Account, Profile, Wishlist, Hosting, Dashboard } from './pages';
 import { useEffect } from 'react';
 
 function App() {
@@ -36,7 +32,6 @@ function App() {
 
 
   return (
-    <Provider store={store}>
       <BrowserRouter>
       <ScrollToTop />
       <Routes>
@@ -77,7 +72,7 @@ function App() {
 
       </Routes>
       </BrowserRouter>
-    </Provider>
+
   )
 }
 

@@ -1,10 +1,17 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import './index.css'
+import './styles/index.css'
 import App from './App'
+import { ThemeModeProvider } from './themes/ThemeModeProvider';
+import '@mui/material/styles';
+import { Box } from './components/muiComponents';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <ThemeModeProvider>
+      <Box sx={{ backgroundColor: 'background.default', minHeight: '100vh' }}>
+        <App />
+      </Box>
+    </ThemeModeProvider>
   </StrictMode>,
 )

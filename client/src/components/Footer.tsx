@@ -1,7 +1,9 @@
+import { Typography } from "./muiComponents";
+
 const Footer = () => {
     return (
         <nav>
-            <span>FOOTER</span>
+            <Typography variant="body1" sx={{ color: 'text.primary' }}>FOOTER</Typography>
         </nav>
     );
 };
