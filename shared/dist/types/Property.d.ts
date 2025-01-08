@@ -1,4 +1,4 @@
-import { PropertyType } from "@prisma/client";
+import { Prisma, PropertyType } from "@prisma/client";
 export type Property = {
     id: string;
     title: string;
@@ -24,4 +24,5 @@ export type Property = {
     pictures: string[];
     ownerId: string;
     publishedAt: Date;
+    rating: Prisma.Decimal;
 };

@@ -6,9 +6,11 @@ import { PropertyFilter } from '../types/PropertyFilter';
  * @param  {number} page
  * @param  {Prisma.SortOrder} publishedAt
  * @param  {Prisma.SortOrder} pricePerNight
+ * @param  {Prisma.Decimal} rating
  * @returns {PropertyFilter} page
+ * 
  */
-export const PropertyFilterDTO = (property: PrismaProperty, numberByPage: number, page: number, publishedAt: Prisma.SortOrder, pricePerNight: Prisma.SortOrder): PropertyFilter => {
+export const PropertyFilterDTO = (property: PrismaProperty, numberByPage: number, page: number, publishedAt: Prisma.SortOrder, pricePerNight: Prisma.SortOrder, rating: Prisma.Decimal): PropertyFilter => {
     return {
         publishedAt: publishedAt ?? undefined,
         pricePerNight: pricePerNight ?? undefined,
@@ -20,6 +22,7 @@ export const PropertyFilterDTO = (property: PrismaProperty, numberByPage: number
         totalBedrooms: property.totalBedrooms ?? undefined,
         equipments: property.equipments ?? undefined,
         numberByPage: numberByPage,
-        page: page
+        page: page,
+        rating: rating ?? undefined
     };
 };

@@ -7,7 +7,7 @@ export class PropertyController {
   static async getAllProperties(req: Request,res: Response,next: NextFunction): Promise<void> {
     const page: number = isNaN(Number(req.query.page)) ? 1 : Number(req.query.page);
     const body = req.body
-    const numberByPage: number = body.numberByPage ?? 15
+    const numberByPage: number = body.numberByPage ?? 16
     const data: PropertyFilter = PropertyFilterDTO( body, numberByPage, page, body.publishedAt, body.pricePerNight );
     sendJsonPromise(PropertyService.getProperties(data))(req, res, next);
   }

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PropertyDTO = void 0;
 const PropertyDTO = (property) => {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o;
     return {
         id: property.id,
         ownerId: property.ownerId,
@@ -28,6 +28,7 @@ const PropertyDTO = (property) => {
         equipments: property.equipments || [],
         pictures: property.pictures || [],
         publishedAt: property.publishedAt,
+        rating: (_o = property.rating) !== null && _o !== void 0 ? _o : 0,
     };
 };
 exports.PropertyDTO = PropertyDTO;

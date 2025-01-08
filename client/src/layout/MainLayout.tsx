@@ -8,7 +8,7 @@ const MainLayout = () => {
         <>
             <Navbar />
                 <Toolbar />
-                <Container>
+                <Container maxWidth="xl">
                     <Outlet />
                 </Container>
             <Footer />

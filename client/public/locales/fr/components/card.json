@@ -1,0 +1,8 @@
+{
+    "chipLabel" : "Superhôte",
+    "subText" : {
+        "p1" : "Hôte",
+        "priceDevice": "€",
+        "p2": "par nuit"
+    }
+}

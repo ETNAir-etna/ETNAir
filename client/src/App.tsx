@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes, Navigate, Outlet } from 'react-router-dom';
 import { AccountLayout, HostingLayout, MainLayout } from './layout';
-import { Travel, Home, Search, User, Reservation, Auth, Account, Profile, Wishlist, Hosting, Dashboard } from './pages';
+import { Travel, Home, Search, User, Reservation, Auth, Account, Profile, Wishlist, Hosting, Dashboard, Property } from './pages';
 import { useEffect } from 'react';
 
 function App() {
@@ -41,6 +41,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path='/search' element={<Search />} />
           <Route path='/user/:userId' element={<User />} />
+          <Route path='/property/:propertyId' element={<Property />} />
         </Route>
 
         <Route path='/propery/:propertyId/reservation' element={<Reservation />}  />

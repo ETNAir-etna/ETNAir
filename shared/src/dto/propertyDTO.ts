@@ -28,5 +28,6 @@ export const PropertyDTO = (property: PrismaProperty): Property => {
         equipments: property.equipments || [],
         pictures: property.pictures || [],
         publishedAt: property.publishedAt,
+        rating: property.rating ?? 0,
     };
 };

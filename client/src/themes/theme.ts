@@ -1,5 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 import typography from './typogrphy';
+import '@mui/material/styles';
 
 // const shadows = [
 //     'none',
@@ -17,6 +18,28 @@ import typography from './typogrphy';
 //     modal: 1300,
 //     tooltip: 1500,
 // };
+
+
+
+declare module '@mui/material/styles' {
+    interface PaletteOptions {
+        blackWhite: {
+            main: string, 
+            contrastText: string
+        },
+        whiteBlack: {
+            main: string, 
+            contrastText: string
+        };
+    }
+}
+
+declare module '@mui/material/Chip' {
+    interface ChipPropsColorOverrides {
+        blackWhite: true
+        whiteBlack: true
+    }
+}
 
 
 export const lightTheme = createTheme({
@@ -41,6 +64,14 @@ export const lightTheme = createTheme({
             disabled: '#BDBDBD', 
         },
         divider: '#E0E0E0',
+        blackWhite: {
+            main: '#000000', 
+            contrastText: '#FFFFFF',
+        },
+        whiteBlack: {
+            main: '#FFFFFF', 
+            contrastText: '#000000', 
+        },
     },
 });
 
@@ -67,6 +98,14 @@ export const darkTheme = createTheme({
             disabled: '#757575',
         },
         divider: '#424242',
+        blackWhite: {
+            main: '#FFFFFF', 
+            contrastText: '#000000', 
+        },
+        whiteBlack: {
+            main: '#000000', 
+            contrastText: '#FFFFFF',
+        },
     },
 });
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MenuItem, Select } from "./muiComponents";
+import { MenuItem, Select } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 

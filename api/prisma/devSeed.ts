@@ -112,7 +112,7 @@ await prisma.property.createMany({
             totalBathrooms: 3,
             area: 250.5,
             pricePerNight: 500,
-            mainImgUrl: 'https://example.com/villa.jpg',
+            mainImgUrl: 'https://plus.unsplash.com/premium_photo-1689609950112-d66095626efb?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8aG91c2V8ZW58MHx8MHx8fDA%3D',
             streetNumber: 123,
             streetName: 'Ocean Drive',
             city: 'Miami',
@@ -122,6 +122,7 @@ await prisma.property.createMany({
             longitude: -80.1300455,
             equipments: ['Pool', 'Wi-Fi', 'Air Conditioning'],
             ownerId: host1.id,
+            rating: 5
         },
         {
             id: uuidv4(),
@@ -133,7 +134,7 @@ await prisma.property.createMany({
             totalBathrooms: 1,
             area: 85.0,
             pricePerNight: 150,
-            mainImgUrl: 'https://example.com/apartment.jpg',
+            mainImgUrl: 'https://plus.unsplash.com/premium_photo-1689609950112-d66095626efb?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8aG91c2V8ZW58MHx8MHx8fDA%3D',
             streetNumber: 456,
             streetName: 'Main Street',
             city: 'New York',
@@ -143,6 +144,7 @@ await prisma.property.createMany({
             longitude: -74.005974,
             equipments: ['Wi-Fi', 'Kitchen', 'Heating'],
             ownerId: guesthost.id,
+            rating: 0
         },
         {
             id: uuidv4(),
@@ -154,7 +156,7 @@ await prisma.property.createMany({
             totalBathrooms: 2,
             area: 120.0,
             pricePerNight: 200,
-            mainImgUrl: 'https://example.com/cottage.jpg',
+            mainImgUrl: 'https://cdn11.bigcommerce.com/s-g95xg0y1db/images/stencil/1280x1280/o/house%20plan%20w-photo%2021802__37906.original.jpg',
             streetNumber: 789,
             streetName: 'Willow Lane',
             city: 'Nashville',
@@ -164,6 +166,7 @@ await prisma.property.createMany({
             longitude: -86.781602,
             equipments: ['Fireplace', 'Wi-Fi', 'Washer/Dryer', 'BBQ'],
             ownerId: guesthost.id,
+            rating: 4
         },
         {
             id: uuidv4(),
@@ -175,7 +178,7 @@ await prisma.property.createMany({
             totalBathrooms: 1,
             area: 55.0,
             pricePerNight: 120,
-            mainImgUrl: 'https://example.com/loft.jpg',
+            mainImgUrl: 'https://www.bhg.com/thmb/H9VV9JNnKl-H1faFXnPlQfNprYw=/1799x0/filters:no_upscale():strip_icc()/white-modern-house-curved-patio-archway-c0a4a3b3-aa51b24d14d0464ea15d36e05aa85ac9.jpg',
             streetNumber: 321,
             streetName: 'Elm Street',
             city: 'Boston',
@@ -185,6 +188,7 @@ await prisma.property.createMany({
             longitude: -71.058880,
             equipments: ['Wi-Fi', 'Kitchen', 'Smart TV'],
             ownerId: guesthost.id,
+            rating: 3.2
         },
     ]
 

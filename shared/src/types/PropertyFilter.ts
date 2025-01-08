@@ -12,6 +12,7 @@ export type PropertyFilter = {
     equipments?: string[]
     numberByPage: number 
     page: number 
+    rating: Prisma.Decimal
 };
 
 

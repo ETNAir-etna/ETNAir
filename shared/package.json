@@ -1,6 +1,6 @@
 {
   "name": "@etnair-etna/shared",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Shared library for API and Client for ETNAir project.",
   "homepage": "https://github.com/Joeybervin/ETNAir#readme",
   "bugs": {
@@ -24,6 +24,9 @@
     "clean": "rm -rf dist",
     "build": "npm run clean && tsc",
     "publish:shared": "dotenv -e .env -- npm publish --access=restricted --registry=https://npm.pkg.github.com/"
+  },
+  "prisma": {
+    "schema": "../api/prisma/"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"

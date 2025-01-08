@@ -71,7 +71,7 @@ async function createProperty( users: Prisma.UserCreateManyInput[], count: numbe
             totalBathrooms: faker.number.int({ min: 1, max: 4 }),
             area: faker.number.float({ min: 30, max: 500, fractionDigits: 1 }),
             pricePerNight: faker.number.float({ min: 50, max: 1000 }),
-            mainImgUrl: faker.image.urlLoremFlickr({ category: 'house' }), 
+            mainImgUrl: `https://picsum.photos/800/600?random=${Math.floor(Math.random() * 1000)}`,
             streetNumber: faker.number.int({ min: 1, max: 5000 }),
             streetName: faker.location.street(),
             city: faker.location.city(),
@@ -81,6 +81,7 @@ async function createProperty( users: Prisma.UserCreateManyInput[], count: numbe
             longitude: faker.location.longitude(),
             equipments: faker.helpers.arrayElements(equipmentList, faker.number.int({ min: 5, max: 15 })),
             ownerId: faker.helpers.arrayElement(randomHost).id || "dc682ea0-fb99-4102-85a7-4bf734c1d4ad",
+            rating: faker.number.float({ min: 0, max: 5, fractionDigits: 2 })
         };
 
         properties.push(property)

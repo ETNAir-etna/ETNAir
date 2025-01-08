@@ -1,3 +1,12 @@
 {
-    "title": "Welcome"
+    "SEO": {
+        "homepage" : {
+            "title" : "ETNAir - Accueil",
+            "description": "Bienvenue sur le site n°1 de la location de logements"
+        }
+    },
+    "homepage": {
+        "subtitle": "Ours favorites destinations",
+        "bottomButton": "Let's go"
+    }
 }

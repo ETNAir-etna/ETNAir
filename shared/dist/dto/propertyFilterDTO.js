@@ -1,6 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PropertyFilterDTO = void 0;
+/**
+ * @param  {PrismaProperty} property
+ * @param  {number} numberByPage
+ * @param  {number} page
+ * @param  {Prisma.SortOrder} publishedAt
+ * @param  {Prisma.SortOrder} pricePerNight
+ * @returns {PropertyFilter} page
+ */
 const PropertyFilterDTO = (property, numberByPage, page, publishedAt, pricePerNight) => {
     var _a, _b, _c, _d, _e, _f, _g;
     return {
@@ -13,8 +21,8 @@ const PropertyFilterDTO = (property, numberByPage, page, publishedAt, pricePerNi
         occupancyMax: (_e = property.occupancyMax) !== null && _e !== void 0 ? _e : undefined,
         totalBedrooms: (_f = property.totalBedrooms) !== null && _f !== void 0 ? _f : undefined,
         equipments: (_g = property.equipments) !== null && _g !== void 0 ? _g : undefined,
-        numberByPage: numberByPage !== null && numberByPage !== void 0 ? numberByPage : 2,
-        page: page !== null && page !== void 0 ? page : 1
+        numberByPage: numberByPage,
+        page: page
     };
 };
 exports.PropertyFilterDTO = PropertyFilterDTO;

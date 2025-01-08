@@ -36,6 +36,7 @@ model Property {
     equipments            String[]
     ownerId               String
     pictures              String[]
+    rating                Decimal
 
 
     // RELATIONS
@@ -52,4 +53,5 @@ model Property {
     @@index([totalBedrooms])
     @@index([propertyType])
     @@index([occupancyMax])
+    @@index([rating])
 }

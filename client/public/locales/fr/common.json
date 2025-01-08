@@ -1,3 +1,14 @@
 {
-    "title": "Bienvenue"
+    "SEO": {
+        "homepage" : {
+            "title" : "ETNAir - Home",
+            "description": "Welcome on the best website to find a booking"
+            
+        }
+    },
+    "homepage": {
+        "subtitle": "Nos destinations favorites",
+        "bottomButton": "Découvrir"
+    }
+
 }

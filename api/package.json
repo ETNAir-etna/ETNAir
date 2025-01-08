@@ -24,7 +24,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@etnair-etna/shared": "^1.0.0",
+    "@etnair-etna/shared": "^1.0.1",
     "@prisma/client": "^6.1.0",
     "@prisma/engines": "^6.1.0",
     "@types/decimal.js": "^0.0.32",
