@@ -15,7 +15,6 @@ interface PropertyAndHost extends Property {
 function Home() {
 
     const [properties, setProperties] = useState<PropertyAndHost[]>([]);
-    const [error, setError] = useState<string | null>(null);
 
     const navigate = useNavigate();
 
@@ -32,10 +31,7 @@ function Home() {
                 const userPromises = hostIds.map((id) =>
                     fetch(`api-etnair/user/${id}`)
                         .then((res) => {
-                            if (!res.ok) {
-                                console.log(error)};
-                                throw new Error(`Erreur lors de la récupération de l'utilisateur ${id}`);
-                            
+                            if (!res.ok) {throw new Error(`Erreur lors de la récupération de l'utilisateur ${id}`);}
                             return res.json();
                         })
                         .then((data) => data.data)
@@ -52,7 +48,7 @@ function Home() {
             } catch (error) {
                 const typedError = error as Error;
                 console.error('ERROR:', typedError.message);
-                setError(typedError.message);
+                
             }
         };
 
