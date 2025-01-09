@@ -7,7 +7,6 @@ import { selectUser } from "../store/userSelector";
 function Profile() {
     const user = useSelector(selectUser);
 
-
     const {
         email = '',
         firstName = '',
@@ -22,9 +21,8 @@ function Profile() {
     // TODO : géré les bouttons et leurs actions
         const handleSubmit = (event: React.FormEvent) => {
             event.preventDefault();
-            const formData = new FormData(event.target as HTMLFormElement);
             console.log('Form submitted');
-            console.log(formData)
+            console.log(email)
         };
     
 

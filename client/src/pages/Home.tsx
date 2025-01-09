@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Property, User } from '@etnair-etna/shared';
+import { Property } from '@etnair-etna/shared';
 import { SEO } from '../components/SEO';
 import { PropretyCard } from '../components/Card';
 import { useTranslation } from 'react-i18next';
@@ -8,10 +8,8 @@ import { Button } from '../components/Button';
 import { Container, Stack, Typography, Box } from '@mui/material';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import { useNavigate } from 'react-router-dom';
+import { PropertyAndHost } from '../interfaces/PropertyAndHost';
 
-interface PropertyAndHost extends Property {
-    host: User
-}
 function Home() {
 
     const [properties, setProperties] = useState<PropertyAndHost[]>([]);
@@ -24,8 +22,7 @@ function Home() {
             try {
                 const propertyResponse = await fetch('api-etnair/property/all');
                 if (!propertyResponse.ok) throw new Error('Erreur lors de la récupération des propriétés');
-                const propertyData: Property[] = (await propertyResponse.json()).data;
-
+                const propertyData: Property[] = (await propertyResponse.json()).data[1];
                 const hostIds = [...new Set(propertyData.map((property) => property.ownerId))];
 
                 const userPromises = hostIds.map((id) =>

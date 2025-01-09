@@ -5,7 +5,7 @@ import { Result } from "../interfaces/result";
 export class PropertyService {
   
   static async getProperties(filter: PropertyFilter): Promise<Result> {
-    const data: Property[] = await PropertyModel.findAll(filter);
+    const data: (number | Property[])[] = await PropertyModel.findAll(filter);
     return { action: "data", data, success: true };
   }
 

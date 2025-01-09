@@ -32,7 +32,7 @@ function ResponsiveAppBar() {
     const user = useSelector(selectUser);
     useEffect(() => {
    
-                    if (user) {
+        if (user) {
             setNavbarSettings(t("settings.private", { returnObjects: true }) as settings[] );
             
         } else {
@@ -40,7 +40,6 @@ function ResponsiveAppBar() {
         
         }
 
-       
     }, [t, user]);
 
     const handleSelect = (selectedItem: settings) => {

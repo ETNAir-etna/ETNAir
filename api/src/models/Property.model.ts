@@ -5,9 +5,11 @@ import { PropertyDTO } from "@etnair-etna/shared/dist/dto";
 const prisma = new PrismaClient();
 
 export class PropertyModel {
-  static async findAll(filter: PropertyFilter): Promise<Property[]> {
+  static async findAll(filter: PropertyFilter): Promise<(number | Property[])[]> {
     const skipItems: number = (filter.page - 1) * filter.numberByPage;
-    const properties = await prisma.property.findMany({
+    const properties = await prisma.$transaction([
+    prisma.property.count(),
+    prisma.property.findMany({
       orderBy: {
         publishedAt: filter.publishedAt,
         pricePerNight: filter.pricePerNight,
@@ -33,8 +35,12 @@ export class PropertyModel {
       },
       skip: skipItems,
       take: filter.numberByPage,
-    });
-    return properties.map((property) => PropertyDTO(property));
+    })
+  ]);
+    const count = properties[0]
+    const propertiesList: Property[] = properties[1].map((property) => PropertyDTO(property));
+    const result: (number | Property[])[] = [count, propertiesList]
+    return result
   }
 
   static async findById(id: string): Promise<Property> {

@@ -46,7 +46,7 @@ const HeroHeader: React.FC<HeroHeaderProps> = ({ imageUrl }) => {
                 </Typography>
 
                 <Button
-                    onClick={() => navigate('/search')}
+                    onClick={() => navigate('/search?page=1')}
                     fullWidth={false}
                     size="large"
                     color="secondary"

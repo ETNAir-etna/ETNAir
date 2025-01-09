@@ -26,10 +26,6 @@ export default function SlideMenu({ items, children, anchor = 'right', onItemCli
         onItemClick(item);
     };
 
-    console.log(items)
-
-
-
     return (
         <div>
             <div onClick={toggleDrawer(true)}>{children}</div>
