@@ -5,7 +5,7 @@ import { PropretyCard } from '../components/Card';
 import { useTranslation } from 'react-i18next';
 import HeroHeader from '../components/HeroHeader';
 import { Button } from '../components/Button';
-import { Container, Stack, Typography, Alert, Box } from '@mui/material';
+import { Container, Stack, Typography, Box } from '@mui/material';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 import { useNavigate } from 'react-router-dom';
 
@@ -32,7 +32,10 @@ function Home() {
                 const userPromises = hostIds.map((id) =>
                     fetch(`api-etnair/user/${id}`)
                         .then((res) => {
-                            if (!res.ok) throw new Error(`Erreur lors de la récupération de l'utilisateur ${id}`);
+                            if (!res.ok) {
+                                console.log(error)};
+                                throw new Error(`Erreur lors de la récupération de l'utilisateur ${id}`);
+                            
                             return res.json();
                         })
                         .then((data) => data.data)
@@ -72,12 +75,6 @@ function Home() {
                     <FavoriteRoundedIcon color='error' />
                     <Typography variant='h6' fontWeight="bold">{t('homepage.subtitle')}</Typography>
                 </Stack>
-
-                {error && (
-                    <Alert severity="error" sx={{ marginBottom: 2 }}>
-                        {error}
-                    </Alert>
-                )}
 
                 {properties.length > 0 ? (
                     <Box

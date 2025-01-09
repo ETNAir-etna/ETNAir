@@ -105,7 +105,7 @@ const PropertyPage: React.FC = () => {
             <Box sx={{ marginBottom: '20px' }}>
                 <Typography variant="h6">Équipements</Typography>
                 <ul>
-                    {property.equipments.map((equipment, index) => (
+                    {property.equipments!.map((equipment, index) => (
                         <li key={index}>
                             <Typography variant="body1">{equipment}</Typography>
                         </li>

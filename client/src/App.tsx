@@ -63,9 +63,9 @@ function App() {
           </Route>
 
           {/* Admin Routes */}
-          {/* <Route path='admin/*' element={<ProtectedRoute requiredRole="admin" />}>
+          <Route path='admin' element={<ProtectedRoute requiredRole="admin" />}>
             <Route index element={<Dashboard />} />
-          </Route> */}
+          </Route>
 
         </Route>
 
