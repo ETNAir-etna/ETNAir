@@ -10,7 +10,7 @@ function App() {
     const userRole = 'admin'; // Exemple : rôle utilisateur
   
     if (!isAuthenticated) {
-      return <Navigate to="/auth/signIn" />;
+      return <Navigate to="/auth" />;
     }
   
     if (requiredRole && userRole !== requiredRole) {
@@ -29,8 +29,6 @@ function App() {
   };
   
   
-
-
   return (
       <BrowserRouter>
       <ScrollToTop />
@@ -44,30 +42,30 @@ function App() {
           <Route path='/property/:propertyId' element={<Property />} />
         </Route>
 
-        <Route path='/propery/:propertyId/reservation' element={<Reservation />}  />
+        <Route path='/property/:propertyId/reservation' element={<Reservation />}  />
 
         {/* Auth Routes */}
         <Route path='/auth/*' element={<Auth />} />
 
-        <Route path='authenticated/*' element={<ProtectedRoute />} >
+        <Route path='authenticated' element={<ProtectedRoute />} >
 
           {/* Account Routes */}
-          <Route path='account/*' element={<AccountLayout />}>
+          <Route path='account' element={<AccountLayout />}>
             <Route index element={<Account />} />
             <Route path='profile' element={<Profile />} />
             <Route path='wishlist' element={<Wishlist />} />
-            <Route index element={<Travel />} />
+            <Route path="travel" element={<Travel />} />
           </Route>
 
           {/* Hosting Routes */}
-          <Route path='hosting/*' element={<HostingLayout />}>
+          <Route path='hosting' element={<HostingLayout />}>
             <Route index element={<Hosting />} />
           </Route>
 
           {/* Admin Routes */}
-          <Route path='admin/*' element={<ProtectedRoute requiredRole="admin" />}>
+          {/* <Route path='admin/*' element={<ProtectedRoute requiredRole="admin" />}>
             <Route index element={<Dashboard />} />
-          </Route>
+          </Route> */}
 
         </Route>
 

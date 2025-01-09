@@ -1,29 +1,137 @@
 import { useTranslation } from "react-i18next";
-import { ThemeSwitcherButton } from "./Button";
-import { AppBar, Container } from '@mui/material';
-import { LanguagesSelect } from "./Select";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+    AppBar,
+    Box,
+    Toolbar,
+    IconButton,
+    Typography,
+    Container,
+    Tooltip,
+    Divider,
+    Stack,
+} from "@mui/material";
+import Avatar from "@mui/material/Avatar";
+import HolidayVillageRoundedIcon from "@mui/icons-material/HolidayVillageRounded";
+import AccountCircleRoundedIcon from "@mui/icons-material/AccountCircleRounded";
+import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import { useSelector } from "react-redux";
+import { selectUser } from "../store/userSelector";
+import SlideMenu from "./SlideMenu";
+import { settings } from "../interfaces/settings";
 
 
 
-const Navbar = () => {
+function ResponsiveAppBar() {
 
-    const { t } = useTranslation('components/navbar');
+    const { t } = useTranslation("components/navbar");
+    const navigate = useNavigate();
+
+    const [navbarSettings, setNavbarSettings] = useState<settings[]>([]);
+    const user = useSelector(selectUser);
+    useEffect(() => {
+   
+                    if (user) {
+            setNavbarSettings(t("settings.private", { returnObjects: true }) as settings[] );
+            
+        } else {
+            setNavbarSettings(t("settings.public", { returnObjects: true }) as settings[]);
+        
+        }
+
+       
+    }, [t, user]);
+
+    const handleSelect = (selectedItem: settings) => {
+        navigate(selectedItem.value);
+
+        if (selectedItem.value === "logout" || selectedItem.value === "Se déconnecter"){
+            // TODO : implémenter le fect pour se déconnecter simple
+        }
+      };
 
     return (
-        <AppBar component="nav">
+        <AppBar position="static">
             <Container maxWidth="xl">
-                
-                <ThemeSwitcherButton />
-                <LanguagesSelect />
-                <span> ETNAir</span>
-                {/* <List>
-                    {(t('list', { returnObjects: true }) as string[]).map( (el: string, i: number) => (
-                        <ListItem key={i}>{el}</ListItem>
-                    ))}
-                </List> */}
+                <Toolbar disableGutters >
+                    <HolidayVillageRoundedIcon
+                        sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+                    />
+                    <Typography
+                        variant="h6"
+                        noWrap
+                        component="a"
+                        href="/"
+                        sx={{
+                            mr: 2,
+                            display: { xs: "none", md: "flex" },
+                            fontFamily: "monospace",
+                            flexGrow: 1,
+                            fontWeight: 700,
+                            letterSpacing: ".3rem",
+                            color: "inherit",
+                            textDecoration: "none",
+                        }}
+                    >
+                        ETNAir
+                    </Typography>
+                    <HolidayVillageRoundedIcon
+                        sx={{ display: { xs: "flex", md: "none" }, mr: 1 }}
+                    />
+                    <Typography
+                        variant="h5"
+                        noWrap
+                        component="a"
+                        href="/"
+                        sx={{
+                            mr: 2,
+                            display: { xs: "flex", md: "none" },
+                            flexGrow: 1,
+                            fontFamily: "monospace",
+                            fontWeight: 700,
+                            letterSpacing: ".3rem",
+                            color: "inherit",
+                            textDecoration: "none",
+                        }}
+                    >
+                        ETNAir
+                    </Typography>
+
+                    <Box sx={{ flexGrow: 0 }}>
+                    <SlideMenu items={navbarSettings} onItemClick={handleSelect} >
+                    <Tooltip title={(t('sttings.tooltip'))}>
+                            <IconButton size="medium" >
+                                <Stack
+                                    sx={{
+                                        border: "#ffff 2px solid",
+                                        px: 1.5,
+                                        py: 0.5,
+                                        borderRadius: "30px",
+                                        color: "white",
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                    }}
+                                    direction="row"
+                                    spacing={2}
+                                    divider={<Divider orientation="vertical" flexItem />}
+                                >
+                                    <MenuRoundedIcon />
+                                    {user ? 
+                                            <Avatar sx={{ width: 20, height: 20 }}  alt={`${user.firstName} ${user.lastName}`} src={user.profileImg as string} />
+                                    :
+                                        <AccountCircleRoundedIcon fontSize="medium" />
+                                    }
+                                    
+                                </Stack>
+                            </IconButton>
+                        </Tooltip>
+                    </SlideMenu>
+
+                    </Box>
+                </Toolbar>
             </Container>
         </AppBar>
     );
-};
-
-export default Navbar;
+}
+export default ResponsiveAppBar;

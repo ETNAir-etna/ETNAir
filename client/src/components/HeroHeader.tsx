@@ -35,12 +35,32 @@ const HeroHeader: React.FC<HeroHeaderProps> = ({ imageUrl }) => {
                     textAlign: 'center',
                 }}
             >
-                <Typography variant="h1" sx={{ color: '#FFFF', mb: 5 }}>
+                <Typography
+                    variant="h1"
+                    sx={{
+                        color: '#FFFF',
+                        fontSize: { xs: '1.5rem', sm: '2rem' }
+                    }}
+                >
                     {t('homepage.title')}
                 </Typography>
-                <Button onClick={() => navigate('/search')} fullWidth={false} size="large"  color="secondary"  sx={{ fontWeight: "bold", paddingX: '70px', borderRadius : "30px" }}>
-                {t('homepage.button')}
+
+                <Button
+                    onClick={() => navigate('/search')}
+                    fullWidth={false}
+                    size="large"
+                    color="secondary"
+                    sx={{
+                        fontWeight: "bold",
+                        paddingX: { xs: '20px', sm: '40px', md: '70px' },
+                        borderRadius: "30px",
+                        fontSize: { xs: '0.9rem', sm: '1rem' },
+                        mt: { xs: 2, sm: 5 },
+                    }}
+                >
+                    {t('homepage.button')}
                 </Button>
+
             </Container>
         </Box>
     );

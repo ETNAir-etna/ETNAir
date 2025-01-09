@@ -1,0 +1,8 @@
+{
+    "language": {
+        "options": [
+        { "menuItem" : "French", "value": "fr"},
+        { "menuItem" : "English", "value": "en"}
+    ]
+    }
+}

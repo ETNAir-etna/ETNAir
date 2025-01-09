@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, Stack } from '@mui/material';
-import { Facebook, Twitter, Instagram } from '@mui/icons-material';
+import { ThemeSwitcherButton } from './Button';
+import { LanguagesSelect } from './Select';
 
 const Footer: React.FC = () => {
     return (
@@ -22,10 +23,11 @@ const Footer: React.FC = () => {
                 © 2024 ETNAir, Inc
             </Typography>
 
+            
+
             <Stack direction="row" spacing={2}>
-                <Facebook />
-                <Twitter />
-                <Instagram />
+                <ThemeSwitcherButton />
+                <LanguagesSelect />
             </Stack>
         </Box>
     );

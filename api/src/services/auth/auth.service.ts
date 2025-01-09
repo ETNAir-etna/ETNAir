@@ -4,6 +4,7 @@ import { Result } from "../../interfaces/result";
 import { UserModel } from "../../models/User.model";
 import { comparePassword, hashPassword } from "../../utils/hashPassword.util";
 import { PrismaClient } from "@prisma/client";
+import { User, UserDTO } from "@etnair-etna/shared";
 
 const prisma = new PrismaClient();
 
@@ -11,9 +12,11 @@ export class AuthService {
   static async registerUser(email: string, password: string): Promise<Result> {
     const hash = await hashPassword(password);
     const user = await UserModel.createUser(email, hash);
+    let newUser: User = UserDTO(user)
     servicesLogger.silly(`Welcome ${user} !`);
     return {
       action: "create",
+      data: newUser,
       success: true,
     };
   }

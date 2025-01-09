@@ -9,6 +9,25 @@
     "homepage": {
         "subtitle": "Nos destinations favorites",
         "bottomButton": "Découvrir"
+    },
+
+    "authpage": {
+        "title" : {
+            "signIn": "Connexion",
+            "signUp": "Créer un compte"
+        },
+        "placeholder": {
+            "password": "Mot de passe",
+            "vPassword": "Confirmer le mot de passe"
+        },
+        "submitButton": {
+            "signIn": "Se connecter",
+            "signUp": "S'inscrire"
+        },
+        "pagelinks": {
+            "signIn": "Pas encore de compte ? Créez-en un",
+            "signUp": "Déjà un compte ? Connectez-vous"
+        }
     }
 
 }

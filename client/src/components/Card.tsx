@@ -1,8 +1,7 @@
-import { Box, Card, CardActionArea, CardContent, CardMedia, Chip, Typography } from "@mui/material"
-import { IconButton } from "./Button";
-import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
+import { Box, Card, CardContent, CardMedia, Chip, Typography } from "@mui/material";
 import StarRateRoundedIcon from '@mui/icons-material/StarRateRounded';
 import { useTranslation } from "react-i18next";
+import { FavoriteIcon } from "./Button";
 
 interface CustomCardProps {
     imgUrl: string;
@@ -19,15 +18,22 @@ export const PropretyCard: React.FC<CustomCardProps> = ({imgUrl, title, rating, 
     const {t} = useTranslation('components/card')
 
     return (
-        <Card  onClick={onClick} sx={{
+    
+        <Card sx={{
             
             maxWidth: 300,
             minWidth: 122,
             borderRadius: 4,
             boxShadow: 0,
             overflow: 'hidden',
+            transition: 'all 0.3s ease',
+            '&:hover': {
+                backgroundColor: '#F8F8F8AF',
+                transform: 'scale(1.01)',
+                  boxShadow: '0 3px 6px rgba(0, 0, 0, 0.1)',
+                },
         }}>
-            <CardActionArea>
+            <Box>
                 {/* Image Section */}
                 <Box position="relative" >
                     <CardMedia
@@ -55,16 +61,7 @@ export const PropretyCard: React.FC<CustomCardProps> = ({imgUrl, title, rating, 
                     />
                     : null }
                     {/* Heart Icon on the top-right */}
-                    <IconButton
-                        sx={{
-                            position: 'absolute',
-                            top: 10,
-                            right: 10,
-                            color: '#FFFFFF', 
-                        }}
-                    >
-                        <FavoriteTwoToneIcon aria-label="add to favorites" />
-                    </IconButton>
+                        <FavoriteIcon />
                 </Box>
 
 
@@ -72,13 +69,13 @@ export const PropretyCard: React.FC<CustomCardProps> = ({imgUrl, title, rating, 
 
                 
                  {/* Content Section */}
-                <CardContent>
+                <CardContent onClick={onClick} sx={{textAlign: "left", cursor: "pointer"}}>
                     {/* Title and Rating */}
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                         <Typography
                             variant="h6"
                             noWrap
-                            sx={{ maxWidth: '70%', overflow: 'hidden', textOverflow: 'ellipsis' }}
+                            sx={{ maxWidth: '85%', overflow: 'hidden', textOverflow: 'ellipsis', fontWeight:550 }}
                         >
                             {title}
                         </Typography>
@@ -103,7 +100,7 @@ export const PropretyCard: React.FC<CustomCardProps> = ({imgUrl, title, rating, 
                         </Typography>
                     </Box>
                 </CardContent>
-            </CardActionArea>
+            </Box>
         </Card>
     )
 

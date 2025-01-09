@@ -5,7 +5,8 @@ import bcrypt from 'bcryptjs';
  * @returns Promise
  */
 export const hashPassword = async (password: string): Promise<string> => {
-  const salt: number | string = process.env.BCRYPT_SALT || 10;
+  console.log(process.env.BCRYPT_SALT)
+  const salt: number = process.env.BCRYPT_SALT !== undefined ? parseInt(process.env.BCRYPT_SALT, 10) : 10;
   const hashedPwd = bcrypt.hash(password, salt);
   return hashedPwd
 };

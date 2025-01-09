@@ -1,14 +1,13 @@
 import { Outlet } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
-import { Container, Toolbar } from '@mui/material';
+import { Container } from '@mui/material';
 
 const MainLayout = () => {
     return (
         <>
             <Navbar />
-                <Toolbar />
-                <Container maxWidth="xl">
+                <Container maxWidth="xl" sx={{mt :3}}>
                     <Outlet />
                 </Container>
             <Footer />

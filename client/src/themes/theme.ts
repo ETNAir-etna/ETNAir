@@ -2,25 +2,6 @@ import { createTheme } from '@mui/material/styles';
 import typography from './typogrphy';
 import '@mui/material/styles';
 
-// const shadows = [
-//     'none',
-//     '0px 1px 3px rgba(0, 0, 0, 0.2)',
-//     '0px 1px 5px rgba(0, 0, 0, 0.3)',
-// ];
-
-// const shape = {
-//     borderRadius: 8,
-// };
-
-// const zIndex = {
-//     appBar: 1200,
-//     drawer: 1100,
-//     modal: 1300,
-//     tooltip: 1500,
-// };
-
-
-
 declare module '@mui/material/styles' {
     interface PaletteOptions {
         blackWhite: {

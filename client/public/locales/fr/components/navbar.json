@@ -1,4 +1,17 @@
 {
     "list": ["Accueil", "À propos"],
-    "logo": "FR ETNAir"
+    "logo": "FR ETNAir",
+    "settings": {
+        "tooltip": "Ouvrir le menu",
+        "public":   [
+            {"menuItem" : "Se connecter", "value": "/auth"},
+            {"menuItem" : "Créer un compte", "value": "/auth"}
+        ],
+        "private": [
+            {"menuItem" : "Mon profil", "value": "/authenticated/account/profile"},
+            {"menuItem" : "Mes favoris", "value": "/authenticated/account/wishlist"},
+            {"menuItem" : "Mes réservations", "value": "/authenticated/account/travel"},
+            {"menuItem" : "Se déconnecter", "value": "/logout"}
+        ]
+    }
 }

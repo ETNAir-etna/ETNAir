@@ -1,4 +1,17 @@
 {
     "list": ["Home", "About"],
-    "logo": "ENG ETNAir"
+    "logo": "ENG ETNAir",
+    "settings": {
+        "tooltip": "Open settings",
+        "public":   [
+            {"menuItem" : "Sign-in", "value": "/auth"},
+            {"menuItem" : "Sign-up", "value": "/auth"}
+        ],
+        "private": [
+            {"menuItem" : "Profile", "value": "/authenticated/account/profile"},
+            {"menuItem" : "My favorites", "value": "/authenticated/account/wishlist"},
+            {"menuItem" : "My Bookings", "value": "/authenticated/account/travel"},
+            {"menuItem" : "Logout", "value": "/logout"}
+        ]
+    }
 }

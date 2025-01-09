@@ -46,7 +46,7 @@ function Home() {
                 }));
 
                 setProperties(mergedProperties);
-            }catch (error) {
+            } catch (error) {
                 const typedError = error as Error;
                 console.error('ERROR:', typedError.message);
                 setError(typedError.message);
@@ -58,8 +58,8 @@ function Home() {
 
     return (
         <>
-            <SEO title={t('SEO/homepage/title')} description={t('SEO/homepage/title')} />
-            
+            <SEO title={t('SEO.homepage.title')} description={t('SEO.homepage.description')} />
+
             <Container maxWidth="xl" sx={{
                 backgroundColor: 'primary',
                 width: '100%',
@@ -72,7 +72,7 @@ function Home() {
                     <FavoriteRoundedIcon color='error' />
                     <Typography variant='h6' fontWeight="bold">{t('homepage.subtitle')}</Typography>
                 </Stack>
-                
+
                 {error && (
                     <Alert severity="error" sx={{ marginBottom: 2 }}>
                         {error}
@@ -86,19 +86,34 @@ function Home() {
                             flexWrap: 'wrap',
                             justifyContent: 'center',
 
-                            gap: 2, 
-                            mt: 3, 
+                            gap: 2,
+                            mt: 3,
                         }}
                     >
                         {properties.map(property => (
-                            <PropretyCard onClick={() => navigate(`/property/${property.id}`)} imgUrl={property.mainImgUrl} title={property.title} rating={property.rating} host={`${property.host.firstName} ${property.host.lastName}`} price={property.pricePerNight} isSuperhost={property.host.isSuperHost ? true : false} />
+                            <PropretyCard key={property.id} onClick={() => navigate(`/property/${property.id}`)} imgUrl={property.mainImgUrl} title={property.title} rating={property.rating} host={`${property.host.firstName} ${property.host.lastName}`} price={property.pricePerNight} isSuperhost={property.host.isSuperHost ? true : false} />
                         ))}
                     </Box>
                 ) : (
                     <Typography variant="body1">No properties found</Typography>
                 )}
 
-                <Button onClick={() => navigate('/search')} fullWidth={false} size="large"  color="secondary"  sx={{ fontWeight: "bold", padding: '15px 150px', borderRadius : "30px", mt: 10}}>{t('homepage.bottomButton')}</Button>
+                <Button
+                    onClick={() => navigate('/search')}
+                    fullWidth={false}
+                    size="large"
+                    color="secondary"
+                    sx={{
+                        fontWeight: "bold",
+                        padding: { xs: '10px 40px', sm: '15px 100px', md: '15px 150px' },
+                        borderRadius: "30px",
+                        mt: 10,
+                        width: { xs: '100%', sm: 'auto' },
+                    }}
+                >
+                    {t('homepage.bottomButton')}
+                </Button>
+
 
             </Container>
         </>
