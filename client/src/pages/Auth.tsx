@@ -8,7 +8,7 @@ import { setUser } from "../store/userSlice";
 import { useDispatch } from "react-redux";
 
 const Auth: React.FC = () => {
-    const [isSignUp, setIsSignUp] = useState(false); // Détermine si l'utilisateur est en mode "Inscription" ou "Connexion"
+    const [isSignUp, setIsSignUp] = useState(false);
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [confirmPassword, setConfirmPassword] = useState<string>("");

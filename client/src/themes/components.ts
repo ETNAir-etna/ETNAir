@@ -3,7 +3,7 @@ export const components = {
     MuiButton: {
         styleOverrides: {
             root: {
-                borderRadius: '8px', // Boutons légèrement arrondis
+                borderRadius: '8px', 
                 padding: '8px 16px',
             },
         },
@@ -11,8 +11,8 @@ export const components = {
     MuiCard: {
         styleOverrides: {
             root: {
-                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)', // Ombres douces
-                borderRadius: '12px', // Coins des cartes arrondis
+                boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)', 
+                borderRadius: '12px', 
                 padding: '16px',
             },
         },
@@ -20,9 +20,9 @@ export const components = {
     MuiAppBar: {
         styleOverrides: {
             root: {
-                backgroundColor: '#FFFFFF', // AppBar clair
+                backgroundColor: '#FFFFFF',
                 color: '#333333',
-                boxShadow: '0 1px 4px rgba(0, 0, 0, 0.1)', // Ombre subtile
+                boxShadow: '0 1px 4px rgba(0, 0, 0, 0.1)', 
             },
         },
     },
@@ -30,7 +30,7 @@ export const components = {
         styleOverrides: {
             root: {
                 '& .MuiInputBase-root': {
-                    borderRadius: '8px', // Champs de texte arrondis
+                    borderRadius: '8px', 
                     backgroundColor: '#FFFFFF',
                 },
             },

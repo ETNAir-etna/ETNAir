@@ -2,14 +2,14 @@ export interface ErrorDetails {
     errorType : string
     message: string
     status: number
-    details?: string | any[]
+    details?: string
 };
 
 export interface Result {
     key?: boolean
     token?: string
     action: string
-    data?: Object | null
+    data?: object | null
     deletedCount?: number
     error?: ErrorDetails
     message?: string;

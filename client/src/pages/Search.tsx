@@ -11,9 +11,8 @@ function Search() {
 
     const [page, setPage] = useState<number>(1);
     const [count, setCount] = useState<number>(0);
-    const [resultPerPage, setRresultPerPage] = useState<number>(16)
     const [properties, setProperties] = useState<Property[]>([]);
-    const [pagesFilters, setPageFilters] = useState<PropertyFilter>({
+    const pagesFilters :PropertyFilter = {
         country: undefined,
         city: undefined,
         propertyType: undefined,
@@ -21,7 +20,7 @@ function Search() {
         pricePerNight: undefined,
         numberByPage: 16,
         page: 1
-    });
+    };
 
     const navigate = useNavigate();
     const params = useParams();
@@ -41,7 +40,7 @@ function Search() {
                 if (!propertyResponse.ok) throw new Error('Erreur lors de la récupération des propriétés');
                 const result: (number | Property[])[] = (await propertyResponse.json()).data;
                 const propertyData = result[1] as Property[];
-                setCount(Math.ceil(result[0] as number / resultPerPage));
+                setCount(Math.ceil(result[0] as number / pagesFilters.numberByPage));
 
 
                 setProperties(propertyData);
@@ -51,33 +50,27 @@ function Search() {
 
             }
         };
-        if (pagesFilters) {
-            pagesFilters.page = page
-            pagesFilters.numberByPage = resultPerPage
-        }
-
+       
         fetchData();
-    }, [page, resultPerPage, pagesFilters]);
+    }, [page, pagesFilters.numberByPage]);
 
 
 
     const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
-        if (value === (page + 1)) {
-            console.log('Navigation en avant (▶)');
-        } else if (value < page) {
-            console.log('Navigation en arrière (◀)');
-        } else {
-            console.log(`Navigué directement à la page ${value}`);
-        }
+        
+            console.log(event);
+       
         setPage(value);
         navigate(`/search?page=${value}`)
     };
 
-    const sub = async (filters: any) => {
+    const sub = async (filters: PropertyFilter) => {
+
+        
         pagesFilters.country = filters.country === "" ? undefined : filters.country
         pagesFilters.city = filters.city === "" ? undefined : filters.city
         pagesFilters.propertyType = filters.propertyType === "" ? undefined : filters.propertyType
-        pagesFilters.occupancyMax = parseInt(filters.occupancyMax, 10)
+        pagesFilters.occupancyMax = parseInt(String(filters.occupancyMax), 10)
         pagesFilters.pricePerNight = filters.pricePerNight === "" ? undefined : filters.pricePerNight
         console.log("pagesFilters submitted:", pagesFilters);
 
@@ -93,7 +86,7 @@ function Search() {
     if (!propertyResponse.ok) throw new Error('Erreur lors de la récupération des propriétés');
     const result: (number | Property[])[] = (await propertyResponse.json()).data;
     const propertyData = result[1] as Property[];
-    setCount(Math.ceil(result[0] as number / resultPerPage));
+    setCount(Math.ceil(result[0] as number / pagesFilters.numberByPage));
 
 
     setProperties(propertyData);

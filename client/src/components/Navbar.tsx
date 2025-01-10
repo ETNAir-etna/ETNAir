@@ -23,8 +23,6 @@ import { settings } from "../interfaces/settings";
 import { clearUser } from "../store/userSlice";
 import { useDispatch } from "react-redux";
 
-
-
 function ResponsiveAppBar() {
 
     const { t } = useTranslation("components/navbar");

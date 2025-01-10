@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux'; // Pour accéder aux données du Redux
 import { Box, TextField, Button, Avatar } from '@mui/material';
-
 import { selectUser } from "../store/userSelector";
 
 function Profile() {
@@ -18,7 +17,6 @@ function Profile() {
     } = user || {};
 
 
-    // TODO : géré les bouttons et leurs actions
         const handleSubmit = (event: React.FormEvent) => {
             event.preventDefault();
             console.log('Form submitted');

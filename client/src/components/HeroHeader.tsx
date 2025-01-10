@@ -4,8 +4,6 @@ import { Button } from './Button';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-
-
 interface HeroHeaderProps {
     imageUrl: string;
 }

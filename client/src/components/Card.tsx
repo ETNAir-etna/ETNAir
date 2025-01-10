@@ -31,7 +31,7 @@ export const PropretyCard: React.FC<CustomCardProps> = ({imgUrl, title, rating, 
             '&:hover': {
                 backgroundColor: '#F8F8F8AF',
                 transform: 'scale(1.01)',
-                  boxShadow: '0 3px 6px rgba(0, 0, 0, 0.1)',
+                boxShadow: '0 3px 6px rgba(0, 0, 0, 0.1)',
                 },
         }}>
             <Box>
@@ -49,7 +49,8 @@ export const PropretyCard: React.FC<CustomCardProps> = ({imgUrl, title, rating, 
                         }}
                     />
                     {/* Badge on the top-left */}
-                    {isSuperhost === true ? <Chip
+                    {isSuperhost === true ? 
+                    <Chip
                         // label={badgeText}
                         label={t("chipLabel")}
                         color="whiteBlack"

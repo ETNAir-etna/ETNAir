@@ -9,7 +9,6 @@ const AccountLayout: React.FC = () => {
     return (
         <>
             <Navbar />
-
             <Container maxWidth="xl" sx={{ display: "flex", minHeight: "100vh", paddingY: 15 }}>
             <AccountSidebare />
                 <Box sx={{ flexGrow: 1 }}>

@@ -2,14 +2,20 @@ import { BrowserRouter, Route, Routes, Navigate, Outlet } from 'react-router-dom
 import { AccountLayout, HostingLayout, MainLayout } from './layout';
 import { Travel, Home, Search, User, Reservation, Auth, Account, Profile, Wishlist, Hosting, Dashboard, Property } from './pages';
 import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { clearUser } from './store/userSlice';
 
 function App() {
 
   const ProtectedRoute = ({ requiredRole }: { requiredRole?: string }) => {
-    const isAuthenticated = true; // TODO : Implémenter la logique
-    const userRole = 'admin'; // Exemple : rôle utilisateur
-  
+
+    const isAuthenticated = true;
+    const userRole = 'admin';
+    const dispatch = useDispatch();
+
+
     if (!isAuthenticated) {
+      dispatch(clearUser()); 
       return <Navigate to="/auth" />;
     }
   

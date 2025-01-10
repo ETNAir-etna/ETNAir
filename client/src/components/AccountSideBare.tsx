@@ -5,17 +5,13 @@ import { useTranslation } from "react-i18next";
 import { clearUser } from "../store/userSlice";
 import { useDispatch } from "react-redux";
 
-
 const AccountSidebare: React.FC  = () => {
 
     const { t } = useTranslation("components/navbar");
     const navigate = useNavigate();
     const dispatch = useDispatch();
- 
-
 
     const handleItemClick = (selectedItem: settings) => {
-       
 
             if (selectedItem.value === "logout") {
                 fetch('/api-etnair/auth/logout',
@@ -37,7 +33,7 @@ const AccountSidebare: React.FC  = () => {
             }
         
         
-      };
+    };
 
 
     return (

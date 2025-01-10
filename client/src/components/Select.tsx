@@ -6,7 +6,6 @@ import React from "react";
 import { settings } from '../interfaces/settings';
 import SlideMenu from './SlideMenu';
 
-
 export const LanguagesSelect: React.FC = () => {
 
     const { i18n } = useTranslation();

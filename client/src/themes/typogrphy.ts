@@ -1,5 +1,5 @@
 const typography = {
-    fontFamily: 'NunitoVariable, Arial, sans-serif', // Police globale
+    fontFamily: 'NunitoVariable, Arial, sans-serif',
     h1: {
         fontSize: '2.5rem',
         lineHeight: 1.2,

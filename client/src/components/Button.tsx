@@ -7,7 +7,6 @@ import LightModeRoundedIcon from '@mui/icons-material/LightModeRounded';
 import FavoriteTwoToneIcon from '@mui/icons-material/FavoriteTwoTone';
 import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
 
-
 export const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
     return (
         <MuiButton 
@@ -20,7 +19,6 @@ export const Button: React.FC<ButtonProps> = ({ children, ...props }) => {
         </MuiButton>
     );
 };
-
 
 export const ThemeSwitcherButton: React.FC = () => {
     const { toggleTheme, mode } = useContext(ThemeModeContext);
