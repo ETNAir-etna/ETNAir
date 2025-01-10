@@ -6,7 +6,7 @@ export type PropertyFilter = {
     country?: string
     city?: string
     propertyType?: PropertyType
-    roomNumber?: number
+    roomNumber?: string
     occupancyMax?: number
     totalBedrooms?: number
     equipments?: string[]

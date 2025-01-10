@@ -7,9 +7,11 @@ exports.PropertyFilterDTO = void 0;
  * @param  {number} page
  * @param  {Prisma.SortOrder} publishedAt
  * @param  {Prisma.SortOrder} pricePerNight
+ * @param  {Prisma.Decimal} rating
  * @returns {PropertyFilter} page
+ *
  */
-const PropertyFilterDTO = (property, numberByPage, page, publishedAt, pricePerNight) => {
+const PropertyFilterDTO = (property, numberByPage, page, publishedAt, pricePerNight, rating) => {
     var _a, _b, _c, _d, _e, _f, _g;
     return {
         publishedAt: publishedAt !== null && publishedAt !== void 0 ? publishedAt : undefined,
@@ -22,7 +24,8 @@ const PropertyFilterDTO = (property, numberByPage, page, publishedAt, pricePerNi
         totalBedrooms: (_f = property.totalBedrooms) !== null && _f !== void 0 ? _f : undefined,
         equipments: (_g = property.equipments) !== null && _g !== void 0 ? _g : undefined,
         numberByPage: numberByPage,
-        page: page
+        page: page,
+        rating: rating !== null && rating !== void 0 ? rating : undefined
     };
 };
 exports.PropertyFilterDTO = PropertyFilterDTO;

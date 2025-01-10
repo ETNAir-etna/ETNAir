@@ -5,10 +5,11 @@ export type PropertyFilter = {
     country?: string;
     city?: string;
     propertyType?: PropertyType;
-    roomNumber?: number;
-    occupancyMax?: number;
-    totalBedrooms?: number;
+    roomNumber?: string;
+    occupancyMax?: string;
+    totalBedrooms?: string;
     equipments?: string[];
     numberByPage: number;
     page: number;
+    rating: Prisma.Decimal;
 };

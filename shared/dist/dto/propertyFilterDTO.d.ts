@@ -6,6 +6,8 @@ import { PropertyFilter } from '../types/PropertyFilter';
  * @param  {number} page
  * @param  {Prisma.SortOrder} publishedAt
  * @param  {Prisma.SortOrder} pricePerNight
+ * @param  {Prisma.Decimal} rating
  * @returns {PropertyFilter} page
+ *
  */
-export declare const PropertyFilterDTO: (property: PrismaProperty, numberByPage: number, page: number, publishedAt: Prisma.SortOrder, pricePerNight: Prisma.SortOrder) => PropertyFilter;
+export declare const PropertyFilterDTO: (property: PrismaProperty, numberByPage: number, page: number, publishedAt: Prisma.SortOrder, pricePerNight: Prisma.SortOrder, rating: Prisma.Decimal) => PropertyFilter;
