@@ -7,7 +7,7 @@ const router = Router();
 
 router.post('/register', registerValidation, checkValidators, AuthController.registerUser);
 
-router.post("/login",loginValidation, checkValidators, AuthController.loginUser);
+router.post("/login", loginValidation, checkValidators, AuthController.loginUser);
 
 router.post("/logout", AuthController.logoutUser);
 

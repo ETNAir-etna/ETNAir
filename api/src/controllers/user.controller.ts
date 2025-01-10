@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { UserService } from "../services/user.service";
 import { sendJsonPromise } from "../helpers/sendJsonPromise.helper";
-import { Prisma } from "@prisma/client";
+import { User } from "@etnair-etna/shared";
 
 export class UserController {
   static async getUsers( req: Request, res: Response, next: NextFunction ): Promise<void> {
@@ -15,17 +15,13 @@ export class UserController {
 
   static async updateUser( req: Request, res: Response, next: NextFunction ): Promise<void> {
     const { id } = req.params;
-    const data: Prisma.UserCreateInput = req.body;
+    const data: User = req.body;
     sendJsonPromise(UserService.updateUser(id, data))(req, res, next);
   }
 
   static async deleteUser( req: Request, res: Response, next: NextFunction ): Promise<void> {
     const { id } = req.body;
     sendJsonPromise(UserService.deleteUser(id))(req, res, next);
-  }
-
-  static async getBlacklist(req: Request, res: Response): Promise<void> {
-    res.send("Welcome User BLACKLIST");
   }
 
 }

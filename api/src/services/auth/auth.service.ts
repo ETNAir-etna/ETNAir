@@ -9,6 +9,7 @@ import { User, UserDTO } from "@etnair-etna/shared";
 const prisma = new PrismaClient();
 
 export class AuthService {
+
   static async registerUser(email: string, password: string): Promise<Result> {
     const hash = await hashPassword(password);
     const user = await UserModel.createUser(email, hash);
@@ -23,35 +24,27 @@ export class AuthService {
 
   static async loginUser(email: string, password: string): Promise<Result> {
     const user = await UserModel.findByEmail(email);
+    
     if (!user) {
-      throw Error();
+      throw Error("User Not found");
     }
+    console.log(user)
     await comparePassword(password, user.password);
+
+    const userData = await UserModel.findById(user.id);
+
     const newToken = jwt.sign({ id: user.id, email, role: user.role }, process.env.JWT_SECRET!, {
       expiresIn: process.env.JWT_EXPIRES_IN || "1h",
     });
+
     return {
       key: true,
       token: newToken,
       action: "log",
+      data: userData,
       success: true,
-      redirect: true,
-      url: "/profile",
     };
   }
-
-  // static async loginUser(email: string, password: string): Promise<Result> {
-  //     const pwdhashed: string = await UserModel.connectUser(email);
-  //     const match: boolean = await comparePassword(password, pwdhashed);
-  //     if (!match) return { action: "redirect", success: false, url: "/" };
-  //     const { id } = (await UserModel.findByEmail(email))!;
-  //     const newToken = jwt.sign(
-  //         { id, email },
-  //         process.env.JWT_SECRET!,
-  //         { expiresIn: process.env.JWT_EXPIRES_IN || '1h' }
-  //     );
-  //     return { key: true, token: newToken, action: "redirect", success: true, url: '/profile' };
-  // };
 
   static async logoutUser(): Promise<Result> {
     return {

@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import createError from 'http-errors';
 
-
 export const checkRole = (roles: string[]) => {
     return (req: Request, res: Response, next: NextFunction) => {
         const userRole: string = res.locals.user.role;

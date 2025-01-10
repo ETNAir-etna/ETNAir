@@ -21,7 +21,6 @@ const formatLog = (tokens: morgan.TokenIndexer, req: any, res: any) => {
     return `${authorization} ${method} ${url} ${status} - ${responseTime} ms`;
 };
 
-
 export const morganMiddleware = morgan(
     formatLog, {
     stream: {

@@ -7,13 +7,14 @@ interface CustomCardProps {
     imgUrl: string;
     title: string;
     rating: number;
-    host: string;
+    host?: string;
     price: number;
-    isSuperhost: boolean
+    isSuperhost?: boolean
     onClick?: () => void;
+    hostDetails?: boolean
 }
 
-export const PropretyCard: React.FC<CustomCardProps> = ({imgUrl, title, rating, host, price, isSuperhost, onClick}) =>  {
+export const PropretyCard: React.FC<CustomCardProps> = ({imgUrl, title, rating, host, price, isSuperhost, onClick, hostDetails = true}) =>  {
 
     const {t} = useTranslation('components/card')
 
@@ -86,9 +87,14 @@ export const PropretyCard: React.FC<CustomCardProps> = ({imgUrl, title, rating, 
                     </Box>
 
                     {/* Host Section */}
-                    <Typography variant="body2" color="text.secondary" >
-                        {t("subText.p1")}: {host}
-                    </Typography>
+                    {hostDetails ? 
+                        <Typography variant="body2" color="text.secondary" >
+                            {t("subText.p1")}: {host}
+                        </Typography>
+                    : 
+                    null
+                    }
+                    
 
                     {/* Price Section */}
                     <Box mt={0.5}>

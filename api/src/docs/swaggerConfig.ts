@@ -22,10 +22,3 @@ export const swaggerDocument = {
     },
     components,
 };
-
-// const options = {
-//     swaggerDefinition,
-//     apis: ["./src/routes/*.routes.ts"],
-// };
-// const swaggerSpec = swaggerJSDoc(options);
-// export default swaggerSpec;

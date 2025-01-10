@@ -11,7 +11,7 @@
             {"menuItem" : "Profile", "value": "/authenticated/account/profile"},
             {"menuItem" : "My favorites", "value": "/authenticated/account/wishlist"},
             {"menuItem" : "My Bookings", "value": "/authenticated/account/travel"},
-            {"menuItem" : "Logout", "value": "/logout"}
+            {"menuItem" : "Logout", "value": "logout"}
         ]
     }
 }

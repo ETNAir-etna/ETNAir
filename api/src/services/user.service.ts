@@ -17,7 +17,7 @@ export class UserService {
 
   static async updateUser(
     id: string,
-    data: Prisma.UserCreateInput
+    data: User
   ): Promise<Result> {
     await UserModel.update(id, data);
     return { action: "data", success: true };

@@ -54,8 +54,6 @@ async function createHosts(count: number): Promise<Prisma.UserCreateManyInput[]>
 
 }
 
-
-
 async function createProperty( users: Prisma.UserCreateManyInput[], count: number): Promise<Prisma.PropertyCreateManyInput[]> {
     const properties: Prisma.PropertyCreateManyInput[] = [];
 

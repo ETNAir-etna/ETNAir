@@ -12,7 +12,6 @@ export class PropertyController {
     sendJsonPromise(PropertyService.getProperties(data))(req, res, next);
   }
 
-  // TODO  finish it
   static async getAllUserProperties(req: Request,res: Response,next: NextFunction): Promise<void> {}
 
   static async getPropertyById(req: Request,res: Response,next: NextFunction): Promise<void> {

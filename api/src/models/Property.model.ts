@@ -7,40 +7,47 @@ const prisma = new PrismaClient();
 export class PropertyModel {
   static async findAll(filter: PropertyFilter): Promise<(number | Property[])[]> {
     const skipItems: number = (filter.page - 1) * filter.numberByPage;
-    const properties = await prisma.$transaction([
-    prisma.property.count(),
-    prisma.property.findMany({
-      orderBy: {
-        publishedAt: filter.publishedAt,
-        pricePerNight: filter.pricePerNight,
+
+console.log(filter)
+    const whereClause = {
+      country: filter.country,
+      city: filter.city,
+      propertyType: filter.propertyType,
+      roomNumber: {
+        gte: filter.roomNumber,
       },
-      where: {
-        country: filter.country,
-        city: filter.city,
-        propertyType: filter.propertyType,
-        roomNumber: {
-          gte: filter.roomNumber,
-        },
-        occupancyMax: {
-          gte: filter.occupancyMax,
-        },
-        totalBedrooms: {
-          gte: filter.totalBedrooms,
-        },
-        equipments: filter.equipments
-          ? {
-              hasSome: filter.equipments,
-            }
-          : undefined,
+      occupancyMax: {
+        gte: filter.occupancyMax,
       },
-      skip: skipItems,
-      take: filter.numberByPage,
-    })
-  ]);
-    const count = properties[0]
-    const propertiesList: Property[] = properties[1].map((property) => PropertyDTO(property));
-    const result: (number | Property[])[] = [count, propertiesList]
-    return result
+      totalBedrooms: {
+        gte: filter.totalBedrooms,
+      },
+      equipments: filter.equipments
+        ? {
+            hasSome: filter.equipments,
+          }
+        : undefined,
+    };
+
+    const [count, properties] = await prisma.$transaction([
+      prisma.property.count({
+        where: whereClause,
+      }),
+      prisma.property.findMany({
+        orderBy: {
+          publishedAt: filter.publishedAt,
+          pricePerNight: filter.pricePerNight,
+        },
+        where: whereClause,
+        skip: skipItems,
+        take: filter.numberByPage,
+      }),
+    ]);
+
+    const propertiesList = properties.map((property) => PropertyDTO(property));
+    const result: (number | Property[])[] = [count, propertiesList];
+    return result;
+
   }
 
   static async findById(id: string): Promise<Property> {

@@ -27,7 +27,6 @@ export class UserModel {
   }
 
   static async createUser(email: string, password: string) {
-    // TODO : Vérifier les données renvoyée et tout faire passer au DTO si fuite
     return prisma.user.create({
       data: {
         email: email,
@@ -36,11 +35,7 @@ export class UserModel {
     });
   }
 
-  static async update(
-    id: string,
-    data: Prisma.PropertyUpdateInput
-  ): Promise<User> {
-    // TODO : Vérifier les données renvoyée et tout faire passer au DTO si fuite
+  static async update( id: string, data: User ): Promise<User> {
     return await prisma.user.update({ where: { id }, data });
   }
 

@@ -48,6 +48,32 @@ const Auth: React.FC = () => {
         }
     };
 
+    const handleSignIn = async () => {
+
+        try {
+            const response = await fetch('/api-etnair/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const responseData = await response.json();
+
+            if (response.ok && responseData.success) {
+                dispatch(setUser(responseData.data));
+                
+                navigate('/authenticated/account/profile');
+            } else {
+                setError(responseData.message || "Une erreur est survenue lors de la connexion.");
+            }
+        } catch (err) {
+            console.error("Erreur lors de la connexion :", err);
+            setError("Impossible de terminer la connexion. Veuillez réessayer.");
+        }
+    };
+
 
     const handleSubmit = () => {
         setError(null);
@@ -63,11 +89,9 @@ const Auth: React.FC = () => {
         }
 
         if (isSignUp) {
-            console.log("Inscription :", { email, password });
             handleSignUp();
         } else {
-            console.log("Connexion :", { email, password });
-            // Ajouter la logique pour la connexion ici (ex: appel API)
+            handleSignIn();
         }
     };
 
